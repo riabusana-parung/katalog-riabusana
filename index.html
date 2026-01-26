@@ -1,0 +1,695 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+        <!-- favicon -->
+        <link rel="shortcut icon" href="./assets/icons/favicon.png" type="image/x-icon" />
+
+        <!-- font poppins -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+        
+        <!-- css -->
+        <link rel="stylesheet" href="./dist/css/style.css" />
+
+        <!-- Remix Icons -->
+        <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet" />
+
+        <!-- aos -->
+        <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+
+    <title>Katalog Produk</title>
+</head>
+<body id="beranda">
+
+        <!-- Background Music -->
+        <audio id="bg-music" src="./assets/audio/rb-asyik.mpeg" loop></audio>
+
+        <!-- Preloader -->
+        <div class="preloader" id="preloader">
+            <div class="preloader-content">
+                <div class="image-slider">
+                    <img src="./assets/images/bubu-riri.jpg" class="active" alt="Loading..." />
+                    <img src="./assets/images/bubu-riri2.jpg" alt="Loading..." />
+                    <img src="./assets/images/bubu-riri3.jpg" alt="Loading..." />
+                </div>
+                <h2>Selamat Datang</h2>
+                <p>Mohon tunggu sebentar...</p>
+                <!-- Animasi Loading Dots Baru -->
+                <div class="loading-dots">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Navbar -->
+        <div class="navbar">
+            <div class="container">
+                <div class="navbar-box">
+                    <div class="logo">
+                        <img src="./assets/icons/favicon.png" alt="RB Logo" />
+                        <h1>Parung.</h1>
+                    </div>
+                    <ul class="menu">
+                        <li>
+                            <a href="#beranda">Beranda</a>
+                        </li>
+                        <li>
+                            <a href="#layanan">Layanan</a>
+                        </li>
+                        <li>
+                            <a href="#produk">Produk Kami</a>
+                        </li>
+                        <li>
+                            <a href="#qna">QnA</a>
+                        </li>
+                        <li>
+                            <a href="#kontak">Kontak</a>
+                        </li>
+                    </ul>
+
+                    <!-- Humberger -->
+                    <div class="hamburger">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+                    </div>
+                </div>
+            </div>
+        <!-- End Navbar -->
+
+        <!-- Hero Section -->
+            <section class="hero">
+                <div class="container">
+                    <div class="hero-box">
+                        <div class="box" data-aos="fade-up" data-aos-duration="1000">
+                            <h1>Katalog <br /> Produk Riabusana</h1>
+                            <p id="hero-caption">"Temukan standar tertinggi dalam berpakaian. Koleksi ini adalah kurasi terpilih kami yang menggabungkan material premium dengan desain yang ikonis. Karena Anda layak mendapatkan yang terbaik."</p>
+                            <div class="hero-buttons">
+                                <a href="#produk">Detail Produk Kami</a>
+                                <a href="https://shopee.co.id/riabusana" target="_blank" class="btn-shopee">
+                                    <i class="ri-shopping-bag-3-fill"></i> Beli di Shopee
+                                </a>
+                            </div>
+                        </div>
+                        <div class="box hero-image-container" data-aos="zoom-in" data-aos-duration="1000">
+                            <div class="hero-blob"></div> <!-- Dekorasi Background -->
+                            <img src="./assets/images/e-katalog/AWAL.jpg" alt="Hero Image" id="hero-img" />
+                            
+                            <!-- Badge Melayang -->
+                            <div class="hero-badge">
+                                <i class="ri-fire-fill"></i>
+                                <div class="badge-text">                
+                                    <span>Best Seller</span>
+                                    <!--small>Minggu Ini</small-->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+        <!-- Hero Section End -->
+
+        <!-- Layanan Section -->
+        <div class="layanan" id="layanan">
+            <div class="container">
+                <div class="layanan-box">
+                    <div class="box" data-aos="fade-up" data-aos-duration="1000">
+                        <i class="ri-star-fill ri-2x"></i>
+                        <h2>Produk Terbaik </h2>
+                        <p>Kami berkomitmen penuh untuk menghadirkan Produk Terbaik demi kepuasan pelanggan, menggabungkan inovasi mutakhir dengan dedikasi tanpa batas untuk mencapai standar kualitas yang tak tertandingi di industri global saat ini.</p>
+                    </div>
+                    <div class="box" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="200">
+                        <i class="ri-price-tag-fill ri-2x"></i>
+                        <h2>Harga Terjangkau </h2>
+                        <p>Kami percaya bahwa setiap orang berhak mendapatkan layanan berkualitas tinggi. Itulah alasan kami tetap konsisten menawarkan Harga Terjangkau sebagai bentuk komitmen kami dalam mendukung pertumbuhan ekonomi masyarakat luas.</p>
+                    </div>
+                    <div class="box" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="400"> 
+                        <i class="ri-store-fill ri-2x"></i>
+                        <h2>Cabang dimana-mana </h2>
+                        <p>Nikmati kemudahan layanan kami di seluruh penjuru negeri karena cabang ada dimana-mana, siap melayani kebutuhan Anda dengan standar kualitas yang konsisten dan keramahan staf profesional kami di setiap lokasi.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Layanan Section -->
+
+        <!--produk-->
+        <div class="produk" id="produk">
+            <div class="container">
+                <div class="produk-box">
+                    <h1 data-aos="fade-up" data-aos-duration="1000">Produk Kami</h1>
+                    <ul data-aos="fade-up" data-aos-duration="1000" data-aos-delay="300">
+                    <li class="active">All Produk</li>
+                    <li>New Arrival</li>
+                    <li>PRIA</li>
+                    <li>WANITA</li>
+                    <li>ANAK</li>
+                    <li>AKSESORIS</li>
+                    <li>BABY</li>
+                    <li>GAMIS</li>
+                    </ul> 
+
+                    <div class="produk-list">
+                        <!-- Produk akan di-render otomatis oleh script.js -->
+                    </div>
+
+                    <!-- Tombol Load More -->
+                    <div class="load-more-container" style="text-align: center; margin-top: 40px;">
+                        <button id="load-more-btn" class="btn-load-more">Lihat Lebih Banyak</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--produk-->
+
+        <!-- QnA Section -->
+        <div class="qna" id="qna">
+            <div class="container">
+                <div class="qna-box">
+                    <h1 data-aos="fade-up" data-aos-duration="1000">Pertanyaan Umum</h1>
+                    
+                    <!-- Live Search Input -->
+                    <div class="qna-search" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="100">
+                        <i class="ri-search-line"></i>
+                        <input type="text" id="qna-search-input" placeholder="Cari pertanyaan Anda di sini..." />
+                    </div>
+
+                    <div class="accordion-container">
+                        <details class="accordion-item" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="200">
+                            <summary>Apakah barang yang dijual Barang nya Diskon?</summary>
+                            <p>Ya, semua produk fashion yang kami jual di Ria Busana dijamin 100% banyak
+                            diskonan dan Barangnya berkualitas.</p>
+                        </details>
+                        
+                        <details class="accordion-item" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="300">
+                            <summary>Bagaimana cara melakukan pemesanan?</summary>
+                            <p>Anda bisa datang langsung ke store kami atau menghubungi kontak WhatsApp yang tersedia di bagian bawah halaman ini.</p>
+                        </details>
+                        
+                        <details class="accordion-item" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="400">
+                            <summary>Bagaimana regulasi pertukaran barang?</summary>
+                            <p>Penukaran barang dapat dilakukan maksimal 2 hari setelah diterima jika terdapat cacat produk, dengan syarat label masih terpasang dan menyertakan Struk Pembayaran.</p>
+                        </details>
+
+                        <details class="accordion-item" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="500">
+                            <summary>Apa saja metode pembayaran yang diterima?</summary>
+                            <p>Kami menerima pembayaran secara tunai, melalui kartu debit Maupun kartu kredit dan transaksi online "QRIS".</p>
+                        </details>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End QnA Section -->
+
+        <!-- Ulasan Section -->
+        <div class="ulasan" id="ulasan">
+            <div class="container">
+                <div class="ulasan-box">
+                    <h1 data-aos="fade-up" data-aos-duration="1000">Ulasan Pelanggan</h1>
+                    <form id="ulasan-form" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="200">
+                        <div class="input-group">
+                            <label for="nama">Nama Lengkap</label>
+                            <input type="text" id="nama" name="nama" placeholder="Masukkan nama Anda..." required>
+                        </div>
+                        <div class="input-group">
+                            <label for="rating">Rating Layanan</label>
+                            <select id="rating" name="rating">
+                                <option value="5">⭐⭐⭐⭐⭐ (Sangat Puas)</option>
+                                <option value="4">⭐⭐⭐⭐ (Puas)</option>
+                                <option value="3">⭐⭐⭐ (Cukup)</option>
+                                <option value="2">⭐⭐ (Kurang)</option>
+                                <option value="1">⭐ (Kecewa)</option>
+                            </select>
+                        </div>
+                        <div class="input-group">
+                            <label for="komentar">Ucapan / Komentar</label>
+                            <textarea id="komentar" name="komentar" rows="4" maxlength="150" placeholder="Tulis pengalaman belanja Anda di sini..."></textarea>
+                            <p class="char-info">Sisa karakter: <span id="char-count">150</span></p>
+                        </div>
+                        <button type="submit" class="btn-kirim">Kirim Ulasan</button>
+                    </form>
+
+                    <!-- Wadah untuk menampilkan hasil ulasan -->
+                    <div id="ulasan-container" class="ulasan-container"></div>
+                </div>
+            </div>
+        </div>
+        <!-- End Ulasan Section -->
+
+        <!-- Lokasi Section -->
+        <div class="lokasi" id="lokasi">
+            <div class="container">
+                <div class="lokasi-box">
+                    <h1 data-aos="fade-up" data-aos-duration="1000">Kunjungi Toko Kami</h1>
+                    <div class="lokasi-content">
+                        <div class="map-container" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="200">
+                            <!-- Embed Map Ria Busana Parung -->
+                            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3965.262827822765!2d106.7262443749915!3d-6.412761693577786!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e69e9a69139151d%3A0x10569255625620!2sRia%20Busana%20Parung!5e0!3m2!1sid!2sid!4v1708930000000!5m2!1sid!2sid" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                        </div>
+                        <div class="jam-operasional" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="300">
+                            <h3>Jam Operasional</h3>
+                            <ul>
+                                <li><span>Senin - Jumat</span> <strong>09:00 - 21:00</strong></li>
+                                <li><span>Sabtu</span> <strong>09:00 - 22:00</strong></li>
+                                <li><span>Minggu</span> <strong>09:00 - 22:00</strong></li>
+                                <li><span>Hari Libur Nasional</span> <strong>Buka (Sesuai Jam)</strong></li>
+                            </ul>
+                            <a href="https://maps.app.goo.gl/R3pK6gAWpFcsD6sXA" target="_blank" class="btn-maps">
+                                <i class="ri-map-pin-line"></i> Buka di Google Maps
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End Lokasi Section -->
+
+        <!-- Footer -->
+        <div class="footer" id="kontak">
+            <div class="box">
+                <p>&copy; Copyright 2026 Katalog RiaBusana Parung by <span>Qonde</span>. All rights reserved.</p>
+                <div class="visitor-badge">
+                    <i class="ri-group-line"></i> <!-- Icon diubah agar lebih relevan -->
+                    <span>Hari Ini: <strong id="daily-visitor-count">...</strong> | Total: <strong id="total-visitor-count">...</strong></span>
+                </div>
+            </div>
+            <div class="box">
+                <i class="ri-whatsapp-fill ri-2x"></i>
+                <a href="https://www.facebook.com/Riabusana.Retail.Fashion" target="_blank" style="text-decoration: none; color: inherit;">
+                    <i class="ri-facebook-fill ri-2x"></i>
+                </a>
+                <a href="https://www.instagram.com/riabusana_official/" target="_blank" style="text-decoration: none; color: inherit;">
+                    <i class="ri-instagram-fill ri-2x"></i>
+                </a>
+                <a href="https://www.tiktok.com/@riabusana_officialnew" target="_blank" style="text-decoration: none; color: inherit;">
+                    <i class="ri-tiktok-fill ri-2x"></i>
+                </a>
+                <a href="https://www.youtube.com/@riabusana_official" target="_blank" style="text-decoration: none; color: inherit;">
+                    <i class="ri-youtube-fill ri-2x"></i>
+                </a>
+                <a href="https://shopee.co.id/riabusana" target="_blank" style="text-decoration: none; color: inherit;" title="Kunjungi Shopee Kami">
+                    <i class="ri-shopping-bag-3-fill ri-2x shopee-icon"></i>
+                </a>
+            </div>
+        </div>
+        <!-- Footer -->
+
+        <!-- Chat Widget -->
+        <div class="chat-widget">
+            <div class="chat-box" id="chat-box">
+                <div class="chat-header">
+                    <span>Asisten Ria Busana</span>
+                    <i class="ri-close-line" style="cursor: pointer;" onclick="toggleChat()"></i>
+                </div>
+                <div class="chat-body" id="chat-body">
+                    <p class="bot-message">Halo! Selamat datang di Ria Busana. 👋</p>
+                </div>
+                <div class="chat-footer">
+                    <a href="https://wa.me/6285710995295?text=Halo%20kak,%20saya%20tertarik%20dengan%20produk%20Ria%20Busana..." target="_blank" class="btn-wa">
+                        <i class="ri-whatsapp-line ri-lg"></i> Chat Admin via WhatsApp
+                    </a>
+                    <a href="https://shopee.co.id/riabusana" target="_blank" class="btn-shopee-chat">
+                        <i class="ri-shopping-bag-3-fill ri-lg"></i> Official Store Shopee
+                    </a>
+                </div>
+            </div>
+            <div class="chat-toggle" onclick="toggleChat()">
+                <i class="ri-message-3-fill ri-2x"></i>
+            </div>
+        </div>
+
+        <!-- Music Toggle Button -->
+        <div class="music-toggle" id="music-toggle">
+            <i class="ri-volume-mute-line"></i>
+        </div>
+
+        <!-- Theme Toggle Button -->
+        <div class="theme-toggle" id="theme-toggle">
+            <i class="ri-moon-line"></i>
+        </div>
+
+        <!-- Scroll to Top Button -->
+        <div class="scroll-top">
+            <i class="ri-arrow-up-line"></i>
+        </div>
+
+        <!-- Lightbox (Popup Gambar) -->
+        <div id="lightbox" class="lightbox">
+            <span class="close-lightbox">&times;</span>
+            <img class="lightbox-content" id="lightbox-img" alt="Detail Produk">
+        </div>
+
+        <!-- Promo Popup (Iklan Event) -->
+        <div id="promo-popup" class="promo-popup">
+            <div class="promo-content">
+                <span class="close-promo">&times;</span>
+                <!-- Ganti gambar di bawah ini sesuai event (misal: cuci-gudang.jpg) -->
+                <img src="./assets/images/CUCI-GUDANG2.jpg" alt="Promo Event" id="promo-image">
+            </div>
+        </div>
+
+        <!-- js -->
+        <script src="./dist/js/script.js"></script>
+        <script src="./dist/js/secure.min.js"></script> <!-- File Proteksi Terpisah -->
+
+        <!-- aos -->
+        <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+        <script>
+            AOS.init({
+                once: true,   /* Animasi hanya berjalan sekali (mencegah glitch saat scroll naik turun) */
+                offset: 50,   /* Trigger animasi lebih awal (50px sebelum elemen terlihat penuh) */
+                duration: 1000,
+            });
+        </script>
+
+        <!-- Hero Slider Script -->
+        <script>
+            const heroImg = document.getElementById('hero-img');
+            const heroCaption = document.getElementById('hero-caption');
+            
+            // Data Gambar dan Caption pasangannya
+            const heroData = [
+                {
+                    src: "./assets/images/slider-4.jpg",
+                    text: '"Temukan standar tertinggi dalam berpakaian. Koleksi ini adalah kurasi terpilih kami yang menggabungkan material premium dengan desain yang ikonis. Karena Anda layak mendapatkan yang terbaik."'
+                },
+                {
+                    src: "./assets/images/e-katalog/ANAK/anak (27).jpg",
+                    text: '"Keceriaan si kecil semakin terpancar dengan koleksi pakaian anak yang nyaman, penuh warna, dan tahan lama untuk segala aktivitas bermain mereka."'
+                },
+                {
+                    src: "./assets/images/e-katalog/PRIA/pria (1).jpg",
+                    text: '"Tampil percaya diri dengan koleksi pria terbaru. Desain maskulin yang modern untuk menemani aktivitas profesional maupun santai Anda."'
+                },
+                {
+                    src: "./assets/images/e-katalog/AKSESORIS/aksesoris (1).jpg",
+                    text: '"Sentuhan akhir yang sempurna. Aksesoris elegan untuk melengkapi gaya Anda, memberikan kesan mewah dalam setiap kesempatan."'
+                },
+                {
+                    src: "./assets/images/e-katalog/AKSESORIS/aksesoris (3).jpg",
+                    text: '"Detail yang memikat hati. Temukan ragam aksesoris unik yang dirancang khusus untuk menonjolkan karakter dan kepribadian Anda."'
+                },
+                {
+                    src: "./assets/images/e-katalog/AWAL-2.jpg",
+                    text: '"Gaya hidup modern dimulai dari sini. Dapatkan inspirasi fashion terkini dengan kualitas terbaik dan harga yang bersahabat."'
+                },
+                {
+                    src: "./assets/images/e-katalog/BABY/baby (8).jpg",
+                    text: '"Lembut dan aman untuk si kecil. Koleksi pakaian bayi kami terbuat dari bahan berkualitas tinggi yang dirancang khusus untuk kenyamanan dan keamanan buah hati Anda."'
+                },                
+                {
+                    src: "./assets/images/e-katalog/GAMIS/gamis-1.jpg",
+                    text: '"Elegan dan anggun dalam setiap langkah. Koleksi gamis terbaru kami dirancang untuk memberikan kenyamanan maksimal tanpa mengorbankan gaya."'
+                },
+                {
+                    src: "./assets/images/e-katalog/AWAL-3.jpg",
+                    text: '"Gaya hidup modern dimulai dari sini. Dapatkan inspirasi fashion terkini dengan kualitas terbaik dan harga yang bersahabat."'
+                },
+                {
+                    src: "./assets/images/e-katalog/AWAL-4.jpg",
+                    text: "'Follow Akun Instagram Kami @riabusana_official untuk update koleksi terbaru dan promo menarik setiap minggunya!'"
+                },
+            ];
+            
+            let i = 0;
+
+            setInterval(() => {
+                heroImg.style.opacity = 0; // Fade out
+                heroCaption.style.opacity = 0; // Fade out teks
+                setTimeout(() => {
+                    i = (i + 1) % heroData.length;
+                    
+                    // Ganti Gambar dan Teks
+                    heroImg.src = heroData[i].src;
+                    heroCaption.innerText = heroData[i].text;
+                    
+                    heroImg.style.opacity = 1; // Fade in
+                    heroCaption.style.opacity = 1; // Fade in teks
+                }, 1000); // Tunggu 1 detik (sesuai durasi transisi CSS)
+            }, 10000); // Ganti gambar setiap 10 detik
+        </script>
+
+        <!-- Live FAQ Search Script -->
+        <script>
+            const searchInput = document.getElementById('qna-search-input');
+            const accordionItems = document.querySelectorAll('.accordion-item');
+
+            searchInput.addEventListener('input', (e) => {
+                const searchValue = e.target.value.toLowerCase();
+
+                accordionItems.forEach(item => {
+                    const question = item.querySelector('summary').textContent.toLowerCase();
+                    const answer = item.querySelector('p').textContent.toLowerCase();
+
+                    if(question.includes(searchValue) || answer.includes(searchValue)) {
+                        item.style.display = 'block';
+                    } else {
+                        item.style.display = 'none';
+                    }
+                });
+            });
+        </script>
+
+        <!-- Proactive Chat Assistant Script -->
+        <script>
+            const chatBox = document.getElementById('chat-box');
+            const chatBody = document.getElementById('chat-body');
+            let hasTriggered = false; // Agar tidak muncul berulang kali
+
+            // Fungsi Buka/Tutup Chat
+            function toggleChat() {
+                chatBox.classList.toggle('active');
+            }
+
+            // Fungsi Menambah Pesan Otomatis
+            function addBotMessage(message) {
+                const p = document.createElement('p');
+                p.classList.add('bot-message');
+                p.innerHTML = message;
+                chatBody.appendChild(p);
+                chatBody.scrollTop = chatBody.scrollHeight; // Auto scroll ke bawah
+            }
+
+            // Muncul otomatis setelah beberapa detik dengan pesan sesuai waktu
+            setTimeout(() => {
+                if (!hasTriggered) {
+                    hasTriggered = true;
+                    chatBox.classList.add('active');
+                    
+                    // Logika pesan berdasarkan waktu
+                    const jam = new Date().getHours();
+                    let pesanSapaan;
+
+                    if (jam >= 5 && jam < 12) { // Pagi (05:00 - 11:59)
+                        pesanSapaan = "Selamat pagi! ☀️ <br><b>Lagi cari outfit untuk memulai hari?</b> Kami punya koleksi casual yang nyaman.";
+                    } else if (jam >= 12 && jam < 18) { // Siang/Sore (12:00 - 17:59)
+                        pesanSapaan = "Selamat siang! 😊 <br><b>Butuh baju baru untuk acara nanti sore?</b> Cek koleksi best-seller kami.";
+                    } else { // Malam (18:00 - 04:59)
+                        pesanSapaan = "Selamat malam! 🌙 <br><b>Ada yang bisa kami bantu?</b> Jangan ragu bertanya tentang produk kami.";
+                    }
+
+                    addBotMessage(pesanSapaan);
+                }
+            }, 5000); // Muncul 5 detik setelah halaman dibuka
+        </script>
+
+        <!-- Character Counter Script -->
+        <script>
+            const komentarInput = document.getElementById('komentar');
+            const charCount = document.getElementById('char-count');
+            const maxChar = 150;
+
+            komentarInput.addEventListener('input', function() {
+                const currentLength = this.value.length;
+                charCount.innerText = maxChar - currentLength;
+            });
+        </script>
+        <!-- Firebase Ulasan Script -->
+        <script type="module">
+            // Import Firebase SDK
+            import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+            import { getFirestore, collection, addDoc, getDocs, query, orderBy, Timestamp, doc, getDoc, runTransaction } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+
+            // --- KONFIGURASI FIREBASE ---
+            // Ganti nilai di bawah ini dengan konfigurasi dari Firebase Console Anda
+            const firebaseConfig = {
+                apiKey: "AIzaSyBsqB9ojiGqt4Ljgm67nWw8LTTw2Mnb4Pk",
+                authDomain: "katalog-fashion.firebaseapp.com",
+                projectId: "katalog-fashion",
+                storageBucket: "katalog-fashion.firebasestorage.app",
+                messagingSenderId: "609453685879",
+                appId: "1:609453685879:web:f771120f1034a765265a72"
+            };
+
+            // Initialize Firebase
+            const app = initializeApp(firebaseConfig);
+            const db = getFirestore(app);
+
+            const ulasanForm = document.getElementById('ulasan-form');
+            const ulasanContainer = document.getElementById('ulasan-container');
+
+            // 1. Load ulasan dari Database saat halaman dibuka
+            // 1. Load ulasan dari Firebase Firestore
+            async function loadUlasan() {
+                ulasanContainer.innerHTML = '<p style="text-align:center; color:#888;">Memuat ulasan...</p>';
+                try {
+                    const q = query(collection(db, "ulasan"), orderBy("tanggal", "desc"));
+                    const querySnapshot = await getDocs(q);
+                    
+                    ulasanContainer.innerHTML = ''; // Hapus loading text
+                    
+                    if (querySnapshot.empty) {
+                        ulasanContainer.innerHTML = '<p style="text-align:center; color:#888;">Belum ada ulasan. Jadilah yang pertama!</p>';
+                    }
+
+                    querySnapshot.forEach((doc) => {
+                        const data = doc.data();
+                        // Format tanggal dari Timestamp Firebase
+                        let dateString = data.tanggal && data.tanggal.toDate ? data.tanggal.toDate().toLocaleDateString("id-ID") : "";
+                        
+                        let stars = '⭐'.repeat(data.rating);
+                        const div = document.createElement('div');
+                        div.className = 'ulasan-card';
+                        div.innerHTML = `
+                            <div class="ulasan-header">
+                                <strong>${data.nama}</strong>
+                                <span>${stars}</span>
+                            </div>
+                            <p>${data.komentar}</p>
+                            <small class="text-muted">${dateString}</small>
+                        `;
+                        ulasanContainer.appendChild(div);
+                    });
+                } catch (error) {
+                    console.error('Gagal memuat ulasan:', error);
+                    console.error("Error loading ulasan: ", error);
+                    ulasanContainer.innerHTML = '<p style="text-align:center; color:red;">Gagal memuat ulasan. Cek konfigurasi Firebase.</p>';
+                }
+            }
+            
+
+            // Load saat pertama kali buka
+            loadUlasan();
+
+            // 2. Kirim Ulasan ke Firebase
+            ulasanForm.addEventListener('submit', async function(e) {
+                e.preventDefault();
+                
+                const nama = document.getElementById('nama').value;
+                const rating = parseInt(document.getElementById('rating').value);
+                const komentar = document.getElementById('komentar').value;
+                const btnKirim = document.querySelector('.btn-kirim');
+
+                // Disable tombol saat mengirim
+                btnKirim.disabled = true;
+                btnKirim.innerText = "Mengirim...";
+
+                try {
+                    await addDoc(collection(db, "ulasan"), {
+                        nama: nama,
+                        rating: rating,
+                        komentar: komentar,
+                        tanggal: Timestamp.now()
+                    });
+
+                    alert('Terima kasih! Ulasan Anda telah terkirim.');
+                    ulasanForm.reset();
+                    document.getElementById('char-count').innerText = 150;
+                    loadUlasan(); // Refresh daftar ulasan
+                } catch (e) {
+                    console.error("Error adding document: ", e);
+                    alert("Gagal mengirim ulasan. Pastikan koneksi internet lancar.");
+                } finally {
+                    btnKirim.disabled = false;
+                    btnKirim.innerText = "Kirim Ulasan";
+                }
+            });
+
+            // 3. Fungsi untuk menampilkan ulasan ke HTML
+            function renderUlasan(dataUlasan) {
+                ulasanContainer.innerHTML = '';
+                dataUlasan.forEach(u => {
+                    let stars = '⭐'.repeat(u.rating);
+                    const div = document.createElement('div');
+                    div.className = 'ulasan-card';
+                    div.innerHTML = `
+                        <div class="ulasan-header">
+                            <strong>${u.nama}</strong>
+                            <span>${stars}</span>
+                        </div>
+                        <p>${u.komentar}</p>
+                        <small class="text-muted">${u.tanggal}</small>
+                    `;
+                    ulasanContainer.appendChild(div);
+                });
+            }
+
+            // 4. Visitor Counter Logic
+            async function initVisitorCounter() {
+                const dailyCountDisplay = document.getElementById('daily-visitor-count');
+                const totalCountDisplay = document.getElementById('total-visitor-count');
+                const visitorRef = doc(db, "stats", "visitors"); // Simpan di koleksi 'stats', dokumen 'visitors'
+
+                // Inisialisasi tampilan awal
+                dailyCountDisplay.innerText = '...';
+                totalCountDisplay.innerText = '...';
+
+                // Dapatkan tanggal hari ini dalam format YYYY-MM-DD
+                const today = new Date().toISOString().split('T')[0];
+
+                try {
+                    // Cek session storage agar refresh halaman tidak menambah counter
+                    const hasVisited = sessionStorage.getItem('has_visited_rb');
+
+                    if (!hasVisited) {
+                        // Gunakan transaction untuk update yang aman (mencegah race condition)
+                        await runTransaction(db, async (transaction) => {
+                            const visitorDoc = await transaction.get(visitorRef);
+
+                            if (!visitorDoc.exists()) {
+                                // Jika dokumen belum ada, buat baru
+                                transaction.set(visitorRef, {
+                                    total_count: 1,
+                                    daily_counts: { [today]: 1 }
+                                });
+                            } else {
+                                // Jika dokumen sudah ada, update
+                                const data = visitorDoc.data();
+                                const newTotal = (data.total_count || 0) + 1;
+                                const newDaily = (data.daily_counts?.[today] || 0) + 1;
+
+                                transaction.update(visitorRef, {
+                                    total_count: newTotal,
+                                    [`daily_counts.${today}`]: newDaily // Dot notation untuk update nested field
+                                });
+                            }
+                        });
+                        sessionStorage.setItem('has_visited_rb', 'true');
+                    }
+
+                    // Ambil dan tampilkan data terbaru
+                    const updatedSnap = await getDoc(visitorRef);
+                    if (updatedSnap.exists()) {
+                        const data = updatedSnap.data();
+                        dailyCountDisplay.innerText = data.daily_counts?.[today] || 0;
+                        totalCountDisplay.innerText = data.total_count || 0;
+                    } else {
+                        dailyCountDisplay.innerText = '0';
+                        totalCountDisplay.innerText = '0';
+                    }
+                } catch (error) {
+                    console.error("Visitor Error:", error);
+                    dailyCountDisplay.innerText = 'N/A';
+                    totalCountDisplay.innerText = 'N/A';
+                }
+            }
+            initVisitorCounter();
+        </script>
+</body>
+</html>
