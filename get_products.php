@@ -7,7 +7,7 @@ header("Cache-Control: post-check=0, pre-check=0", false);
 header("Pragma: no-cache");
 
 // Folder utama tempat gambar produk disimpan
-$baseDir = 'assets/images/e-katalog/';
+$baseDir = 'assets/images/ekatalog/';
 $products = [];
 
 // Cek apakah folder ada
