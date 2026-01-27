@@ -302,12 +302,12 @@ const updateProductVisibility = (filterValue, animate = false) => {
 // Fungsi Utama untuk Memuat Data dan Menyiapkan Filter
 async function initCatalog() {
     try {
-        // TIPS: Saat development lokal (menggunakan XAMPP), Anda bisa menggunakan baris di bawah ini
-        // agar data produk selalu update tanpa perlu membuat file products.json manual.
-        const response = await fetch('./get_products.php?v=' + new Date().getTime());
+        // [DEVELOPMENT - XAMPP]
+        // Gunakan baris ini saat di localhost agar otomatis update dari PHP
+        // const response = await fetch('./get_products.php?v=' + new Date().getTime());
 
-        // BARIS INI untuk production di GitHub Pages yang tidak mendukung PHP.
-        // Pastikan file './products.json' sudah di-generate dari get_products.php
+        // [PRODUCTION - GITHUB PAGES]
+        // Gunakan baris ini untuk GitHub (Wajib file products.json sudah ada)
         const response = await fetch('./products.json?v=' + new Date().getTime()); 
         products = await response.json();
         
