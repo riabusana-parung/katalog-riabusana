@@ -50,26 +50,36 @@ const themeToggleBtn = document.getElementById('theme-toggle');
 const body = document.body;
 const themeIcon = themeToggleBtn.querySelector('i');
 
-// Daftar tema: Light -> Dark -> Purple
-const themes = ['light', 'dark', 'purple', 'bubu'];
+// Daftar tema: Light -> Dark -> Purple -> Bubu -> Ramadhan
+const themes = ['light', 'dark', 'purple', 'bubu', 'ramadhan'];
 
-// --- PARTICLE SYSTEM (Bubu Mode) ---
+// --- PARTICLE SYSTEM ---
 let particleInterval;
+let clockInterval; // Variabel untuk interval jam
 
-const startParticles = () => {
+// Definisikan bentuk partikel untuk setiap tema
+const particleShapes = {
+    bubu: ['❤️', '⭐', '🌸', '✨', '💖'],
+    ramadhan: ['🌙', '✨', '🕌', '🏮', '⭐'] // Bulan, kilau, masjid, lentera, bintang
+};
+
+const startParticles = (theme) => {
     if (particleInterval) return; // Mencegah duplikasi interval
+    const shapes = particleShapes[theme];
+    if (!shapes) return; // Jangan jalankan jika tema tidak punya partikel
+
     particleInterval = setInterval(() => {
         const particle = document.createElement('div');
         particle.classList.add('falling-particle');
+        particle.classList.add(theme + '-particle'); // Tambahkan class spesifik tema (misal: ramadhan-particle)
         
-        // Acak bentuk: Hati, Bintang, Bunga, Kilau
-        const shapes = ['❤️', '⭐', '🌸', '✨', '💖'];
+        // Acak bentuk dari tema yang aktif
         particle.innerText = shapes[Math.floor(Math.random() * shapes.length)];
         
         // Random posisi dan animasi
         particle.style.left = Math.random() * 100 + 'vw';
         particle.style.fontSize = (Math.random() * 20 + 10) + 'px'; // Ukuran 10px - 30px
-        const duration = Math.random() * 3 + 3; // Durasi 3s - 6s
+        const duration = Math.random() * 3 + 3; // Durasi 3s - 6s (Normal speed)
         particle.style.animationDuration = duration + 's';
         
         document.body.appendChild(particle);
@@ -91,11 +101,17 @@ const stopParticles = () => {
 // Fungsi untuk menerapkan tema
 const applyTheme = (themeName) => {
     // Reset class
-    body.classList.remove('dark-mode', 'purple-mode', 'bubu-mode');
+    body.classList.remove('dark-mode', 'purple-mode', 'bubu-mode', 'ramadhan-mode');
     themeIcon.className = ''; // Reset icon class
     
-    // Stop partikel secara default (hanya nyala di bubu mode)
+    // Stop partikel secara default
     stopParticles();
+
+    // Stop Jam Digital jika ada (agar tidak jalan di background saat ganti tema)
+    if (clockInterval) {
+        clearInterval(clockInterval);
+        clockInterval = null;
+    }
 
     if (themeName === 'dark') {
         body.classList.add('dark-mode');
@@ -105,8 +121,33 @@ const applyTheme = (themeName) => {
         themeIcon.classList.add('ri-emotion-happy-line'); // Icon next: Bubu
     } else if (themeName === 'bubu') {
         body.classList.add('bubu-mode');
-        themeIcon.classList.add('ri-sun-line'); // Icon next: Light
-        startParticles(); // Jalankan animasi partikel
+        themeIcon.classList.add('ri-star-fill'); // Icon next: Ramadhan (Ganti ke Bintang karena Masjid tidak muncul)
+        startParticles('bubu'); // Jalankan animasi partikel Bubu
+    } else if (themeName === 'ramadhan') {
+        body.classList.add('ramadhan-mode');
+        themeIcon.classList.add('ri-sun-line'); // Icon next: Light (Matahari, tanda kembali ke awal)
+        startParticles('ramadhan'); // Jalankan animasi partikel Ramadhan
+
+        // Jalankan Jam Digital Realtime
+        const updateClock = () => {
+            const clockEl = document.getElementById('imsakiyah-clock');
+            if (clockEl) {
+                clockEl.innerText = new Date().toLocaleTimeString('en-GB', { hour12: false });
+            }
+        };
+        updateClock(); // Jalankan langsung saat tema aktif
+        clockInterval = setInterval(updateClock, 1000); // Update tiap detik
+        
+        // Munculkan Popup Imsakiyah Otomatis
+        const imsakPopup = document.getElementById('imsakiyah-popup');
+        if (imsakPopup) {
+            // Update Tanggal Hari Ini
+            const dateEl = document.getElementById('imsakiyah-date');
+            if (dateEl) {
+                dateEl.innerText = new Date().toLocaleDateString('id-ID', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+            }
+            setTimeout(() => imsakPopup.classList.add('active'), 800); // Delay sedikit agar smooth
+        }
     } else {
         // Light mode
         themeIcon.classList.add('ri-moon-line'); // Icon next: Dark
@@ -121,6 +162,13 @@ applyTheme(currentTheme);
 
 // Event listener click
 themeToggleBtn.addEventListener('click', () => {
+    // Sembunyikan notifikasi jika tombol tema diklik
+    const themeNotif = document.getElementById('theme-notification');
+    if (themeNotif && themeNotif.classList.contains('show')) {
+        themeNotif.classList.remove('show');
+        localStorage.setItem('seen_ramadhan_theme', 'true'); // Simpan status sudah dilihat
+    }
+
     let currentIndex = themes.indexOf(currentTheme);
     let nextIndex = (currentIndex + 1) % themes.length;
     currentTheme = themes[nextIndex];
@@ -360,21 +408,54 @@ loadMoreBtn.onclick = () => {
 
 // --- PROMO POPUP LOGIC ---
 window.addEventListener('load', () => {
-    const promoPopup = document.getElementById('promo-popup');
-    const closePromo = document.querySelector('.close-promo');
+    // Fungsi Helper untuk menangani banyak popup
+    const handlePopup = (id, showDelay, hideDelay) => {
+        const popup = document.getElementById(id);
+        if (!popup) return;
 
-    if (promoPopup) {
-        // 1. Munculkan popup setelah 4 detik (setelah preloader & user melihat hero sebentar)
-        setTimeout(() => {
-            promoPopup.classList.add('show');
-        }, 4000);
+        const closeBtn = popup.querySelector('.close-promo');
 
-        // 2. Hilangkan otomatis setelah 10 detik tampil (total 14 detik dari load)
-        setTimeout(() => {
-            promoPopup.classList.remove('show');
-        }, 14000);
+        // Munculkan popup
+        setTimeout(() => popup.classList.add('show'), showDelay);
 
-        // 3. Tombol Close Manual
-        closePromo.onclick = () => promoPopup.classList.remove('show');
+        // Sembunyikan otomatis
+        setTimeout(() => popup.classList.remove('show'), hideDelay);
+
+        // Tombol Close Manual
+        if (closeBtn) closeBtn.onclick = () => popup.classList.remove('show');
+    };
+
+    // Popup 1: Muncul detik ke-4, Hilang detik ke-14
+    handlePopup('promo-popup', 4000, 14000);
+
+    // Popup 2: Muncul detik ke-15, Hilang detik ke-25 (Muncul setelah yang pertama selesai)
+    handlePopup('promo-popup-2', 15000, 25000);
+
+    // Logic Close Popup Imsakiyah
+    const imsakPopup = document.getElementById('imsakiyah-popup');
+    const closeImsak = document.querySelector('.close-imsakiyah');
+    if (imsakPopup && closeImsak) {
+        closeImsak.onclick = () => imsakPopup.classList.remove('active');
+        // Tutup jika klik di luar area konten
+        imsakPopup.onclick = (e) => { if (e.target === imsakPopup) imsakPopup.classList.remove('active'); };
+    }
+
+    // --- THEME NOTIFICATION LOGIC ---
+    const themeNotif = document.getElementById('theme-notification');
+    const closeThemeNotif = document.querySelector('.close-theme-notif');
+    
+    // Cek localStorage: Apakah user sudah pernah menutup notifikasi ini?
+    const hasSeenTheme = localStorage.getItem('seen_ramadhan_theme');
+    
+    // Munculkan hanya jika belum pernah dilihat DAN tema saat ini bukan Ramadhan
+    if (themeNotif && !hasSeenTheme && currentTheme !== 'ramadhan') {
+        setTimeout(() => themeNotif.classList.add('show'), 3000); // Muncul detik ke-3
+    }
+
+    if (closeThemeNotif) {
+        closeThemeNotif.onclick = () => {
+            themeNotif.classList.remove('show');
+            localStorage.setItem('seen_ramadhan_theme', 'true');
+        };
     }
 });

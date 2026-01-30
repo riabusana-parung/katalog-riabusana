@@ -1455,6 +1455,24 @@ body.bubu-mode .visitor-badge { border-color: #ff8fab; color: #5c4742; }
 body.bubu-mode .visitor-badge:hover { background-color: #ffe6ea; }
 body.bubu-mode .visitor-badge i, body.bubu-mode .visitor-badge strong { color: #d9534f; }
 
+/* Floating Buttons Bubu Mode */
+body.bubu-mode .theme-toggle,
+body.bubu-mode .music-toggle,
+body.bubu-mode .scroll-top,
+body.bubu-mode .chat-toggle,
+body.bubu-mode .close-promo {
+    background-color: #ff8fab; /* Pink Bubu */
+    color: white;
+    box-shadow: 0 4px 15px rgba(255, 143, 171, 0.4);
+}
+body.bubu-mode .theme-toggle:hover,
+body.bubu-mode .music-toggle:hover,
+body.bubu-mode .scroll-top:hover,
+body.bubu-mode .chat-toggle:hover,
+body.bubu-mode .close-promo:hover {
+    background-color: #ff7096;
+}
+
 /* Bubu Mode Mobile Menu */
 @media (max-width: 768px) {
     body.bubu-mode .navbar-box .menu { 
@@ -1463,6 +1481,155 @@ body.bubu-mode .visitor-badge i, body.bubu-mode .visitor-badge strong { color: #
     }
     body.bubu-mode .navbar-box .menu li a { color: #442c2e; }
     body.bubu-mode .navbar-box .hamburger span { background-color: #442c2e; }
+}
+
+/*====== Ramadhan Theme ======*/
+@keyframes ramadhan-bg-anim {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+body.ramadhan-mode {
+    color: #EAE7D6; /* Off-white / light gold text */
+    background-color: #0F2D24; /* Deep green fallback */
+}
+
+/* Animated Background and Overlay */
+body.ramadhan-mode::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('../../assets/images/ramadhan-bg.jpg'); /* Menggunakan gambar yang sudah ada */
+    background-size: cover;
+    background-position: center center;
+    background-attachment: fixed;
+    animation: ramadhan-bg-anim 30s linear infinite;
+    z-index: -2;
+}
+
+body.ramadhan-mode::after {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(15, 45, 36, 0.5); /* Opasitas dikurangi agar gambar background lebih terlihat */
+    z-index: -1;
+}
+
+/* Override components for Ramadhan Mode */
+body.ramadhan-mode .navbar-box .menu li a,
+body.ramadhan-mode .logo h1 {
+    color: #EAE7D6;
+}
+body.ramadhan-mode .navbar-box .menu li a:hover {
+    border-bottom-color: #D4AF37; /* Gold */
+}
+body.ramadhan-mode .hero-box h1 { color: #D4AF37; } /* Gold */
+body.ramadhan-mode .hero-box p { color: #C8C3B0; }
+body.ramadhan-mode .hero-box a { background-color: #D4AF37; color: #0F2D24; }
+
+/* Glassmorphism/Subtle background for containers */
+body.ramadhan-mode .layanan-box .box,
+body.ramadhan-mode .produk-box ul li,
+body.ramadhan-mode .accordion-item,
+body.ramadhan-mode .ulasan-box form,
+body.ramadhan-mode .ulasan-card,
+body.ramadhan-mode .jam-operasional,
+body.ramadhan-mode .footer,
+body.ramadhan-mode .chat-box,
+body.ramadhan-mode .visitor-badge,
+body.ramadhan-mode .hero-badge {
+    background-color: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    border: 1px solid rgba(212, 175, 55, 0.2);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.2);
+}
+
+body.ramadhan-mode .layanan-box .box:hover { background-color: rgba(212, 175, 55, 0.1); }
+body.ramadhan-mode .layanan-box .box i { color: #D4AF37; }
+body.ramadhan-mode .layanan-box .box:hover > * { color: #EAE7D6; }
+body.ramadhan-mode .produk-box h1,
+body.ramadhan-mode .qna-box h1,
+body.ramadhan-mode .ulasan-box h1,
+body.ramadhan-mode .lokasi-box h1 {
+    color: #EAE7D6;
+}
+body.ramadhan-mode .produk-box ul li { color: #EAE7D6; }
+body.ramadhan-mode .produk-box ul li:hover {
+    border-color: #D4AF37;
+    color: #D4AF37;
+    background-color: rgba(212, 175, 55, 0.1);
+}
+body.ramadhan-mode .produk-box ul li.active {
+    background-color: #D4AF37;
+    color: #0F2D24;
+    border-color: #D4AF37;
+}
+
+body.ramadhan-mode .qna-search input, body.ramadhan-mode .input-group input, body.ramadhan-mode .input-group select, body.ramadhan-mode .input-group textarea { background-color: rgba(0, 0, 0, 0.2); border-color: rgba(212, 175, 55, 0.3); color: #EAE7D6; }
+body.ramadhan-mode .qna-search input:focus, body.ramadhan-mode .input-group input:focus, body.ramadhan-mode .input-group select:focus, body.ramadhan-mode .input-group textarea:focus { border-color: #D4AF37; }
+body.ramadhan-mode .accordion-item summary { color: #D4AF37; }
+body.ramadhan-mode .accordion-item p { color: #C8C3B0; border-top-color: rgba(212, 175, 55, 0.2); }
+body.ramadhan-mode .btn-kirim { background-color: #D4AF37; color: #0F2D24; }
+body.ramadhan-mode .btn-kirim:hover { background-color: #c09e32; }
+body.ramadhan-mode .ulasan-card { border-left-color: #D4AF37; }
+body.ramadhan-mode .ulasan-header { color: #D4AF37; }
+body.ramadhan-mode .text-muted { color: #a09c8e; }
+body.ramadhan-mode .map-container iframe { filter: grayscale(100%) invert(90%) sepia(20%) hue-rotate(90deg); }
+body.ramadhan-mode .map-container:hover iframe { filter: none; }
+body.ramadhan-mode .jam-operasional { background-color: rgba(255, 255, 255, 0.05); }
+body.ramadhan-mode .jam-operasional h3 { color: #D4AF37; border-bottom-color: rgba(212, 175, 55, 0.2); }
+body.ramadhan-mode .jam-operasional ul li { border-bottom-color: rgba(212, 175, 55, 0.2); }
+body.ramadhan-mode .btn-maps { background-color: transparent; color: #D4AF37; border-color: #D4AF37; }
+body.ramadhan-mode .btn-maps:hover { background-color: #D4AF37; color: #0F2D24; }
+body.ramadhan-mode .footer { background-color: rgba(255, 255, 255, 0.05); }
+body.ramadhan-mode .footer .box i:hover { color: #D4AF37; }
+body.ramadhan-mode .chat-box { background-color: rgba(15, 45, 36, 0.9); }
+body.ramadhan-mode .chat-body { color: #EAE7D6; }
+body.ramadhan-mode .chat-footer { background-color: rgba(15, 45, 36, 0.8); border-top-color: rgba(212, 175, 55, 0.2); }
+body.ramadhan-mode .chat-header { background-color: #D4AF37; color: #0F2D24; }
+body.ramadhan-mode .chat-toggle { background-color: #D4AF37; color: #0F2D24; }
+body.ramadhan-mode .bot-message { background-color: rgba(255, 255, 255, 0.1); border: 1px solid rgba(212, 175, 55, 0.2); }
+/* Visitor Badge Ramadhan Mode */
+body.ramadhan-mode .visitor-badge { border-color: rgba(212, 175, 55, 0.5); color: #C8C3B0; }
+body.ramadhan-mode .visitor-badge:hover { background-color: rgba(212, 175, 55, 0.1); }
+body.ramadhan-mode .visitor-badge i, body.ramadhan-mode .visitor-badge strong { color: #D4AF37; }
+
+/* Floating Buttons Ramadhan Mode */
+body.ramadhan-mode .theme-toggle,
+body.ramadhan-mode .music-toggle,
+body.ramadhan-mode .scroll-top,
+body.ramadhan-mode .chat-toggle,
+body.ramadhan-mode .close-promo {
+    background-color: #D4AF37; /* Latar Emas (Agar ikon hijau terlihat jelas) */
+    color: #0F2D24; /* Ikon Hijau Tua */
+    border: 2px solid #D4AF37;
+    box-shadow: 0 4px 15px rgba(212, 175, 55, 0.4);
+}
+body.ramadhan-mode .theme-toggle:hover,
+body.ramadhan-mode .music-toggle:hover,
+body.ramadhan-mode .scroll-top:hover,
+body.ramadhan-mode .chat-toggle:hover,
+body.ramadhan-mode .close-promo:hover {
+    background-color: #0F2D24; /* Hover jadi Hijau */
+    color: #D4AF37; /* Ikon jadi Emas */
+}
+
+/* Ramadhan Mode Mobile Menu */
+@media (max-width: 768px) {
+    body.ramadhan-mode .navbar-box .menu { 
+        background-color: rgba(15, 45, 36, 0.95); 
+        backdrop-filter: blur(10px);
+    }
+    body.ramadhan-mode .navbar-box .menu li a { color: #EAE7D6; }
+    body.ramadhan-mode .navbar-box .hamburger span { background-color: #EAE7D6; }
 }
 
 /*====== Scroll to Top ======*/
@@ -1786,4 +1953,134 @@ body.bubu-mode .btn-load-more:hover { background-color: #ff7096; }
 @keyframes windSway {
     0% { transform: rotate(1.5deg); }
     100% { transform: rotate(-1.5deg); }
+}
+
+/*====== Popup Imsakiyah ======*/
+.imsakiyah-popup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    z-index: 12000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+}
+
+.imsakiyah-popup.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.imsakiyah-content {
+    background: linear-gradient(135deg, #0F2D24 0%, #1a4236 100%);
+    color: #EAE7D6;
+    padding: 25px;
+    border-radius: 15px;
+    width: 90%;
+    max-width: 350px;
+    text-align: center;
+    border: 2px solid #D4AF37;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    position: relative;
+    transform: scale(0.8);
+    transition: transform 0.3s ease;
+}
+
+.imsakiyah-popup.active .imsakiyah-content {
+    transform: scale(1);
+}
+
+.close-imsakiyah {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 24px;
+    cursor: pointer;
+    color: #D4AF37;
+    transition: 0.3s;
+}
+.close-imsakiyah:hover { color: white; }
+
+.imsakiyah-header { display: flex; align-items: center; justify-content: center; gap: 10px; margin-bottom: 10px; }
+.imsakiyah-header i { font-size: 24px; color: #D4AF37; }
+.imsakiyah-header h3 { color: #D4AF37; margin: 0; }
+
+#imsakiyah-date { margin-bottom: 20px; font-size: 14px; opacity: 0.8; }
+
+.imsakiyah-clock {
+    font-size: 36px;
+    font-weight: 700;
+    color: #D4AF37;
+    margin-bottom: 20px;
+    letter-spacing: 2px;
+    text-shadow: 0 0 15px rgba(212, 175, 55, 0.3);
+}
+
+.jadwal-list { display: flex; flex-direction: column; gap: 10px; margin-bottom: 15px; }
+
+.jadwal-item {
+    display: flex; justify-content: space-between; padding: 10px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 8px;
+    border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+}
+
+.jadwal-item.highlight { background: rgba(212, 175, 55, 0.2); border-color: #D4AF37; }
+.jadwal-item strong { color: #D4AF37; }
+
+/*====== Theme Notification (Tooltip) ======*/
+.theme-notification {
+    position: fixed;
+    bottom: 165px; /* Sejajar dengan tombol tema */
+    right: 80px; /* Di sebelah kiri tombol */
+    background-color: #D4AF37; /* Warna Emas */
+    color: #0F2D24; /* Teks Hijau Tua */
+    padding: 10px 15px;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 600;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    z-index: 998;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateX(20px);
+    transition: all 0.4s cubic-bezier(0.68, -0.55, 0.27, 1.55); /* Efek membal */
+    pointer-events: none;
+}
+
+.theme-notification.show {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(0);
+    pointer-events: auto;
+}
+
+/* Segitiga penunjuk ke arah kanan (ke tombol) */
+.theme-notification::after {
+    content: '';
+    position: absolute;
+    right: -6px;
+    top: 50%;
+    transform: translateY(-50%);
+    border-width: 6px 0 6px 6px;
+    border-style: solid;
+    border-color: transparent transparent transparent #D4AF37;
+}
+
+.close-theme-notif {
+    cursor: pointer;
+    font-size: 16px;
+    transition: 0.3s;
+}
+.close-theme-notif:hover {
+    color: white;
 }
