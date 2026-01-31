@@ -738,7 +738,7 @@ body {
     background-color: #f1f1f1;
     padding: 10px;
     border-radius: 10px;
-    color: #333;
+    color: #353434;
 }
 
 .chat-footer {
@@ -1596,7 +1596,7 @@ body.ramadhan-mode .chat-body { color: #EAE7D6; }
 body.ramadhan-mode .chat-footer { background-color: rgba(15, 45, 36, 0.8); border-top-color: rgba(212, 175, 55, 0.2); }
 body.ramadhan-mode .chat-header { background-color: #D4AF37; color: #0F2D24; }
 body.ramadhan-mode .chat-toggle { background-color: #D4AF37; color: #0F2D24; }
-body.ramadhan-mode .bot-message { background-color: rgba(255, 255, 255, 0.1); border: 1px solid rgba(212, 175, 55, 0.2); }
+body.ramadhan-mode .bot-message { background-color: rgba(255, 255, 255, 0.1);color: #c7be1b; border: 1px solid rgba(212, 175, 55, 0.2); }
 /* Visitor Badge Ramadhan Mode */
 body.ramadhan-mode .visitor-badge { border-color: rgba(212, 175, 55, 0.5); color: #C8C3B0; }
 body.ramadhan-mode .visitor-badge:hover { background-color: rgba(212, 175, 55, 0.1); }
