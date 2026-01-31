@@ -43,6 +43,11 @@ body {
     list-style-type: none;
 }
 
+/* Sembunyikan gambar kubah di tampilan Desktop/Laptop */
+.navbar-box .menu li.mobile-menu-header {
+    display: none;
+}
+
 .navbar-box .menu li a{
     text-decoration: none;
     color: black;
@@ -126,6 +131,12 @@ body {
         opacity: 1;
     }
 
+    .navbar-box .menu li.mobile-menu-header img {
+        width: 150px; /* Diperbesar agar lebih terlihat bagus */
+        filter: drop-shadow(0 0 15px rgba(212, 175, 55, 0.5)); /* Glow Emas */
+        animation: float-kubah 3s ease-in-out infinite;
+    }
+
     .navbar-box .menu li a{
         color: white;
         font-size: 20px;
@@ -133,6 +144,12 @@ body {
     }
 }
 /* =======END NAVBAR======= */
+
+/* Animasi Kubah Melayang */
+@keyframes float-kubah {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
+}
 
 /* =======HERO======= */
 .hero{
@@ -1630,6 +1647,12 @@ body.ramadhan-mode .close-promo:hover {
     }
     body.ramadhan-mode .navbar-box .menu li a { color: #EAE7D6; }
     body.ramadhan-mode .navbar-box .hamburger span { background-color: #EAE7D6; }
+
+    /* Munculkan gambar kubah HANYA di tema Ramadhan Mobile */
+    body.ramadhan-mode .navbar-box .menu li.mobile-menu-header {
+        display: block;
+        margin-bottom: 15px;
+    }
 }
 
 /*====== Scroll to Top ======*/
