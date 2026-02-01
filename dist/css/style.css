@@ -143,6 +143,38 @@ body {
         text-decoration: underline;
     }
 }
+
+/* ======= PROMO BANNER (SPANDUK) ======= */
+.promo-banner {
+    display: flex; /* Ubah ke Flexbox agar gambar sejajar ke samping */
+    overflow: hidden; /* Sembunyikan gambar yang ada di luar area */
+    margin-top: 20px; /* Jarak dari Logo/Menu */
+    width: 100%;
+    position: relative;
+    border-radius: 10px; /* Pindahkan radius ke container */
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1); /* Pindahkan shadow ke container */
+}
+
+.promo-banner img {
+    display: block;
+    min-width: 100%; /* Paksa lebar gambar 100% dari container */
+    width: 100%;
+    flex-shrink: 0; /* Mencegah gambar mengecil */
+    height: auto;
+    transition: transform 0.5s ease-in-out; /* Efek animasi geser yang halus */
+    margin: 0;
+}
+
+.promo-banner img:hover {
+    transform: none; /* Matikan efek zoom saat hover agar tidak bentrok dengan slider */
+}
+
+@media (max-width: 768px) {
+    .promo-banner img {
+        width: 100%; /* Full width di tampilan Mobile */
+        max-height: unset; /* Biarkan tinggi menyesuaikan rasio gambar */
+    }
+}
 /* =======END NAVBAR======= */
 
 /* Animasi Kubah Melayang */
@@ -1894,22 +1926,33 @@ body.bubu-mode .btn-load-more:hover { background-color: #ff7096; }
 .promo-content {
     position: relative;
     width: 90%;
-    max-width: 400px; /* Sedikit diperkecil agar pas dengan frame */
-    background: #fff; /* Frame putih */
-    padding: 10px; /* Jarak frame ke gambar */
+    max-width: 500px; /* Lebar maksimal disesuaikan */
+    background: transparent; /* Hapus background putih */
+    padding: 0; /* Hapus padding agar gambar full */
     border-radius: 10px;
-    box-shadow: 0 20px 50px rgba(0,0,0,0.5); /* Bayangan dramatis */
-    
-    /* Titik poros ayunan di bagian atas tengah */
-    transform-origin: top center;
-    
-    /* Animasi: Jatuh berayun + Goyang perlahan */
-    animation: dropSwing 1.5s ease-out forwards, windSway 3s ease-in-out infinite alternate 1.5s;
+    box-shadow: none; 
+    animation: zoomInPopup 0.5s ease forwards; /* Ganti animasi ayunan dengan zoom simpel */
 }
 
-/* Membuat Efek Tali Gantungan */
-.promo-content::before,
-.promo-content::after {
+/* === Style Khusus Popup 1 (Portrait) dengan Efek Gantungan === */
+#promo-popup .promo-content {
+    background: #fff; /* Frame putih */
+    padding: 10px;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+    transform-origin: top center;
+    animation: dropSwing 1.5s ease-out forwards, windSway 3s ease-in-out infinite alternate 1.5s;
+    max-width: 280px; /* Ukuran diperkecil lagi agar lebih manis */
+    margin-top: 80px; /* Turunkan posisi agar tali gantungan terlihat jelas */
+}
+
+/* Efek Goyang Lebih Kencang Saat Hover */
+#promo-popup .promo-content:hover {
+    animation: windSway 0.5s ease-in-out infinite alternate;
+}
+
+/* Tali Gantungan untuk Popup 1 */
+#promo-popup .promo-content::before,
+#promo-popup .promo-content::after {
     content: '';
     position: absolute;
     bottom: 100%; /* Mulai dari atas frame */
@@ -1917,39 +1960,64 @@ body.bubu-mode .btn-load-more:hover { background-color: #ff7096; }
     height: 100vh; /* Panjang tali sampai atas layar */
     background: linear-gradient(to right, #888, #ccc, #888); /* Efek metal/tali */
     z-index: -1;
+    display: block;
 }
 
-.promo-content::before {
-    left: 30px;
+#promo-popup .promo-content::before { left: 30px; }
+#promo-popup .promo-content::after { right: 30px; }
+
+/* Style Khusus Popup Landscape (Promo Kedua) */
+.promo-content-landscape {
+    max-width: 700px; /* Lebih lebar agar gambar landscape terlihat jelas */
 }
 
+/* Hapus Efek Tali Gantungan */
+.promo-content::before,
 .promo-content::after {
-    right: 30px;
+    display: none;
+}
+
+.promo-slider-container {
+    width: 100%;
+    overflow: hidden;
+    border-radius: 10px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3); /* Shadow dipindah ke container gambar */
+    background-color: #fff; /* Background putih jaga-jaga jika gambar transparan */
+}
+
+.promo-slider-wrapper {
+    display: flex;
+    width: 100%; /* KUNCI: Pastikan lebar wrapper 100% agar geser akurat */
+    transition: transform 0.5s ease-in-out;
 }
 
 .promo-content img {
-    width: 100%;
-    border-radius: 5px; /* Radius gambar sedikit lebih kecil dari frame */
+    width: 100%; /* Paksa lebar gambar mengikuti container */
+    min-width: 100%;
+    flex-shrink: 0;
+    height: auto;
+    object-fit: cover;
     display: block;
 }
 
 .close-promo {
     position: absolute;
-    top: -15px;
-    right: -15px;
-    width: 35px;
-    height: 35px;
+    top: -12px;
+    right: -12px;
+    width: 30px;
+    height: 30px;
     background-color: rebeccapurple;
     color: white;
     border-radius: 50%;
     text-align: center;
-    line-height: 35px;
+    line-height: 28px;
     font-weight: bold;
-    font-size: 20px;
+    font-size: 18px;
     cursor: pointer;
     border: 2px solid white;
     box-shadow: 0 2px 10px rgba(0,0,0,0.2);
     transition: transform 0.3s;
+    z-index: 10; /* Pastikan tombol di atas gambar */
 }
 
 .close-promo:hover {
@@ -1957,26 +2025,12 @@ body.bubu-mode .btn-load-more:hover { background-color: #ff7096; }
     background-color: #ff5722;
 }
 
-/* Animasi Jatuh & Berayun (Entrance) */
-@keyframes dropSwing {
-    0% {
-        transform: translateY(-100vh) rotate(10deg);
-        opacity: 0;
-    }
-    40% {
-        transform: translateY(20px) rotate(-5deg);
-        opacity: 1;
-    }
-    60% { transform: translateY(-10px) rotate(3deg); }
-    80% { transform: translateY(5px) rotate(-1deg); }
-    100% { transform: translateY(0) rotate(0deg); opacity: 1; }
+/* Animasi Zoom In Simpel */
+@keyframes zoomInPopup {
+    from { transform: scale(0.5); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
 }
 
-/* Animasi Goyang Angin (Looping) */
-@keyframes windSway {
-    0% { transform: rotate(1.5deg); }
-    100% { transform: rotate(-1.5deg); }
-}
 
 /*====== Popup Imsakiyah ======*/
 .imsakiyah-popup {

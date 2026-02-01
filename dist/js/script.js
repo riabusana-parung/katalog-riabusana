@@ -425,10 +425,10 @@ window.addEventListener('load', () => {
         if (closeBtn) closeBtn.onclick = () => popup.classList.remove('show');
     };
 
-    // Popup 1: Muncul detik ke-4, Hilang detik ke-14
+    // Popup 1 (Slider Portrait): Muncul detik ke-4, Hilang detik ke-14
     handlePopup('promo-popup', 4000, 14000);
 
-    // Popup 2: Muncul detik ke-15, Hilang detik ke-25 (Muncul setelah yang pertama selesai)
+    // Popup 2 (Landscape): Muncul detik ke-15, Hilang detik ke-25
     handlePopup('promo-popup-2', 15000, 25000);
 
     // Logic Close Popup Imsakiyah
@@ -459,3 +459,29 @@ window.addEventListener('load', () => {
         };
     }
 });
+
+// --- PROMO BANNER SLIDER ---
+const promoImages = document.querySelectorAll('.promo-banner img');
+let currentPromoIndex = 0;
+
+if (promoImages.length > 0) {
+    setInterval(() => {
+        currentPromoIndex = (currentPromoIndex + 1) % promoImages.length;
+        // Geser semua gambar ke kiri berdasarkan index saat ini
+        promoImages.forEach(img => {
+            img.style.transform = `translateX(-${currentPromoIndex * 100}%)`;
+        });
+    }, 4000); // Ganti gambar setiap 4 detik
+}
+
+// --- PROMO POPUP SLIDER ---
+const popupSliderWrapper = document.querySelector('.promo-slider-wrapper');
+const popupImages = document.querySelectorAll('.promo-slider-wrapper img');
+let currentPopupIndex = 0;
+
+if (popupImages.length > 0) {
+    setInterval(() => {
+        currentPopupIndex = (currentPopupIndex + 1) % popupImages.length;
+        popupSliderWrapper.style.transform = `translateX(-${currentPopupIndex * 100}%)`;
+    }, 3000); // Geser setiap 3 detik
+}
