@@ -111,6 +111,13 @@
                             <div class="hero-blob"></div> <!-- Dekorasi Background -->
                             <img src="./assets/images/ekatalog/AWAL (1).jpg" alt="Hero Image" id="hero-img" />
                             
+                            <!-- Tombol Navigasi Manual -->
+                            <button class="hero-nav prev" onclick="manualHeroSlide('prev')"><i class="ri-arrow-left-s-line"></i></button>
+                            <button class="hero-nav next" onclick="manualHeroSlide('next')"><i class="ri-arrow-right-s-line"></i></button>
+
+                            <!-- Indikator Dots -->
+                            <div class="hero-dots" id="hero-dots"></div>
+
                             <!-- Badge Melayang -->
                             <div class="hero-badge">
                                 <i class="ri-fire-fill"></i>
@@ -425,8 +432,10 @@
 
         <!-- Hero Slider Script -->
         <script>
-            const heroImg = document.getElementById('hero-img');
+            let heroImg = document.getElementById('hero-img'); // Ubah const ke let agar bisa di-update
             const heroCaption = document.getElementById('hero-caption');
+            const heroContainer = document.querySelector('.hero-image-container');
+            const heroDotsContainer = document.getElementById('hero-dots');
             
             // Data Gambar dan Caption pasangannya
             const heroData = [
@@ -472,22 +481,150 @@
                 },
             ];
             
-            let i = 0;
+            let currentHeroIndex = 0;
+            let heroInterval;
+            let isAnimating = false; // Mencegah klik ganda cepat
+            let isHovering = false; // Status hover mouse
 
-            setInterval(() => {
-                heroImg.style.opacity = 0; // Fade out
-                heroCaption.style.opacity = 0; // Fade out teks
+            // Fungsi Membuat Dots
+            function createHeroDots() {
+                heroDotsContainer.innerHTML = '';
+                heroData.forEach((_, index) => {
+                    const dot = document.createElement('div');
+                    dot.classList.add('hero-dot');
+                    if (index === 0) dot.classList.add('active');
+                    
+                    dot.onclick = () => {
+                        if (isAnimating || currentHeroIndex === index) return;
+                        clearInterval(heroInterval);
+                        const direction = index > currentHeroIndex ? 'next' : 'prev';
+                        currentHeroIndex = index;
+                        updateHeroSlide(direction);
+                        if (!isHovering) startHeroAutoSlide(); // Hanya restart jika tidak sedang hover
+                    };
+                    heroDotsContainer.appendChild(dot);
+                });
+            }
+
+            // Fungsi Ganti Slide
+            function updateHeroSlide(direction = 'next') {
+                if (isAnimating) return;
+                isAnimating = true;
+
+                const nextData = heroData[currentHeroIndex];
+
+                // 1. Buat elemen gambar baru
+                const newImg = document.createElement('img');
+                newImg.src = nextData.src;
+                newImg.alt = "Hero Image";
+                newImg.classList.add('hero-slide-anim'); // Tambah class animasi
+
+                // 2. Tentukan posisi awal gambar baru (Kiri atau Kanan)
+                if (direction === 'next') {
+                    newImg.style.transform = 'translateX(100%)'; // Mulai dari kanan
+                } else {
+                    newImg.style.transform = 'translateX(-100%)'; // Mulai dari kiri
+                }
+
+                heroContainer.appendChild(newImg);
+
+                // 3. Jalankan Animasi (Slide In & Slide Out)
+                // Gunakan setTimeout kecil agar browser sempat merender posisi awal
                 setTimeout(() => {
-                    i = (i + 1) % heroData.length;
+                    heroImg.style.transition = 'transform 0.5s ease-in-out';
                     
-                    // Ganti Gambar dan Teks
-                    heroImg.src = heroData[i].src;
-                    heroCaption.innerText = heroData[i].text;
+                    if (direction === 'next') {
+                        heroImg.style.transform = 'translateX(-100%)'; // Gambar lama geser ke kiri
+                        newImg.style.transform = 'translateX(0)';      // Gambar baru masuk ke tengah
+                    } else {
+                        heroImg.style.transform = 'translateX(100%)';  // Gambar lama geser ke kanan
+                        newImg.style.transform = 'translateX(0)';      // Gambar baru masuk ke tengah
+                    }
+                }, 50);
+
+                // 4. Update Caption (Fade Effect)
+                heroCaption.style.opacity = 0;
+                setTimeout(() => {
+                    heroCaption.innerText = nextData.text;
+                    heroCaption.style.opacity = 1;
+                }, 250); // Ganti teks di tengah-tengah animasi slide
+
+                // 6. Update Dots Active State
+                document.querySelectorAll('.hero-dot').forEach((dot, idx) => {
+                    if (idx === currentHeroIndex) dot.classList.add('active');
+                    else dot.classList.remove('active');
+                });
+
+                // 5. Bersihkan setelah animasi selesai
+                setTimeout(() => {
+                    heroImg.remove(); // Hapus gambar lama dari DOM
+                    heroImg = newImg; // Update referensi variabel ke gambar baru
                     
-                    heroImg.style.opacity = 1; // Fade in
-                    heroCaption.style.opacity = 1; // Fade in teks
-                }, 1000); // Tunggu 1 detik (sesuai durasi transisi CSS)
-            }, 10000); // Ganti gambar setiap 10 detik
+                    // Reset style gambar baru agar menjadi statis (bukan absolute lagi)
+                    newImg.classList.remove('hero-slide-anim');
+                    newImg.style.transform = '';
+                    newImg.style.transition = '';
+                    newImg.id = 'hero-img'; // Kembalikan ID asli
+
+                    isAnimating = false;
+                }, 550); // Tunggu sedikit lebih lama dari durasi transisi (0.5s)
+            }
+
+            function nextHeroSlide() {
+                currentHeroIndex = (currentHeroIndex + 1) % heroData.length;
+                updateHeroSlide('next');
+            }
+
+            function prevHeroSlide() {
+                currentHeroIndex = (currentHeroIndex - 1 + heroData.length) % heroData.length;
+                updateHeroSlide('prev');
+            }
+
+            // Fungsi Manual (Klik Tombol / Swipe)
+            function manualHeroSlide(direction) {
+                clearInterval(heroInterval); // Hentikan timer otomatis sebentar
+                if (direction === 'next') nextHeroSlide();
+                else prevHeroSlide();
+                if (!isHovering) startHeroAutoSlide(); // Mulai lagi timer otomatis hanya jika tidak hover
+            }
+
+            function startHeroAutoSlide() {
+                clearInterval(heroInterval); // Reset timer lama untuk mencegah duplikasi
+                heroInterval = setInterval(nextHeroSlide, 10000); // Ganti gambar setiap 10 detik
+            }
+
+            // Jalankan Slider Otomatis
+            createHeroDots(); // Buat dots saat inisialisasi
+            startHeroAutoSlide();
+
+            // --- Fitur Pause on Hover ---
+            heroContainer.addEventListener('mouseenter', () => {
+                isHovering = true;
+                clearInterval(heroInterval); // Hentikan slider saat mouse masuk
+            });
+
+            heroContainer.addEventListener('mouseleave', () => {
+                isHovering = false;
+                startHeroAutoSlide(); // Jalankan lagi saat mouse keluar
+            });
+
+            // --- Fitur Swipe (Geser) untuk Mobile ---
+            let touchStartX = 0;
+            let touchEndX = 0;
+
+            heroContainer.addEventListener('touchstart', e => {
+                touchStartX = e.changedTouches[0].screenX;
+            });
+
+            heroContainer.addEventListener('touchend', e => {
+                touchEndX = e.changedTouches[0].screenX;
+                handleSwipe();
+            });
+
+            function handleSwipe() {
+                if (touchEndX < touchStartX - 50) manualHeroSlide('next'); // Geser Kiri -> Next
+                if (touchEndX > touchStartX + 50) manualHeroSlide('prev'); // Geser Kanan -> Prev
+            }
         </script>
 
         <!-- Live FAQ Search Script -->
