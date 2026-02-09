@@ -2301,6 +2301,16 @@ body.purple-mode .video-info h3 { color: #f3e5f5; }
     height: 100%;
 }
 
+/* Tambahkan Support untuk YouTube Iframe */
+.video-slide iframe, .video-wrapper iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+}
+
 .video-nav {
     position: absolute;
     top: 50%;

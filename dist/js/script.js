@@ -544,13 +544,20 @@ async function loadVideos() {
         if (gridContainer) {
             gridContainer.innerHTML = '';
             videos.forEach((video, index) => {
+                let videoContent = '';
+                if (video.type === 'youtube') {
+                    videoContent = `<iframe src="${video.src}" allowfullscreen></iframe>`;
+                } else {
+                    videoContent = `<video controls preload="none"><source src="${video.src}" type="${video.type}"></video>`;
+                }
+
                 const card = document.createElement('div');
                 card.className = 'video-card';
                 card.setAttribute('data-aos', 'fade-up');
                 card.setAttribute('data-aos-delay', index * 100);
                 card.innerHTML = `
                     <div class="video-wrapper">
-                        <video controls preload="none"><source src="${video.src}" type="${video.type}"></video>
+                        ${videoContent}
                     </div>
                     <div class="video-info"><h3>${video.title}</h3></div>
                 `;
@@ -567,10 +574,16 @@ window.moveVideoSlide = function(direction) {
     if (!window.totalVideos) return;
     
     // Pause video saat ini sebelum geser
-    const videos = document.querySelectorAll('.slider-video');
-    if (videos[window.currentVideoIndex]) {
-        videos[window.currentVideoIndex].pause();
-        videos[window.currentVideoIndex].currentTime = 0; // Reset video ke awal
+    const slides = document.querySelectorAll('.video-slide');
+    const currentSlide = slides[window.currentVideoIndex];
+    
+    if (currentSlide) {
+        const video = currentSlide.querySelector('video');
+        const iframe = currentSlide.querySelector('iframe');
+        
+        if (video) { video.pause(); video.currentTime = 0; }
+        // Kirim perintah pause ke YouTube via postMessage
+        if (iframe) { iframe.contentWindow.postMessage('{"event":"command","func":"pauseVideo","args":""}', '*'); }
     }
 
     window.currentVideoIndex += direction;
@@ -581,9 +594,11 @@ window.moveVideoSlide = function(direction) {
     if (wrapper) wrapper.style.transform = `translateX(-${window.currentVideoIndex * 100}%)`;
 
     // Autoplay video baru (Slide Aktif)
-    if (videos[window.currentVideoIndex]) {
-        videos[window.currentVideoIndex].muted = window.isGlobalMuted; // Pastikan video baru mengikuti status mute
-        videos[window.currentVideoIndex].play().catch(e => console.log("Autoplay dicegah browser:", e));
+    const newSlide = slides[window.currentVideoIndex];
+    const newVideo = newSlide ? newSlide.querySelector('video') : null;
+    if (newVideo) {
+        newVideo.muted = window.isGlobalMuted; 
+        newVideo.play().catch(e => console.log("Autoplay dicegah browser:", e));
     }
 };
 
@@ -618,9 +633,11 @@ const videoSliderContainer = document.querySelector('.video-slider-container');
 if (videoSliderContainer) {
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
-            const videos = document.querySelectorAll('.slider-video');
-            if (videos.length > 0 && typeof window.currentVideoIndex !== 'undefined') {
-                const currentVideo = videos[window.currentVideoIndex];
+            const slides = document.querySelectorAll('.video-slide');
+            if (slides.length > 0 && typeof window.currentVideoIndex !== 'undefined') {
+                const currentSlide = slides[window.currentVideoIndex];
+                const currentVideo = currentSlide ? currentSlide.querySelector('video') : null;
+                const currentIframe = currentSlide ? currentSlide.querySelector('iframe') : null;
 
                 if (entry.isIntersecting) {
                     // Masuk viewport (50%) -> Play
@@ -630,7 +647,11 @@ if (videoSliderContainer) {
                 } else {
                     // Keluar viewport -> Pause
                     if (currentVideo && !currentVideo.paused) {
-                        videos[window.currentVideoIndex].pause();
+                        currentVideo.pause();
+                    }
+                    // Pause YouTube juga saat di-scroll lewat
+                    if (currentIframe) {
+                        currentIframe.contentWindow.postMessage('{"event":"command","func":"pauseVideo","args":""}', '*');
                     }
                 }
             }
