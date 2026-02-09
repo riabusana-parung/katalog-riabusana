@@ -482,7 +482,7 @@ body {
 
 /*======produk======*/
 .produk{
-    padding-bottom: 150px;
+    padding-bottom: 50px; /* Dikurangi dari 150px agar lebih rapat */
 }
 
 .produk-box h1{
@@ -2195,6 +2195,164 @@ body.bubu-mode .btn-load-more:hover { background-color: #ff7096; }
 .jadwal-item.highlight { background: rgba(212, 175, 55, 0.2); border-color: #D4AF37; }
 .jadwal-item strong { color: #D4AF37; }
 
+/* ======= TV MEDIA PAGE ======= */
+.tv-media {
+    padding-top: 20px; /* Dikurangi dari 50px agar lebih dekat dengan garis */
+    padding-bottom: 50px; /* Dikurangi agar tidak terlalu renggang */
+}
+
+.tv-media-box h1 {
+    text-align: center;
+    margin-bottom: 10px;
+    color: rebeccapurple;
+}
+
+.video-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    margin-top: 30px;
+}
+
+.video-card {
+    background: white;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.video-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 35px rgba(102, 51, 153, 0.2);
+}
+
+.video-wrapper {
+    width: 100%;
+    background: black;
+    position: relative;
+}
+
+.video-wrapper video {
+    width: 100%;
+    display: block;
+    aspect-ratio: 16 / 9; /* Rasio standar video */
+}
+
+.video-info {
+    padding: 15px;
+    text-align: center;
+}
+
+.video-info h3 {
+    font-size: 16px;
+    color: #333;
+    font-weight: 600;
+}
+
+/* Dark Mode Support untuk TV Media */
+body.dark-mode .tv-media-box h1 { color: #f1f1f1; }
+body.dark-mode .video-card { background-color: #2c2c2c; }
+body.dark-mode .video-info h3 { color: #f1f1f1; }
+
+/* Purple Mode Support */
+body.purple-mode .tv-media-box h1 { color: #d68eff; }
+body.purple-mode .video-card { background-color: #4a148c; }
+body.purple-mode .video-info h3 { color: #f3e5f5; }
+
+/* ======= VIDEO SLIDER (1 Frame) ======= */
+.video-slider-container {
+    position: relative;
+    width: 100%;
+    max-width: 700px; /* Batasi lebar agar pas di layar */
+    margin: 0 auto;
+    overflow: hidden;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    background: #000;
+}
+
+.video-slider-wrapper {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+    width: 100%;
+}
+
+.video-slide {
+    min-width: 100%;
+    box-sizing: border-box;
+    position: relative;
+}
+
+/* Wrapper video agar responsif 16:9 */
+.video-slide .video-wrapper {
+    width: 100%;
+    padding-bottom: 56.25%; /* Aspect Ratio 16:9 */
+    height: 0;
+    position: relative;
+    background: black;
+}
+
+.video-slide video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.video-nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(255, 255, 255, 0.2);
+    border: none;
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 24px;
+    color: white;
+    transition: all 0.3s ease;
+    z-index: 5;
+    backdrop-filter: blur(2px);
+}
+
+.video-nav:hover {
+    background-color: rebeccapurple;
+    color: white;
+}
+
+.video-nav.prev { left: 15px; }
+.video-nav.next { right: 15px; }
+
+/* Tombol Mute Video */
+.video-mute-btn {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background-color: rgba(0, 0, 0, 0.5);
+    border: none;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 20px;
+    color: white;
+    transition: all 0.3s ease;
+    z-index: 6;
+    backdrop-filter: blur(2px);
+}
+
+.video-mute-btn:hover {
+    background-color: rebeccapurple;
+}
 /*====== Theme Notification (Tooltip) ======*/
 .theme-notification {
     position: fixed;
@@ -2245,3 +2403,57 @@ body.bubu-mode .btn-load-more:hover { background-color: #ff7096; }
 .close-theme-notif:hover {
     color: white;
 }
+
+/* ======= Section Separator with Icon ======= */
+.section-separator-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 80%;
+    max-width: 600px;
+    margin: 0 auto 20px auto;
+    opacity: 0.8;
+}
+
+.section-separator-icon::before,
+.section-separator-icon::after {
+    content: '';
+    flex: 1;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, rebeccapurple);
+    border-radius: 50%;
+}
+
+.section-separator-icon::after {
+    background: linear-gradient(90deg, rebeccapurple, transparent);
+}
+
+.section-separator-icon i {
+    margin: 0 15px;
+    font-size: 24px;
+    color: rebeccapurple;
+    animation: pulse-icon 2s infinite;
+}
+
+@keyframes pulse-icon {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.2); }
+    100% { transform: scale(1); }
+}
+
+/* Theme Overrides for Separator */
+body.dark-mode .section-separator-icon::before { background: linear-gradient(90deg, transparent, #9966cc); }
+body.dark-mode .section-separator-icon::after { background: linear-gradient(90deg, #9966cc, transparent); }
+body.dark-mode .section-separator-icon i { color: #9966cc; }
+
+body.purple-mode .section-separator-icon::before { background: linear-gradient(90deg, transparent, #d68eff); }
+body.purple-mode .section-separator-icon::after { background: linear-gradient(90deg, #d68eff, transparent); }
+body.purple-mode .section-separator-icon i { color: #d68eff; }
+
+body.bubu-mode .section-separator-icon::before { background: linear-gradient(90deg, transparent, #ff8fab); }
+body.bubu-mode .section-separator-icon::after { background: linear-gradient(90deg, #ff8fab, transparent); }
+body.bubu-mode .section-separator-icon i { color: #ff8fab; }
+
+body.ramadhan-mode .section-separator-icon::before { background: linear-gradient(90deg, transparent, #D4AF37); }
+body.ramadhan-mode .section-separator-icon::after { background: linear-gradient(90deg, #D4AF37, transparent); }
+body.ramadhan-mode .section-separator-icon i { color: #D4AF37; }

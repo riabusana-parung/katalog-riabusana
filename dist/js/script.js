@@ -397,14 +397,18 @@ async function initCatalog() {
 }
 
 // Jalankan inisialisasi
-initCatalog();
+if (productContainer) {
+    initCatalog();
+}
 
 // Event Listener Tombol Load More
-loadMoreBtn.onclick = () => {
-    itemsToShow += loadIncrement;
-    const activeFilter = document.querySelector('.produk-box ul li.active').getAttribute('data-filter-key');
-    updateProductVisibility(activeFilter, false); // Tidak perlu animasi reset penuh, cukup item baru
-};
+if (loadMoreBtn) {
+    loadMoreBtn.onclick = () => {
+        itemsToShow += loadIncrement;
+        const activeFilter = document.querySelector('.produk-box ul li.active').getAttribute('data-filter-key');
+        updateProductVisibility(activeFilter, false); // Tidak perlu animasi reset penuh, cukup item baru
+    };
+}
 
 // --- PROMO POPUP LOGIC ---
 window.addEventListener('load', () => {
@@ -484,4 +488,145 @@ if (popupImages.length > 0) {
         currentPopupIndex = (currentPopupIndex + 1) % popupImages.length;
         popupSliderWrapper.style.transform = `translateX(-${currentPopupIndex * 100}%)`;
     }, 3000); // Geser setiap 3 detik
+}
+
+// --- TV MEDIA LOGIC (Slider & Grid Support) ---
+let currentVideoIndex = 0;
+let totalVideos = 0;
+window.isGlobalMuted = false; // Default: Suara Nyala
+
+async function loadVideos() {
+    const sliderWrapper = document.getElementById('video-slider-wrapper'); // Untuk Index (Slider)
+    const gridContainer = document.getElementById('video-container'); // Untuk Halaman TV Media (Grid)
+
+    if (!sliderWrapper && !gridContainer) return;
+
+    try {
+        // Deteksi otomatis: Localhost pakai PHP (Scan Folder), Online pakai JSON (Manual Link GDrive)
+        const isLocalhost = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+        const endpoint = isLocalhost ? './get_video.php' : './videos.json';
+
+        const response = await fetch(endpoint);
+        const videos = await response.json();
+
+        if (videos.length === 0) return;
+
+        // --- LOGIKA SLIDER (Index Page) ---
+        if (sliderWrapper) {
+            sliderWrapper.innerHTML = '';
+            window.totalVideos = videos.length;
+            window.currentVideoIndex = 0;
+
+            videos.forEach((video) => {
+                const slide = document.createElement('div');
+                slide.className = 'video-slide';
+                slide.innerHTML = `
+                    <div class="video-wrapper">
+                        <video controls playsinline preload="none" class="slider-video">
+                            <source src="${video.src}" type="${video.type}">
+                        </video>
+                    </div>
+                    <div class="video-info"><h3>${video.title}</h3></div>
+                `;
+
+                // Event listener: Saat video selesai, geser ke slide berikutnya
+                const videoEl = slide.querySelector('video');
+                videoEl.muted = window.isGlobalMuted; // Terapkan status mute global saat inisialisasi
+                videoEl.addEventListener('ended', () => {
+                    moveVideoSlide(1);
+                });
+
+                sliderWrapper.appendChild(slide);
+            });
+        }
+
+        // --- LOGIKA GRID (Halaman Khusus TV Media) ---
+        if (gridContainer) {
+            gridContainer.innerHTML = '';
+            videos.forEach((video, index) => {
+                const card = document.createElement('div');
+                card.className = 'video-card';
+                card.setAttribute('data-aos', 'fade-up');
+                card.setAttribute('data-aos-delay', index * 100);
+                card.innerHTML = `
+                    <div class="video-wrapper">
+                        <video controls preload="none"><source src="${video.src}" type="${video.type}"></video>
+                    </div>
+                    <div class="video-info"><h3>${video.title}</h3></div>
+                `;
+                gridContainer.appendChild(card);
+            });
+        }
+    } catch (error) {
+        console.error('Gagal memuat video:', error);
+    }
+}
+
+// Fungsi Navigasi Slider (Next/Prev)
+window.moveVideoSlide = function(direction) {
+    if (!window.totalVideos) return;
+    
+    // Pause video saat ini sebelum geser
+    const videos = document.querySelectorAll('.slider-video');
+    if (videos[window.currentVideoIndex]) {
+        videos[window.currentVideoIndex].pause();
+        videos[window.currentVideoIndex].currentTime = 0; // Reset video ke awal
+    }
+
+    window.currentVideoIndex += direction;
+    if (window.currentVideoIndex < 0) window.currentVideoIndex = window.totalVideos - 1;
+    if (window.currentVideoIndex >= window.totalVideos) window.currentVideoIndex = 0;
+
+    const wrapper = document.getElementById('video-slider-wrapper');
+    if (wrapper) wrapper.style.transform = `translateX(-${window.currentVideoIndex * 100}%)`;
+
+    // Autoplay video baru (Slide Aktif)
+    if (videos[window.currentVideoIndex]) {
+        videos[window.currentVideoIndex].muted = window.isGlobalMuted; // Pastikan video baru mengikuti status mute
+        videos[window.currentVideoIndex].play().catch(e => console.log("Autoplay dicegah browser:", e));
+    }
+};
+
+loadVideos();
+
+// Fungsi Toggle Mute Global
+window.toggleVideoMute = function() {
+    window.isGlobalMuted = !window.isGlobalMuted;
+    const videos = document.querySelectorAll('.slider-video');
+    const btnIcon = document.querySelector('.video-mute-btn i');
+
+    // Update Ikon Tombol
+    if (btnIcon) {
+        btnIcon.className = window.isGlobalMuted ? 'ri-volume-mute-line' : 'ri-volume-up-line';
+    }
+
+    // Terapkan ke semua video di slider
+    videos.forEach(v => v.muted = window.isGlobalMuted);
+};
+
+// --- AUTO PAUSE VIDEO ON SCROLL ---
+const videoSliderContainer = document.querySelector('.video-slider-container');
+if (videoSliderContainer) {
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            const videos = document.querySelectorAll('.slider-video');
+            if (videos.length > 0 && typeof window.currentVideoIndex !== 'undefined') {
+                const currentVideo = videos[window.currentVideoIndex];
+
+                if (entry.isIntersecting) {
+                    // Masuk viewport (50%) -> Play
+                    if (currentVideo && currentVideo.paused) {
+                        currentVideo.play().catch(e => console.log("Autoplay scroll dicegah:", e));
+                    }
+                } else {
+                    // Keluar viewport -> Pause
+                    if (currentVideo && !currentVideo.paused) {
+                        videos[window.currentVideoIndex].pause();
+                    }
+                }
+            }
+        });
+    }, { threshold: 0.5 }); // Trigger saat 50% elemen terlihat
+    
+    observer.observe(videoSliderContainer);
 }
