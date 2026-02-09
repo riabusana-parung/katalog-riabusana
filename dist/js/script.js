@@ -350,9 +350,11 @@ const updateProductVisibility = (filterValue, animate = false) => {
 // Fungsi Utama untuk Memuat Data dan Menyiapkan Filter
 async function initCatalog() {
     try {
-        // Deteksi otomatis: Jika localhost pakai PHP, jika online pakai JSON
+        // Deteksi otomatis: Localhost pakai PHP, TAPI jika Live Server (Port 55xx) pakai JSON
         const isLocalhost = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
-        const endpoint = isLocalhost ? './get_products.php' : './products.json';
+        const isLiveServer = window.location.port.startsWith('55'); // Port default Live Server VS Code (5500)
+        
+        const endpoint = (isLocalhost && !isLiveServer) ? './get_products.php' : './products.json';
         
         const response = await fetch(endpoint + '?v=' + new Date().getTime());
         products = await response.json();
@@ -502,9 +504,11 @@ async function loadVideos() {
     if (!sliderWrapper && !gridContainer) return;
 
     try {
-        // Deteksi otomatis: Localhost pakai PHP (Scan Folder), Online pakai JSON (Manual Link GDrive)
+        // Deteksi otomatis: Localhost pakai PHP, TAPI jika Live Server (Port 55xx) pakai JSON
         const isLocalhost = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
-        const endpoint = isLocalhost ? './get_video.php' : './videos.json';
+        const isLiveServer = window.location.port.startsWith('55'); // Port default Live Server VS Code (5500)
+
+        const endpoint = (isLocalhost && !isLiveServer) ? './get_video.php' : './videos.json';
 
         const response = await fetch(endpoint);
         const videos = await response.json();
@@ -517,27 +521,73 @@ async function loadVideos() {
             window.totalVideos = videos.length;
             window.currentVideoIndex = 0;
 
-            videos.forEach((video) => {
+            const ytPlayersToInit = []; // Tampung ID player YouTube untuk di-init API
+
+            videos.forEach((video, index) => {
+                let videoContent = '';
+                
+                // Cek apakah ini video YouTube atau MP4 biasa
+                if (video.type === 'youtube') {
+                    // Tambahkan enablejsapi=1 agar bisa dipause lewat script
+                    const separator = video.src.includes('?') ? '&' : '?';
+                    const origin = window.location.origin; // Fix: Tambahkan origin agar API YouTube valid & aman
+                    const iframeId = `yt-player-${index}`; // ID Unik untuk API
+                    
+                    // Logika Autoplay: Hanya video pertama yang autoplay & mute saat web dibuka
+                    const autoplayParams = (index === 0) ? '&autoplay=1&mute=1' : '';
+
+                    videoContent = `<iframe id="${iframeId}" class="slider-video" src="${video.src}${separator}enablejsapi=1&rel=0&modestbranding=1&iv_load_policy=3&fs=0&color=white&origin=${origin}${autoplayParams}" allowfullscreen></iframe>`;
+                    ytPlayersToInit.push(iframeId);
+                } else {
+                    videoContent = `<video controls playsinline preload="none" class="slider-video"><source src="${video.src}" type="${video.type}"></video>`;
+                }
+
                 const slide = document.createElement('div');
                 slide.className = 'video-slide';
                 slide.innerHTML = `
                     <div class="video-wrapper">
-                        <video controls playsinline preload="none" class="slider-video">
-                            <source src="${video.src}" type="${video.type}">
-                        </video>
+                        ${videoContent}
                     </div>
                     <div class="video-info"><h3>${video.title}</h3></div>
                 `;
 
                 // Event listener: Saat video selesai, geser ke slide berikutnya
-                const videoEl = slide.querySelector('video');
-                videoEl.muted = window.isGlobalMuted; // Terapkan status mute global saat inisialisasi
-                videoEl.addEventListener('ended', () => {
-                    moveVideoSlide(1);
-                });
+                const videoEl = slide.querySelector('video'); // Hanya ada jika MP4
+                if (videoEl) {
+                    videoEl.muted = window.isGlobalMuted; 
+                    videoEl.addEventListener('ended', () => moveVideoSlide(1));
+                }
 
                 sliderWrapper.appendChild(slide);
             });
+
+            // Inisialisasi YouTube API untuk Autoplay Next Slide
+            if (ytPlayersToInit.length > 0) {
+                const initPlayers = () => {
+                    ytPlayersToInit.forEach(id => {
+                        if (document.getElementById(id)) {
+                            new YT.Player(id, {
+                                events: {
+                                    'onStateChange': (event) => {
+                                        if (event.data === 0) window.moveVideoSlide(1); // 0 = ENDED
+                                    }
+                                }
+                            });
+                        }
+                    });
+                };
+
+                if (window.YT && window.YT.Player) {
+                    initPlayers();
+                } else {
+                    if (!document.querySelector('script[src="https://www.youtube.com/iframe_api"]')) {
+                        const tag = document.createElement('script');
+                        tag.src = "https://www.youtube.com/iframe_api";
+                        document.body.appendChild(tag);
+                    }
+                    window.onYouTubeIframeAPIReady = initPlayers;
+                }
+            }
         }
 
         // --- LOGIKA GRID (Halaman Khusus TV Media) ---
@@ -546,7 +596,8 @@ async function loadVideos() {
             videos.forEach((video, index) => {
                 let videoContent = '';
                 if (video.type === 'youtube') {
-                    videoContent = `<iframe src="${video.src}" allowfullscreen></iframe>`;
+                    const separator = video.src.includes('?') ? '&' : '?';
+                    videoContent = `<iframe src="${video.src}${separator}rel=0&modestbranding=1&iv_load_policy=3&fs=0&color=white" allowfullscreen></iframe>`;
                 } else {
                     videoContent = `<video controls preload="none"><source src="${video.src}" type="${video.type}"></video>`;
                 }
@@ -596,9 +647,16 @@ window.moveVideoSlide = function(direction) {
     // Autoplay video baru (Slide Aktif)
     const newSlide = slides[window.currentVideoIndex];
     const newVideo = newSlide ? newSlide.querySelector('video') : null;
+    const newIframe = newSlide ? newSlide.querySelector('iframe') : null;
+
     if (newVideo) {
         newVideo.muted = window.isGlobalMuted; 
         newVideo.play().catch(e => console.log("Autoplay dicegah browser:", e));
+    }
+
+    if (newIframe) {
+        // Play video YouTube via API saat slide bergeser
+        newIframe.contentWindow.postMessage('{"event":"command","func":"playVideo","args":""}', '*');
     }
 };
 
@@ -616,7 +674,14 @@ window.toggleVideoMute = function() {
     }
 
     // Terapkan ke semua video di slider
-    videos.forEach(v => v.muted = window.isGlobalMuted);
+    videos.forEach(v => {
+        if (v.tagName === 'VIDEO') {
+            v.muted = window.isGlobalMuted;
+        } else if (v.tagName === 'IFRAME') {
+            const command = window.isGlobalMuted ? 'mute' : 'unMute';
+            v.contentWindow.postMessage(`{"event":"command","func":"${command}","args":""}`, '*');
+        }
+    });
 };
 
 // --- EVENT LISTENERS FOR VIDEO CONTROLS (Fix ReferenceError) ---
@@ -643,6 +708,10 @@ if (videoSliderContainer) {
                     // Masuk viewport (50%) -> Play
                     if (currentVideo && currentVideo.paused) {
                         currentVideo.play().catch(e => console.log("Autoplay scroll dicegah:", e));
+                    }
+                    // Play YouTube juga saat di-scroll ke arahnya
+                    if (currentIframe) {
+                        currentIframe.contentWindow.postMessage('{"event":"command","func":"playVideo","args":""}', '*');
                     }
                 } else {
                     // Keluar viewport -> Pause
