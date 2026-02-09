@@ -604,6 +604,15 @@ window.toggleVideoMute = function() {
     videos.forEach(v => v.muted = window.isGlobalMuted);
 };
 
+// --- EVENT LISTENERS FOR VIDEO CONTROLS (Fix ReferenceError) ---
+const videoPrevBtn = document.querySelector('.video-nav.prev');
+const videoNextBtn = document.querySelector('.video-nav.next');
+const videoMuteBtn = document.querySelector('.video-mute-btn');
+
+if (videoPrevBtn) videoPrevBtn.addEventListener('click', () => window.moveVideoSlide(-1));
+if (videoNextBtn) videoNextBtn.addEventListener('click', () => window.moveVideoSlide(1));
+if (videoMuteBtn) videoMuteBtn.addEventListener('click', () => window.toggleVideoMute());
+
 // --- AUTO PAUSE VIDEO ON SCROLL ---
 const videoSliderContainer = document.querySelector('.video-slider-container');
 if (videoSliderContainer) {
