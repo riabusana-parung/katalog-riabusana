@@ -53,6 +53,16 @@ const themeIcon = themeToggleBtn.querySelector('i');
 // Daftar tema: Light -> Dark -> Purple -> Bubu -> Ramadhan
 const themes = ['light', 'dark', 'purple', 'bubu', 'ramadhan'];
 
+// --- DATA JADWAL IMSAKIYAH (Bogor & Sekitarnya) ---
+const jadwalRamadhan = {
+    "2026-02-19": { imsak: "04:30", subuh: "04:40", maghrib: "18:15" }, // Data Dummy Hari Ini (Contoh)
+    "2026-02-27": { imsak: "04:31", subuh: "04:41", maghrib: "18:08" },
+    "2026-02-28": { imsak: "04:31", subuh: "04:41", maghrib: "18:08" },
+    "2026-03-01": { imsak: "04:31", subuh: "04:41", maghrib: "18:07" },
+    // Fallback default jika tanggal tidak ada
+    "default": { imsak: "04:31", subuh: "04:41", maghrib: "18:08" }
+};
+
 // --- PARTICLE SYSTEM ---
 let particleInterval;
 let clockInterval; // Variabel untuk interval jam
@@ -142,10 +152,27 @@ const applyTheme = (themeName) => {
         const imsakPopup = document.getElementById('imsakiyah-popup');
         if (imsakPopup) {
             // Update Tanggal Hari Ini
+            const now = new Date();
             const dateEl = document.getElementById('imsakiyah-date');
             if (dateEl) {
-                dateEl.innerText = new Date().toLocaleDateString('id-ID', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+                dateEl.innerText = now.toLocaleDateString('id-ID', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
             }
+
+            // --- UPDATE JADWAL DINAMIS ---
+            const year = now.getFullYear();
+            const month = String(now.getMonth() + 1).padStart(2, '0');
+            const day = String(now.getDate()).padStart(2, '0');
+            const dateKey = `${year}-${month}-${day}`;
+
+            const jadwal = jadwalRamadhan[dateKey] || jadwalRamadhan["default"];
+            const timeEls = document.querySelectorAll('.jadwal-item strong');
+            
+            if (timeEls.length >= 3) {
+                timeEls[0].innerText = jadwal.imsak + " WIB";
+                timeEls[1].innerText = jadwal.subuh + " WIB";
+                timeEls[2].innerText = jadwal.maghrib + " WIB";
+            }
+
             setTimeout(() => imsakPopup.classList.add('active'), 800); // Delay sedikit agar smooth
         }
     } else {
