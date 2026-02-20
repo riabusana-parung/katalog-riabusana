@@ -336,6 +336,7 @@ function renderProducts() {
         const img = document.createElement('img');
         img.src = product.src;
         img.alt = "produk image";
+        img.loading = "lazy"; // Mengaktifkan Native Lazy Loading
         
         img.onclick = () => {
             lightbox.classList.add('active');
@@ -603,42 +604,62 @@ async function loadVideos() {
             window.currentVideoIndex = 0;
 
             const ytPlayersToInit = []; // Tampung ID player YouTube untuk di-init API
-
+ 
             videos.forEach((video, index) => {
-                let videoContent = '';
-                
-                // Cek apakah ini video YouTube atau MP4 biasa
-                if (video.type === 'youtube') {
-                    // Tambahkan enablejsapi=1 agar bisa dipause lewat script
-                    const separator = video.src.includes('?') ? '&' : '?';
-                    const origin = window.location.origin; // Fix: Tambahkan origin agar API YouTube valid & aman
-                    const iframeId = `yt-player-${index}`; // ID Unik untuk API
-                    
-                    // Logika Autoplay: Hanya video pertama yang autoplay & mute saat web dibuka
-                    const autoplayParams = (index === 0) ? '&autoplay=1&mute=1' : '';
-
-                    videoContent = `<iframe id="${iframeId}" class="slider-video" src="${video.src}${separator}enablejsapi=1&rel=0&modestbranding=1&iv_load_policy=3&fs=0&color=white&origin=${origin}${autoplayParams}" allowfullscreen></iframe>`;
-                    ytPlayersToInit.push(iframeId);
-                } else {
-                    videoContent = `<video controls playsinline preload="none" class="slider-video"><source src="${video.src}" type="${video.type}"></video>`;
-                }
-
                 const slide = document.createElement('div');
                 slide.className = 'video-slide';
-                slide.innerHTML = `
-                    <div class="video-wrapper">
-                        ${videoContent}
-                    </div>
-                    <div class="video-info"><h3>${video.title}</h3></div>
-                `;
+ 
+                const videoWrapper = document.createElement('div');
+                videoWrapper.className = 'video-wrapper';
+ 
+                const skeletonLoader = document.createElement('div');
+                skeletonLoader.className = 'skeleton-loader';
+                videoWrapper.appendChild(skeletonLoader);
+ 
+                const hideSkeleton = () => {
+                    skeletonLoader.style.opacity = '0';
+                    setTimeout(() => skeletonLoader.remove(), 500);
+                };
+ 
+                if (video.type === 'youtube') {
+                     const separator = video.src.includes('?') ? '&' : '?';
+                     const origin = window.location.origin;
+                     const iframeId = `yt-player-${index}`;
+                     const autoplayParams = (index === 0) ? '&autoplay=1&mute=1' : '';
+ 
+                     const iframe = document.createElement('iframe');
+                     iframe.id = iframeId;
+                     iframe.className = 'slider-video';
+                     iframe.src = `${video.src}${separator}enablejsapi=1&rel=0&modestbranding=1&iv_load_policy=3&fs=0&color=white&origin=${origin}${autoplayParams}`;
+                     iframe.allowFullscreen = true;
+                     iframe.loading = 'lazy';
+                     iframe.onload = hideSkeleton;
+                     videoWrapper.appendChild(iframe);
+                     ytPlayersToInit.push(iframeId);
+                } else { // MP4
+                    const videoEl = document.createElement('video');
+                    videoEl.className = 'slider-video';
+                    videoEl.controls = true;
+                    videoEl.playsInline = true;
+                    videoEl.preload = 'metadata';
 
-                // Event listener: Saat video selesai, geser ke slide berikutnya
-                const videoEl = slide.querySelector('video'); // Hanya ada jika MP4
-                if (videoEl) {
+                    const sourceEl = document.createElement('source');
+                    sourceEl.src = video.src;
+                    sourceEl.type = video.type;
+                    videoEl.appendChild(sourceEl);
+
+                    videoEl.addEventListener('loadeddata', hideSkeleton);
                     videoEl.muted = window.isGlobalMuted; 
                     videoEl.addEventListener('ended', () => moveVideoSlide(1));
+                    videoWrapper.appendChild(videoEl);
                 }
-
+ 
+                const videoInfo = document.createElement('div');
+                videoInfo.className = 'video-info';
+                videoInfo.innerHTML = `<h3>${video.title}</h3>`;
+ 
+                slide.appendChild(videoWrapper);
+                slide.appendChild(videoInfo);
                 sliderWrapper.appendChild(slide);
             });
 
@@ -675,24 +696,45 @@ async function loadVideos() {
         if (gridContainer) {
             gridContainer.innerHTML = '';
             videos.forEach((video, index) => {
-                let videoContent = '';
-                if (video.type === 'youtube') {
-                    const separator = video.src.includes('?') ? '&' : '?';
-                    videoContent = `<iframe src="${video.src}${separator}rel=0&modestbranding=1&iv_load_policy=3&fs=0&color=white" allowfullscreen></iframe>`;
-                } else {
-                    videoContent = `<video controls preload="none"><source src="${video.src}" type="${video.type}"></video>`;
-                }
-
                 const card = document.createElement('div');
                 card.className = 'video-card';
                 card.setAttribute('data-aos', 'fade-up');
                 card.setAttribute('data-aos-delay', index * 100);
-                card.innerHTML = `
-                    <div class="video-wrapper">
-                        ${videoContent}
-                    </div>
-                    <div class="video-info"><h3>${video.title}</h3></div>
-                `;
+
+                const videoWrapper = document.createElement('div');
+                videoWrapper.className = 'video-wrapper';
+
+                const skeletonLoader = document.createElement('div');
+                skeletonLoader.className = 'skeleton-loader';
+                videoWrapper.appendChild(skeletonLoader);
+
+                const hideSkeleton = () => {
+                    skeletonLoader.style.opacity = '0';
+                    setTimeout(() => skeletonLoader.remove(), 500);
+                };
+
+                if (video.type === 'youtube') {
+                    const separator = video.src.includes('?') ? '&' : '?';
+                    const iframe = document.createElement('iframe');
+                    iframe.src = `${video.src}${separator}rel=0&modestbranding=1&iv_load_policy=3&fs=0&color=white`;
+                    iframe.allowFullscreen = true;
+                    iframe.loading = 'lazy';
+                    iframe.onload = hideSkeleton;
+                    videoWrapper.appendChild(iframe);
+                } else {
+                    const videoEl = document.createElement('video');
+                    videoEl.controls = true;
+                    videoEl.preload = 'metadata';
+                    const sourceEl = document.createElement('source');
+                    sourceEl.src = video.src;
+                    sourceEl.type = video.type;
+                    videoEl.appendChild(sourceEl);
+                    videoEl.addEventListener('loadeddata', hideSkeleton);
+                    videoWrapper.appendChild(videoEl);
+                }
+
+                card.innerHTML = `<div class="video-info"><h3>${video.title}</h3></div>`;
+                card.prepend(videoWrapper);
                 gridContainer.appendChild(card);
             });
         }
@@ -712,10 +754,10 @@ window.moveVideoSlide = function(direction) {
     if (currentSlide) {
         const video = currentSlide.querySelector('video');
         const iframe = currentSlide.querySelector('iframe');
-        
+
         if (video) { video.pause(); video.currentTime = 0; }
         // Kirim perintah pause ke YouTube via postMessage
-        if (iframe) { iframe.contentWindow.postMessage('{"event":"command","func":"pauseVideo","args":""}', '*'); }
+        if (iframe) { iframe.contentWindow.postMessage('{"event":"command","func":"pauseVideo","args":""}', 'https://www.youtube.com'); }
     }
 
     window.currentVideoIndex += direction;
@@ -730,14 +772,14 @@ window.moveVideoSlide = function(direction) {
     const newVideo = newSlide ? newSlide.querySelector('video') : null;
     const newIframe = newSlide ? newSlide.querySelector('iframe') : null;
 
-    if (newVideo) {
+    if (newVideo) { 
         newVideo.muted = window.isGlobalMuted; 
         newVideo.play().catch(e => console.log("Autoplay dicegah browser:", e));
     }
 
-    if (newIframe) {
+    if (newIframe) { 
         // Play video YouTube via API saat slide bergeser
-        newIframe.contentWindow.postMessage('{"event":"command","func":"playVideo","args":""}', '*');
+        newIframe.contentWindow.postMessage('{"event":"command","func":"playVideo","args":""}', 'https://www.youtube.com');
     }
 };
 
@@ -760,7 +802,7 @@ window.toggleVideoMute = function() {
             v.muted = window.isGlobalMuted;
         } else if (v.tagName === 'IFRAME') {
             const command = window.isGlobalMuted ? 'mute' : 'unMute';
-            v.contentWindow.postMessage(`{"event":"command","func":"${command}","args":""}`, '*');
+            v.contentWindow.postMessage(`{"event":"command","func":"${command}","args":""}`, 'https://www.youtube.com');
         }
     });
 };
@@ -792,7 +834,7 @@ if (videoSliderContainer) {
                     }
                     // Play YouTube juga saat di-scroll ke arahnya
                     if (currentIframe) {
-                        currentIframe.contentWindow.postMessage('{"event":"command","func":"playVideo","args":""}', '*');
+                        currentIframe.contentWindow.postMessage('{"event":"command","func":"playVideo","args":""}', 'https://www.youtube.com');
                     }
                 } else {
                     // Keluar viewport -> Pause
@@ -801,7 +843,7 @@ if (videoSliderContainer) {
                     }
                     // Pause YouTube juga saat di-scroll lewat
                     if (currentIframe) {
-                        currentIframe.contentWindow.postMessage('{"event":"command","func":"pauseVideo","args":""}', '*');
+                        currentIframe.contentWindow.postMessage('{"event":"command","func":"pauseVideo","args":""}', 'https://www.youtube.com');
                     }
                 }
             }
