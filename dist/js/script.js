@@ -53,15 +53,88 @@ const themeIcon = themeToggleBtn.querySelector('i');
 // Daftar tema: Light -> Dark -> Purple -> Bubu -> Ramadhan
 const themes = ['light', 'dark', 'purple', 'bubu', 'ramadhan'];
 
-// --- DATA JADWAL IMSAKIYAH (Bogor & Sekitarnya) ---
-const jadwalRamadhan = {
-    "2026-02-19": { imsak: "04:30", subuh: "04:40", maghrib: "18:15" }, // Data Dummy Hari Ini (Contoh)
-    "2026-02-27": { imsak: "04:31", subuh: "04:41", maghrib: "18:08" },
-    "2026-02-28": { imsak: "04:31", subuh: "04:41", maghrib: "18:08" },
-    "2026-03-01": { imsak: "04:31", subuh: "04:41", maghrib: "18:07" },
-    // Fallback default jika tanggal tidak ada
-    "default": { imsak: "04:31", subuh: "04:41", maghrib: "18:08" }
-};
+// --- DATA JADWAL IMSAKIYAH (API & Fallback) ---
+const jadwalFallback = { imsak: "04:31", subuh: "04:41", dzuhur: "12:00", ashar: "15:15", maghrib: "18:08", isya: "19:18" };
+
+async function updateJadwalSholat() {
+    const timeEls = document.querySelectorAll('.jadwal-item strong');
+    const dateEl = document.getElementById('imsakiyah-date');
+    if (timeEls.length < 6) return;
+
+    // Set loading state sementara
+    timeEls.forEach(el => el.innerText = "...");
+
+    let jadwal = jadwalFallback; // Default ke fallback
+
+    try {
+        const now = new Date();
+        const year = now.getFullYear();
+        const month = String(now.getMonth() + 1).padStart(2, '0');
+        const day = String(now.getDate()).padStart(2, '0');
+        
+        // ID Kota Bogor = 1228 (Sumber: API MyQuran)
+        const cityId = '1228'; 
+        
+        const response = await fetch(`https://api.myquran.com/v2/sholat/jadwal/${cityId}/${year}/${month}/${day}`);
+        const result = await response.json();
+
+        if (result.status && result.data && result.data.jadwal) {
+            jadwal = result.data.jadwal;
+            if (dateEl) dateEl.innerText = jadwal.tanggal;
+        } else {
+            throw new Error("Data API tidak valid");
+        }
+    } catch (error) {
+        console.error("Gagal memuat jadwal sholat:", error);
+        
+        if (dateEl) {
+            const now = new Date();
+            dateEl.innerText = now.toLocaleDateString('id-ID', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+        }
+    }
+
+    // Update Teks Waktu
+    timeEls[0].innerText = jadwal.imsak + " WIB";
+    timeEls[1].innerText = jadwal.subuh + " WIB";
+    timeEls[2].innerText = jadwal.dzuhur + " WIB";
+    timeEls[3].innerText = jadwal.ashar + " WIB";
+    timeEls[4].innerText = jadwal.maghrib + " WIB";
+    timeEls[5].innerText = jadwal.isya + " WIB";
+
+    // --- LOGIC HIGHLIGHT OTOMATIS ---
+    const now = new Date();
+    const currentMinutes = now.getHours() * 60 + now.getMinutes();
+    const timeToMinutes = (t) => {
+        const [h, m] = t.split(':').map(Number);
+        return h * 60 + m;
+    };
+
+    const times = [
+        { time: jadwal.imsak, index: 0 },
+        { time: jadwal.subuh, index: 1 },
+        { time: jadwal.dzuhur, index: 2 },
+        { time: jadwal.ashar, index: 3 },
+        { time: jadwal.maghrib, index: 4 },
+        { time: jadwal.isya, index: 5 }
+    ];
+
+    let activeIndex = 5; // Default Isya (jika belum masuk waktu Imsak hari ini)
+
+    for (let i = 0; i < times.length; i++) {
+        if (currentMinutes < timeToMinutes(times[i].time)) {
+            activeIndex = i - 1;
+            break;
+        }
+    }
+
+    if (activeIndex < 0) activeIndex = 5; // Sebelum Imsak -> Masih Isya
+
+    const jadwalItems = document.querySelectorAll('.jadwal-item');
+    jadwalItems.forEach(item => item.classList.remove('highlight'));
+    if (jadwalItems[activeIndex]) {
+        jadwalItems[activeIndex].classList.add('highlight');
+    }
+}
 
 // --- PARTICLE SYSTEM ---
 let particleInterval;
@@ -151,27 +224,8 @@ const applyTheme = (themeName) => {
         // Munculkan Popup Imsakiyah Otomatis
         const imsakPopup = document.getElementById('imsakiyah-popup');
         if (imsakPopup) {
-            // Update Tanggal Hari Ini
-            const now = new Date();
-            const dateEl = document.getElementById('imsakiyah-date');
-            if (dateEl) {
-                dateEl.innerText = now.toLocaleDateString('id-ID', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
-            }
-
-            // --- UPDATE JADWAL DINAMIS ---
-            const year = now.getFullYear();
-            const month = String(now.getMonth() + 1).padStart(2, '0');
-            const day = String(now.getDate()).padStart(2, '0');
-            const dateKey = `${year}-${month}-${day}`;
-
-            const jadwal = jadwalRamadhan[dateKey] || jadwalRamadhan["default"];
-            const timeEls = document.querySelectorAll('.jadwal-item strong');
-            
-            if (timeEls.length >= 3) {
-                timeEls[0].innerText = jadwal.imsak + " WIB";
-                timeEls[1].innerText = jadwal.subuh + " WIB";
-                timeEls[2].innerText = jadwal.maghrib + " WIB";
-            }
+            // Ambil data terbaru dari API
+            updateJadwalSholat();
 
             setTimeout(() => imsakPopup.classList.add('active'), 800); // Delay sedikit agar smooth
         }
@@ -255,7 +309,7 @@ window.addEventListener('load', () => {
         document.addEventListener('click', () => {
             if (bgMusic.paused) toggleMusic();
         }, { once: true }); // `{ once: true }` agar event ini hanya berjalan sekali.
-    }, 3000); // Diperlama jadi 3 detik agar slider sempat terlihat
+    }, 500); // Waktu tunggu dikurangi agar preloader cepat hilang setelah load selesai
 });
 
 // --- DATA PRODUK (JSON Array) ---
