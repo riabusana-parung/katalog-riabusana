@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+    <!-- favicon -->
+    <link rel="shortcut icon" href="./assets/icons/favicon.png" type="image/x-icon" />
+
+    <!-- font poppins -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+    
+    <!-- css -->
+    <link rel="stylesheet" href="./dist/css/style.css" />
+
+    <!-- Remix Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet" />
+
+    <!-- aos -->
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+
+    <title>Daftar Member - Ria Busana Parung</title>
+</head>
+<body>
+    <!-- Background Music -->
+    <audio id="bg-music" src="./assets/audio/rb-asyik.mpeg" loop></audio>
+
+    <!-- Navbar -->
+    <div class="navbar">
+        <div class="container">
+            <div class="navbar-box">
+                <div class="logo">
+                    <img src="./assets/icons/favicon.png" alt="RB Logo" />
+                    <h1>Parung.</h1>
+                </div>
+                <ul class="menu">
+                    <li class="mobile-menu-header">
+                        <img src="./assets/images/kubah.png" alt="Kubah Masjid">
+                    </li>
+                    <li><a href="index.html#beranda">Beranda</a></li>
+                    <li><a href="index.html#layanan">Layanan</a></li>
+                    <li><a href="index.html#tv-media">TV Media</a></li>
+                    <li><a href="index.html#produk">Produk Kami</a></li>
+                    <li><a href="qna.html">QnA</a></li>
+                    <li><a href="#" style="color: rebeccapurple; font-weight: 600; border-bottom: 3px solid rebeccapurple;">Member</a></li>
+                    <li><a href="#kontak">Kontak</a></li>
+                </ul>
+                <div class="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Member Section -->
+    <div class="member-section" style="padding-top: 80px; padding-bottom: 100px; min-height: 70vh; display: flex; align-items: center;">
+        <div class="container">
+            <div class="hero-box" style="align-items: center;">
+                <!-- Kolom Teks -->
+                <div class="box" data-aos="fade-right" data-aos-duration="1000">
+                    <h1 style="color: rebeccapurple; font-size: 48px; line-height: 1.2; margin-bottom: 20px;">Gabung Member <br> Ria Busana</h1>
+                    <p style="font-size: 18px; line-height: 1.8; color: #555; margin-bottom: 30px;">
+                        Dapatkan berbagai keuntungan eksklusif dengan menjadi member resmi Ria Busana. Nikmati pengalaman belanja yang lebih hemat dan menyenangkan.
+                    </p>
+                    
+                    <ul style="list-style: none; margin-bottom: 40px;">
+                        <li style="margin-bottom: 15px; display: flex; align-items: center; font-size: 18px; font-weight: 500;">
+                            <i class="ri-checkbox-circle-fill" style="color: rebeccapurple; font-size: 24px; margin-right: 15px;"></i> 
+                            Diskon Khusus Member
+                        </li>
+                        <li style="margin-bottom: 15px; display: flex; align-items: center; font-size: 18px; font-weight: 500;">
+                            <i class="ri-checkbox-circle-fill" style="color: rebeccapurple; font-size: 24px; margin-right: 15px;"></i> 
+                            Kumpul Poin Belanja
+                        </li>
+                        <li style="margin-bottom: 15px; display: flex; align-items: center; font-size: 18px; font-weight: 500;">
+                            <i class="ri-checkbox-circle-fill" style="color: rebeccapurple; font-size: 24px; margin-right: 15px;"></i> 
+                            Info Promo Lebih Awal
+                        </li>
+                    </ul>
+
+                    <a href="https://member.riabusana.co.id/" target="_blank" class="btn-kirim" style="text-decoration: none; display: inline-flex; align-items: center; justify-content: center; width: auto; padding: 15px 40px; border-radius: 50px; font-size: 18px; gap: 10px; box-shadow: 0 10px 20px rgba(102, 51, 153, 0.3);">
+                        Daftar Sekarang <i class="ri-arrow-right-line"></i>
+                    </a>
+                    <p style="margin-top: 15px; font-size: 14px; color: #888;">*Anda akan diarahkan ke halaman resmi pendaftaran.</p>
+                </div>
+
+                <!-- Kolom Gambar -->
+                <div class="box" data-aos="fade-left" data-aos-duration="1000">
+                    <div style="position: relative; border-radius: 30px; overflow: hidden; box-shadow: 0 20px 50px rgba(0,0,0,0.15);">
+                        <img src="./assets/images/ekatalog/AWAL (10).jpg" alt="Member Ria Busana" style="width: 100%; height: auto; display: block;">
+                        <!-- Badge Hiasan -->
+                        <div style="position: absolute; bottom: 30px; left: 30px; background: white; padding: 15px 25px; border-radius: 15px; display: flex; align-items: center; gap: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.1);">
+                            <i class="ri-vip-crown-2-fill" style="font-size: 32px; color: #FFD700;"></i>
+                            <div>
+                                <h4 style="margin: 0; color: #333;">Member VIP</h4>
+                                <small style="color: #777;">Benefit Melimpah</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer" id="kontak">
+        <div class="box">
+            <p>&copy; Copyright 2026 Katalog RiaBusana Parung by <span>Qonde</span>. All rights reserved.</p>
+        </div>
+        <div class="box">
+            <i class="ri-whatsapp-fill ri-2x"></i>
+            <a href="https://www.facebook.com/Riabusana.Retail.Fashion" target="_blank" style="text-decoration: none; color: inherit;"><i class="ri-facebook-fill ri-2x"></i></a>
+            <a href="https://www.instagram.com/riabusana_official/" target="_blank" style="text-decoration: none; color: inherit;"><i class="ri-instagram-fill ri-2x"></i></a>
+            <a href="https://www.tiktok.com/@riabusana_officialnew" target="_blank" style="text-decoration: none; color: inherit;"><i class="ri-tiktok-fill ri-2x"></i></a>
+            <a href="https://www.youtube.com/@riabusana_official" target="_blank" style="text-decoration: none; color: inherit;"><i class="ri-youtube-fill ri-2x"></i></a>
+            <a href="https://shopee.co.id/riabusana" target="_blank" style="text-decoration: none; color: inherit;"><i class="ri-shopping-bag-3-fill ri-2x shopee-icon"></i></a>
+        </div>
+    </div>
+
+    <!-- Floating Buttons -->
+    <div class="music-toggle" id="music-toggle"><i class="ri-volume-mute-line"></i></div>
+    <div class="theme-toggle" id="theme-toggle"><i class="ri-moon-line"></i></div>
+    <div class="scroll-top"><i class="ri-arrow-up-line"></i></div>
+
+    <!-- Scripts -->
+    <script type="module" src="./dist/js/script.js"></script>
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script>
+        AOS.init({ once: true, offset: 50, duration: 1000 });
+    </script>
+</body>
+</html>
