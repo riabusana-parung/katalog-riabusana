@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+        <!-- favicon -->
+        <link rel="shortcut icon" href="./assets/icons/favicon.png" type="image/x-icon" />
+
+        <!-- font poppins -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+        
+        <!-- css -->
+        <link rel="stylesheet" href="./dist/css/style.css" />
+
+        <!-- Remix Icons -->
+        <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet" />
+
+        <!-- aos -->
+        <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+
+    <title>QnA - Ria Busana Parung</title>
+</head>
+<body>
+    <!-- Background Music -->
+    <audio id="bg-music" src="./assets/audio/rb-asyik.mpeg" loop></audio>
+
+    <!-- Navbar -->
+    <div class="navbar">
+        <div class="container">
+            <div class="navbar-box">
+                <div class="logo">
+                    <img src="./assets/icons/favicon.png" alt="RB Logo" />
+                    <h1>Parung.</h1>
+                </div>
+                <ul class="menu">
+                    <li class="mobile-menu-header">
+                        <img src="./assets/images/kubah.png" alt="Kubah Masjid">
+                    </li>
+                    <li><a href="index.html#beranda">Beranda</a></li>
+                    <li><a href="index.html#layanan">Layanan</a></li>
+                    <li><a href="index.html#tv-media">TV Media</a></li>
+                    <li><a href="index.html#produk">Produk Kami</a></li>
+                    <li><a href="#" style="color: rebeccapurple; font-weight: 600; border-bottom: 3px solid rebeccapurple;">QnA</a></li>
+                    <li><a href="#kontak">Kontak</a></li>
+                </ul>
+                <div class="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- QnA Section -->
+    <div class="qna" id="qna" style="padding-top: 50px; padding-bottom: 50px;">
+        <div class="container">
+            <div class="qna-box">
+                <h1 data-aos="fade-up" data-aos-duration="1000">Pertanyaan Umum</h1>
+                
+                <!-- Live Search Input -->
+                <div class="qna-search" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="100">
+                    <i class="ri-search-line"></i>
+                    <input type="text" id="qna-search-input" placeholder="Cari pertanyaan Anda di sini..." />
+                </div>
+
+                <div class="accordion-container">
+                    <details class="accordion-item" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="200">
+                        <summary>Apakah barang yang dijual Barang nya Diskon?</summary>
+                        <p>Ya, semua produk fashion yang kami jual di Ria Busana dijamin 100% banyak diskonan dan Barangnya berkualitas.</p>
+                    </details>
+                    
+                    <details class="accordion-item" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="300">
+                        <summary>Bagaimana cara melakukan pemesanan?</summary>
+                        <p>Anda bisa datang langsung ke store kami atau menghubungi kontak WhatsApp yang tersedia di bagian bawah halaman ini.</p>
+                    </details>
+                    
+                    <details class="accordion-item" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="400">
+                        <summary>Bagaimana regulasi pertukaran barang?</summary>
+                        <p>Penukaran barang dapat dilakukan maksimal 2 hari setelah diterima jika terdapat cacat produk, dengan syarat label masih terpasang dan menyertakan Struk Pembayaran.</p>
+                    </details>
+
+                    <details class="accordion-item" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="500">
+                        <summary>Apa saja metode pembayaran yang diterima?</summary>
+                        <p>Kami menerima pembayaran secara tunai, melalui kartu debit Maupun kartu kredit dan transaksi online "QRIS".</p>
+                    </details>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Garis Pemisah dengan Ikon -->
+    <div class="section-separator-icon" data-aos="zoom-in" data-aos-duration="1000">
+        <i class="ri-message-2-line"></i>
+    </div>
+
+    <!-- Ulasan Section (Dipindahkan dari Index) -->
+    <div class="ulasan" id="ulasan" style="padding-top: 50px;">
+        <div class="container">
+            <div class="ulasan-box">
+                <h1 data-aos="fade-up" data-aos-duration="1000">Ulasan Pelanggan</h1>
+                <form id="ulasan-form" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="200">
+                    <div class="input-group">
+                        <label for="nama">Nama Lengkap</label>
+                        <input type="text" id="nama" name="nama" placeholder="Masukkan nama Anda..." required>
+                    </div>
+                    <div class="input-group">
+                        <label for="rating">Rating Layanan</label>
+                        <select id="rating" name="rating">
+                            <option value="5">⭐⭐⭐⭐⭐ (Sangat Puas)</option>
+                            <option value="4">⭐⭐⭐⭐ (Puas)</option>
+                            <option value="3">⭐⭐⭐ (Cukup)</option>
+                            <option value="2">⭐⭐ (Kurang)</option>
+                            <option value="1">⭐ (Kecewa)</option>
+                        </select>
+                    </div>
+                    <div class="input-group">
+                        <label for="komentar">Ucapan / Komentar</label>
+                        <textarea id="komentar" name="komentar" rows="4" maxlength="150" placeholder="Tulis pengalaman belanja Anda di sini..."></textarea>
+                        <p class="char-info">Sisa karakter: <span id="char-count">150</span></p>
+                    </div>
+                    <button type="submit" class="btn-kirim">Kirim Ulasan</button>
+                </form>
+
+                <!-- Wadah untuk menampilkan hasil ulasan -->
+                <div id="ulasan-container" class="ulasan-container"></div>
+
+                <!-- Tombol Load More Ulasan -->
+                <div style="text-align: center; margin-top: 20px;">
+                    <button id="load-more-ulasan" class="btn-load-more" style="display: none;">Lihat Ulasan Lainnya</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer" id="kontak">
+        <div class="box">
+            <p>&copy; Copyright 2026 Katalog RiaBusana Parung by <span>Qonde</span>. All rights reserved.</p>
+        </div>
+        <div class="box">
+            <i class="ri-whatsapp-fill ri-2x"></i>
+            <a href="https://www.facebook.com/Riabusana.Retail.Fashion" target="_blank" style="text-decoration: none; color: inherit;"><i class="ri-facebook-fill ri-2x"></i></a>
+            <a href="https://www.instagram.com/riabusana_official/" target="_blank" style="text-decoration: none; color: inherit;"><i class="ri-instagram-fill ri-2x"></i></a>
+            <a href="https://www.tiktok.com/@riabusana_officialnew" target="_blank" style="text-decoration: none; color: inherit;"><i class="ri-tiktok-fill ri-2x"></i></a>
+            <a href="https://www.youtube.com/@riabusana_official" target="_blank" style="text-decoration: none; color: inherit;"><i class="ri-youtube-fill ri-2x"></i></a>
+            <a href="https://shopee.co.id/riabusana" target="_blank" style="text-decoration: none; color: inherit;"><i class="ri-shopping-bag-3-fill ri-2x shopee-icon"></i></a>
+        </div>
+    </div>
+
+    <!-- Chat Widget -->
+    <div class="chat-widget">
+        <div class="chat-box" id="chat-box">
+            <div class="chat-header">
+                <span>Asisten Ria Busana</span>
+                <i class="ri-close-line" style="cursor: pointer;" onclick="document.getElementById('chat-box').classList.toggle('active')"></i>
+            </div>
+            <div class="chat-body" id="chat-body">
+                <p class="bot-message">Halo! Ada yang bisa kami bantu seputar pertanyaan umum? 👋</p>
+            </div>
+            <div class="chat-footer">
+                <a href="https://wa.me/6285710995295" target="_blank" class="btn-wa"><i class="ri-whatsapp-line ri-lg"></i> Chat Admin</a>
+            </div>
+        </div>
+        <div class="chat-toggle" onclick="document.getElementById('chat-box').classList.toggle('active')">
+            <i class="ri-message-3-fill ri-2x"></i>
+        </div>
+    </div>
+
+    <!-- Floating Buttons -->
+    <div class="music-toggle" id="music-toggle"><i class="ri-volume-mute-line"></i></div>
+    <div class="theme-toggle" id="theme-toggle"><i class="ri-moon-line"></i></div>
+    <div class="scroll-top"><i class="ri-arrow-up-line"></i></div>
+
+    <!-- Scripts -->
+    <script type="module" src="./dist/js/script.js"></script>
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script>
+        AOS.init({ once: true, offset: 50, duration: 1000 });
+
+        // QnA Search Script
+        const searchInput = document.getElementById('qna-search-input');
+        const accordionItems = document.querySelectorAll('.accordion-item');
+        if(searchInput){
+            searchInput.addEventListener('input', (e) => {
+                const searchValue = e.target.value.toLowerCase();
+                accordionItems.forEach(item => {
+                    const question = item.querySelector('summary').textContent.toLowerCase();
+                    const answer = item.querySelector('p').textContent.toLowerCase();
+                    if(question.includes(searchValue) || answer.includes(searchValue)) {
+                        item.style.display = 'block';
+                    } else {
+                        item.style.display = 'none';
+                    }
+                });
+            });
+        }
+
+        // Chat Toggle Logic (Simple version for QnA page)
+        const chatBox = document.getElementById('chat-box');
+        if(chatBox) {
+            setTimeout(() => {
+                chatBox.classList.add('active');
+            }, 3000);
+        }
+    </script>
+
+    <!-- Character Counter Script -->
+    <script>
+        const komentarInput = document.getElementById('komentar');
+        const charCount = document.getElementById('char-count');
+        const maxChar = 150;
+
+        if(komentarInput && charCount) {
+            komentarInput.addEventListener('input', function() {
+                const currentLength = this.value.length;
+                charCount.innerText = maxChar - currentLength;
+            });
+        }
+    </script>
+
+    <!-- Firebase Ulasan Script -->
+    <script type="module">
+        // Import Firebase SDK
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+        import { getFirestore, collection, addDoc, getDocs, query, orderBy, Timestamp, limit, startAfter } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+
+        // --- KONFIGURASI FIREBASE ---
+        const firebaseConfig = {
+            apiKey: "AIzaSyBsqB9ojiGqt4Ljgm67nWw8LTTw2Mnb4Pk",
+            authDomain: "katalog-fashion.firebaseapp.com",
+            projectId: "katalog-fashion",
+            storageBucket: "katalog-fashion.firebasestorage.app",
+            messagingSenderId: "609453685879",
+            appId: "1:609453685879:web:f771120f1034a765265a72"
+        };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+
+        const ulasanForm = document.getElementById('ulasan-form');
+        const ulasanContainer = document.getElementById('ulasan-container');
+        const loadMoreBtn = document.getElementById('load-more-ulasan');
+        
+        let lastVisible = null;
+        const reviewsPerPage = 5; // Jumlah ulasan per halaman
+        let isLoading = false;
+
+        // 1. Load ulasan dari Firebase Firestore
+        async function loadUlasan(isNextPage = false) {
+            if(!ulasanContainer) return;
+            
+            if (!isNextPage) {
+                ulasanContainer.innerHTML = '<p style="text-align:center; color:#888;">Memuat ulasan...</p>';
+                lastVisible = null;
+                if(loadMoreBtn) loadMoreBtn.style.display = 'none';
+            } else {
+                if(loadMoreBtn) {
+                    loadMoreBtn.innerText = "Memuat...";
+                    loadMoreBtn.disabled = true;
+                }
+            }
+
+            isLoading = true;
+
+            try {
+                let q;
+                if (isNextPage && lastVisible) {
+                    q = query(collection(db, "ulasan"), orderBy("tanggal", "desc"), startAfter(lastVisible), limit(reviewsPerPage));
+                } else {
+                    q = query(collection(db, "ulasan"), orderBy("tanggal", "desc"), limit(reviewsPerPage));
+                }
+
+                const querySnapshot = await getDocs(q);
+                
+                if (!isNextPage) {
+                    ulasanContainer.innerHTML = ''; // Hapus loading text
+                }
+                
+                if (querySnapshot.empty) {
+                    if (!isNextPage) {
+                        ulasanContainer.innerHTML = '<p style="text-align:center; color:#888;">Belum ada ulasan. Jadilah yang pertama!</p>';
+                    }
+                    if(loadMoreBtn) loadMoreBtn.style.display = 'none';
+                } else {
+                    lastVisible = querySnapshot.docs[querySnapshot.docs.length - 1];
+
+                    querySnapshot.forEach((doc) => {
+                        const data = doc.data();
+                        // Format tanggal dari Timestamp Firebase
+                        let dateString = data.tanggal && data.tanggal.toDate ? data.tanggal.toDate().toLocaleDateString("id-ID") : "";
+                        
+                        // Cek apakah ada balasan admin
+                        let adminReplyHTML = '';
+                        if (data.balasan) {
+                            adminReplyHTML = `
+                                <div class="admin-reply">
+                                    <div class="reply-header">
+                                        <i class="ri-customer-service-2-fill"></i>
+                                        <span>Respon Admin</span>
+                                    </div>
+                                    <p>${data.balasan}</p>
+                                </div>
+                            `;
+                        }
+
+                        let stars = '⭐'.repeat(data.rating);
+                        const div = document.createElement('div');
+                        div.className = 'ulasan-card';
+                        div.innerHTML = `
+                            <div class="ulasan-header">
+                                <strong>${data.nama}</strong>
+                                <span>${stars}</span>
+                            </div>
+                            <p>${data.komentar}</p>
+                            <small class="text-muted">${dateString}</small>
+                            ${adminReplyHTML}
+                        `;
+                        ulasanContainer.appendChild(div);
+                    });
+
+                    // Cek apakah masih ada data lagi untuk ditampilkan tombol Load More
+                    if (querySnapshot.docs.length < reviewsPerPage) {
+                        if(loadMoreBtn) loadMoreBtn.style.display = 'none';
+                    } else {
+                        if(loadMoreBtn) loadMoreBtn.style.display = 'inline-block';
+                    }
+                }
+            } catch (error) {
+                console.error('Gagal memuat ulasan:', error);
+                if (!isNextPage) ulasanContainer.innerHTML = '<p style="text-align:center; color:red;">Gagal memuat ulasan. Cek koneksi internet.</p>';
+            } finally {
+                isLoading = false;
+                if (isNextPage && loadMoreBtn) {
+                    loadMoreBtn.innerText = "Lihat Ulasan Lainnya";
+                    loadMoreBtn.disabled = false;
+                }
+            }
+        }
+
+        // Load saat pertama kali buka
+        loadUlasan();
+
+        // Event Listener Tombol Load More
+        if (loadMoreBtn) {
+            loadMoreBtn.addEventListener('click', () => {
+                if (!isLoading) loadUlasan(true);
+            });
+        }
+
+        // 2. Kirim Ulasan ke Firebase
+        if(ulasanForm) {
+            ulasanForm.addEventListener('submit', async function(e) {
+                e.preventDefault();
+                const nama = document.getElementById('nama').value;
+                const rating = parseInt(document.getElementById('rating').value);
+                const komentar = document.getElementById('komentar').value;
+                const btnKirim = document.querySelector('.btn-kirim');
+
+                btnKirim.disabled = true;
+                btnKirim.innerText = "Mengirim...";
+
+                try {
+                    await addDoc(collection(db, "ulasan"), {
+                        nama: nama,
+                        rating: rating,
+                        komentar: komentar,
+                        tanggal: Timestamp.now()
+                    });
+                    alert('Terima kasih! Ulasan Anda telah terkirim.');
+                    ulasanForm.reset();
+                    if(document.getElementById('char-count')) document.getElementById('char-count').innerText = 150;
+                    loadUlasan(); 
+                } catch (e) {
+                    console.error("Error adding document: ", e);
+                    alert("Gagal mengirim ulasan.");
+                } finally {
+                    btnKirim.disabled = false;
+                    btnKirim.innerText = "Kirim Ulasan";
+                }
+            });
+        }
+    </script>
+</body>
+</html>

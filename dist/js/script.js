@@ -1,3 +1,16 @@
+// Import Firebase SDK
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+
+const firebaseConfig = {
+    apiKey: "AIzaSyBsqB9ojiGqt4Ljgm67nWw8LTTw2Mnb4Pk",
+    authDomain: "katalog-fashion.firebaseapp.com",
+    projectId: "katalog-fashion",
+    storageBucket: "katalog-fashion.firebasestorage.app",
+    messagingSenderId: "609453685879",
+    appId: "1:609453685879:web:f771120f1034a765265a72"
+};
+
 const humberger = document.querySelector('.hamburger');
 const menu = document.querySelector('.menu');
 
@@ -59,28 +72,62 @@ const jadwalFallback = { imsak: "04:31", subuh: "04:41", dzuhur: "12:00", ashar:
 async function updateJadwalSholat() {
     const timeEls = document.querySelectorAll('.jadwal-item strong');
     const dateEl = document.getElementById('imsakiyah-date');
+    const locationEl = document.getElementById('imsakiyah-location');
     if (timeEls.length < 6) return;
 
     // Set loading state sementara
     timeEls.forEach(el => el.innerText = "...");
 
     let jadwal = jadwalFallback; // Default ke fallback
+    let apiUrl = `https://api.aladhan.com/v1/timingsByCity?city=Bogor&country=Indonesia&method=20`;
+    let locationText = "*Jadwal untuk wilayah Bogor & Sekitarnya";
 
     try {
-        const now = new Date();
-        const year = now.getFullYear();
-        const month = String(now.getMonth() + 1).padStart(2, '0');
-        const day = String(now.getDate()).padStart(2, '0');
-        
-        // ID Kota Bogor = 1228 (Sumber: API MyQuran)
-        const cityId = '1228'; 
-        
-        const response = await fetch(`https://api.myquran.com/v2/sholat/jadwal/${cityId}/${year}/${month}/${day}`);
+        // Coba deteksi lokasi pengguna
+        try {
+            const position = await new Promise((resolve, reject) => {
+                if (!navigator.geolocation) reject(new Error("Geolocation not supported"));
+                navigator.geolocation.getCurrentPosition(resolve, reject, { timeout: 5000 });
+            });
+            
+            const lat = position.coords.latitude;
+            const long = position.coords.longitude;
+            // Gunakan endpoint koordinat jika lokasi diizinkan
+            apiUrl = `https://api.aladhan.com/v1/timings?latitude=${lat}&longitude=${long}&method=20`;
+            
+            // Reverse Geocoding untuk mendapatkan nama kota spesifik
+            try {
+                const geoRes = await fetch(`https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${lat}&longitude=${long}&localityLanguage=id`);
+                const geoData = await geoRes.json();
+                const cityName = geoData.city || geoData.locality || "Lokasi Anda";
+                locationText = `*Jadwal untuk wilayah ${cityName}`;
+            } catch (e) {
+                locationText = "*Jadwal disesuaikan dengan Lokasi Anda";
+            }
+        } catch (geoError) {
+            console.log("Lokasi tidak dideteksi (Denied/Error), menggunakan default Bogor.");
+        }
+
+        const response = await fetch(apiUrl);
         const result = await response.json();
 
-        if (result.status && result.data && result.data.jadwal) {
-            jadwal = result.data.jadwal;
+        if (result.code === 200 && result.data && result.data.timings) {
+            const timings = result.data.timings;
+            const dateData = result.data.date;
+
+            // Mapping data dari format Aladhan ke format aplikasi
+            jadwal = {
+                imsak: timings.Imsak,
+                subuh: timings.Fajr,
+                dzuhur: timings.Dhuhr,
+                ashar: timings.Asr,
+                maghrib: timings.Maghrib,
+                isya: timings.Isha,
+                tanggal: dateData.readable // Contoh: "21 Feb 2026"
+            };
+
             if (dateEl) dateEl.innerText = jadwal.tanggal;
+            if (locationEl) locationEl.innerText = locationText;
         } else {
             throw new Error("Data API tidak valid");
         }
@@ -432,14 +479,23 @@ const updateProductVisibility = (filterValue, animate = false) => {
 // Fungsi Utama untuk Memuat Data dan Menyiapkan Filter
 async function initCatalog() {
     try {
-        // Deteksi otomatis: Localhost pakai PHP, TAPI jika Live Server (Port 55xx) pakai JSON
-        const isLocalhost = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
-        const isLiveServer = window.location.port.startsWith('55'); // Port default Live Server VS Code (5500)
+        // --- UPDATE: Menggunakan Firebase Firestore ---
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+        const productsCol = collection(db, 'products');
+        const snapshot = await getDocs(productsCol);
         
-        const endpoint = (isLocalhost && !isLiveServer) ? './get_products.php' : './products.json';
-        
-        const response = await fetch(endpoint + '?v=' + new Date().getTime());
-        products = await response.json();
+        if (!snapshot.empty) {
+            products = snapshot.docs.map(doc => doc.data());
+        } else {
+            // Fallback ke PHP jika database kosong (agar tidak blank saat pertama kali)
+            console.log("Database kosong, mengambil dari folder...");
+            const isLocalhost = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+            const isLiveServer = window.location.port.startsWith('55');
+            const endpoint = (isLocalhost && !isLiveServer) ? './get_products.php' : './products.json';
+            const response = await fetch(endpoint + '?v=' + new Date().getTime());
+            products = await response.json();
+        }
         
         // Render produk ke HTML
         renderProducts();
@@ -852,3 +908,9 @@ if (videoSliderContainer) {
     
     observer.observe(videoSliderContainer);
 }
+
+// --- EXPOSE GLOBALS (Karena script sekarang type="module") ---
+window.moveVideoSlide = moveVideoSlide;
+window.toggleVideoMute = toggleVideoMute;
+window.manualHeroSlide = (direction) => { /* Logic hero slide ada di index.html, aman */ };
+// Pastikan fungsi lain yang dipanggil via onclick di HTML terekspos

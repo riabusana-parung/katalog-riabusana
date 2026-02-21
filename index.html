@@ -72,7 +72,7 @@
                             <a href="#produk">Produk Kami</a>
                         </li>
                         <li>
-                            <a href="#qna">QnA</a>
+                            <a href="qna.html">QnA</a>
                         </li>
                         <li>
                             <a href="#kontak">Kontak</a>
@@ -216,80 +216,6 @@
         </div>
         <!-- End TV Media Section -->
 
-        <!-- QnA Section -->
-        <div class="qna" id="qna">
-            <div class="container">
-                <div class="qna-box">
-                    <h1 data-aos="fade-up" data-aos-duration="1000">Pertanyaan Umum</h1>
-                    
-                    <!-- Live Search Input -->
-                    <div class="qna-search" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="100">
-                        <i class="ri-search-line"></i>
-                        <input type="text" id="qna-search-input" placeholder="Cari pertanyaan Anda di sini..." />
-                    </div>
-
-                    <div class="accordion-container">
-                        <details class="accordion-item" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="200">
-                            <summary>Apakah barang yang dijual Barang nya Diskon?</summary>
-                            <p>Ya, semua produk fashion yang kami jual di Ria Busana dijamin 100% banyak
-                            diskonan dan Barangnya berkualitas.</p>
-                        </details>
-                        
-                        <details class="accordion-item" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="300">
-                            <summary>Bagaimana cara melakukan pemesanan?</summary>
-                            <p>Anda bisa datang langsung ke store kami atau menghubungi kontak WhatsApp yang tersedia di bagian bawah halaman ini.</p>
-                        </details>
-                        
-                        <details class="accordion-item" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="400">
-                            <summary>Bagaimana regulasi pertukaran barang?</summary>
-                            <p>Penukaran barang dapat dilakukan maksimal 2 hari setelah diterima jika terdapat cacat produk, dengan syarat label masih terpasang dan menyertakan Struk Pembayaran.</p>
-                        </details>
-
-                        <details class="accordion-item" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="500">
-                            <summary>Apa saja metode pembayaran yang diterima?</summary>
-                            <p>Kami menerima pembayaran secara tunai, melalui kartu debit Maupun kartu kredit dan transaksi online "QRIS".</p>
-                        </details>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- End QnA Section -->
-
-        <!-- Ulasan Section -->
-        <div class="ulasan" id="ulasan">
-            <div class="container">
-                <div class="ulasan-box">
-                    <h1 data-aos="fade-up" data-aos-duration="1000">Ulasan Pelanggan</h1>
-                    <form id="ulasan-form" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="200">
-                        <div class="input-group">
-                            <label for="nama">Nama Lengkap</label>
-                            <input type="text" id="nama" name="nama" placeholder="Masukkan nama Anda..." required>
-                        </div>
-                        <div class="input-group">
-                            <label for="rating">Rating Layanan</label>
-                            <select id="rating" name="rating">
-                                <option value="5">⭐⭐⭐⭐⭐ (Sangat Puas)</option>
-                                <option value="4">⭐⭐⭐⭐ (Puas)</option>
-                                <option value="3">⭐⭐⭐ (Cukup)</option>
-                                <option value="2">⭐⭐ (Kurang)</option>
-                                <option value="1">⭐ (Kecewa)</option>
-                            </select>
-                        </div>
-                        <div class="input-group">
-                            <label for="komentar">Ucapan / Komentar</label>
-                            <textarea id="komentar" name="komentar" rows="4" maxlength="150" placeholder="Tulis pengalaman belanja Anda di sini..."></textarea>
-                            <p class="char-info">Sisa karakter: <span id="char-count">150</span></p>
-                        </div>
-                        <button type="submit" class="btn-kirim">Kirim Ulasan</button>
-                    </form>
-
-                    <!-- Wadah untuk menampilkan hasil ulasan -->
-                    <div id="ulasan-container" class="ulasan-container"></div>
-                </div>
-            </div>
-        </div>
-        <!-- End Ulasan Section -->
-
         <!-- Lokasi Section -->
         <div class="lokasi" id="lokasi">
             <div class="container">
@@ -420,13 +346,13 @@
             </div>
         </div>
 
-        <!-- Popup Jadwal Imsakiyah (Khusus Tema Ramadhan) -->
+        <!-- Popup Jadwal Sholat & Imsakiyah (Khusus Tema Ramadhan) -->
         <div id="imsakiyah-popup" class="imsakiyah-popup">
             <div class="imsakiyah-content">
                 <span class="close-imsakiyah">&times;</span>
                 <div class="imsakiyah-header">
                     <i class="ri-moon-clear-fill"></i>
-                    <h3>Jadwal Imsakiyah</h3>
+                    <h3>Jadwal Sholat & Imsakiyah</h3>
                 </div>
                 <p id="imsakiyah-date">Hari Ini</p>
                 <div id="imsakiyah-clock" class="imsakiyah-clock">00:00:00</div>
@@ -456,12 +382,12 @@
                         <strong>19:18 WIB</strong>
                     </div>
                 </div>
-                <small>*Jadwal untuk wilayah Bogor & Sekitarnya</small>
+                <small id="imsakiyah-location">*Jadwal untuk wilayah Bogor & Sekitarnya</small>
             </div>
         </div>
 
         <!-- js -->
-        <script src="./dist/js/script.js"></script>
+        <script type="module" src="./dist/js/script.js"></script>
 
         <!-- aos -->
         <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
@@ -670,27 +596,6 @@
             }
         </script>
 
-        <!-- Live FAQ Search Script -->
-        <script>
-            const searchInput = document.getElementById('qna-search-input');
-            const accordionItems = document.querySelectorAll('.accordion-item');
-
-            searchInput.addEventListener('input', (e) => {
-                const searchValue = e.target.value.toLowerCase();
-
-                accordionItems.forEach(item => {
-                    const question = item.querySelector('summary').textContent.toLowerCase();
-                    const answer = item.querySelector('p').textContent.toLowerCase();
-
-                    if(question.includes(searchValue) || answer.includes(searchValue)) {
-                        item.style.display = 'block';
-                    } else {
-                        item.style.display = 'none';
-                    }
-                });
-            });
-        </script>
-
         <!-- Proactive Chat Assistant Script -->
         <script>
             const chatBox = document.getElementById('chat-box');
@@ -749,7 +654,7 @@
         <script type="module">
             // Import Firebase SDK
             import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-            import { getFirestore, collection, addDoc, getDocs, query, orderBy, Timestamp, doc, getDoc, runTransaction } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+            import { getFirestore, doc, getDoc, runTransaction } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
             // --- KONFIGURASI FIREBASE ---
             // Ganti nilai di bawah ini dengan konfigurasi dari Firebase Console Anda
@@ -766,106 +671,7 @@
             const app = initializeApp(firebaseConfig);
             const db = getFirestore(app);
 
-            const ulasanForm = document.getElementById('ulasan-form');
-            const ulasanContainer = document.getElementById('ulasan-container');
-
-            // 1. Load ulasan dari Database saat halaman dibuka
-            // 1. Load ulasan dari Firebase Firestore
-            async function loadUlasan() {
-                ulasanContainer.innerHTML = '<p style="text-align:center; color:#888;">Memuat ulasan...</p>';
-                try {
-                    const q = query(collection(db, "ulasan"), orderBy("tanggal", "desc"));
-                    const querySnapshot = await getDocs(q);
-                    
-                    ulasanContainer.innerHTML = ''; // Hapus loading text
-                    
-                    if (querySnapshot.empty) {
-                        ulasanContainer.innerHTML = '<p style="text-align:center; color:#888;">Belum ada ulasan. Jadilah yang pertama!</p>';
-                    }
-
-                    querySnapshot.forEach((doc) => {
-                        const data = doc.data();
-                        // Format tanggal dari Timestamp Firebase
-                        let dateString = data.tanggal && data.tanggal.toDate ? data.tanggal.toDate().toLocaleDateString("id-ID") : "";
-                        
-                        let stars = '⭐'.repeat(data.rating);
-                        const div = document.createElement('div');
-                        div.className = 'ulasan-card';
-                        div.innerHTML = `
-                            <div class="ulasan-header">
-                                <strong>${data.nama}</strong>
-                                <span>${stars}</span>
-                            </div>
-                            <p>${data.komentar}</p>
-                            <small class="text-muted">${dateString}</small>
-                        `;
-                        ulasanContainer.appendChild(div);
-                    });
-                } catch (error) {
-                    console.error('Gagal memuat ulasan:', error);
-                    console.error("Error loading ulasan: ", error);
-                    ulasanContainer.innerHTML = '<p style="text-align:center; color:red;">Gagal memuat ulasan. Cek konfigurasi Firebase.</p>';
-                }
-            }
-            
-
-            // Load saat pertama kali buka
-            loadUlasan();
-
-            // 2. Kirim Ulasan ke Firebase
-            ulasanForm.addEventListener('submit', async function(e) {
-                e.preventDefault();
-                
-                const nama = document.getElementById('nama').value;
-                const rating = parseInt(document.getElementById('rating').value);
-                const komentar = document.getElementById('komentar').value;
-                const btnKirim = document.querySelector('.btn-kirim');
-
-                // Disable tombol saat mengirim
-                btnKirim.disabled = true;
-                btnKirim.innerText = "Mengirim...";
-
-                try {
-                    await addDoc(collection(db, "ulasan"), {
-                        nama: nama,
-                        rating: rating,
-                        komentar: komentar,
-                        tanggal: Timestamp.now()
-                    });
-
-                    alert('Terima kasih! Ulasan Anda telah terkirim.');
-                    ulasanForm.reset();
-                    document.getElementById('char-count').innerText = 150;
-                    loadUlasan(); // Refresh daftar ulasan
-                } catch (e) {
-                    console.error("Error adding document: ", e);
-                    alert("Gagal mengirim ulasan. Pastikan koneksi internet lancar.");
-                } finally {
-                    btnKirim.disabled = false;
-                    btnKirim.innerText = "Kirim Ulasan";
-                }
-            });
-
-            // 3. Fungsi untuk menampilkan ulasan ke HTML
-            function renderUlasan(dataUlasan) {
-                ulasanContainer.innerHTML = '';
-                dataUlasan.forEach(u => {
-                    let stars = '⭐'.repeat(u.rating);
-                    const div = document.createElement('div');
-                    div.className = 'ulasan-card';
-                    div.innerHTML = `
-                        <div class="ulasan-header">
-                            <strong>${u.nama}</strong>
-                            <span>${stars}</span>
-                        </div>
-                        <p>${u.komentar}</p>
-                        <small class="text-muted">${u.tanggal}</small>
-                    `;
-                    ulasanContainer.appendChild(div);
-                });
-            }
-
-            // 4. Visitor Counter Logic
+            // Visitor Counter Logic
             async function initVisitorCounter() {
                 const dailyCountDisplay = document.getElementById('daily-visitor-count');
                 const totalCountDisplay = document.getElementById('total-visitor-count');

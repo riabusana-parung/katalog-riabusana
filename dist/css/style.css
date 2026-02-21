@@ -1128,6 +1128,43 @@ body {
     margin-top: 5px;
 }
 
+/*====== Admin Reply Style ======*/
+.admin-reply {
+    margin-top: 15px;
+    padding: 12px 15px;
+    background-color: rgba(0, 0, 0, 0.03);
+    border-left: 3px solid rebeccapurple;
+    border-radius: 0 8px 8px 8px;
+    font-size: 0.95em;
+    position: relative;
+}
+
+.reply-header {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-weight: 700;
+    color: rebeccapurple;
+    margin-bottom: 5px;
+    font-size: 0.9em;
+}
+
+.reply-header i {
+    font-size: 1.1em;
+}
+
+/* Dark Mode Admin Reply */
+body.dark-mode .admin-reply { background-color: rgba(255, 255, 255, 0.05); border-left-color: #9966cc; }
+body.dark-mode .reply-header { color: #9966cc; }
+
+/* Purple Mode Admin Reply */
+body.purple-mode .admin-reply { background-color: rgba(0, 0, 0, 0.2); border-left-color: #d68eff; }
+body.purple-mode .reply-header { color: #d68eff; }
+
+/* Ramadhan Mode Admin Reply */
+body.ramadhan-mode .admin-reply { background-color: rgba(0, 0, 0, 0.2); border-left-color: #D4AF37; color: #EAE7D6; }
+body.ramadhan-mode .reply-header { color: #D4AF37; }
+
 /*====== Lightbox (Popup) ======*/
 .lightbox {
     display: none; /* Tersembunyi secara default */
@@ -1976,6 +2013,10 @@ body.purple-mode .btn-load-more:hover { background-color: #8e24aa; }
 
 body.bubu-mode .btn-load-more { background-color: #ff8fab; color: white; }
 body.bubu-mode .btn-load-more:hover { background-color: #ff7096; }
+
+/* Bubu Mode Admin Reply */
+body.bubu-mode .admin-reply { background-color: rgba(255, 255, 255, 0.5); border-left-color: #ff8fab; }
+body.bubu-mode .reply-header { color: #d9534f; }
 
 
 /*====== Animasi Filter Produk ======*/
