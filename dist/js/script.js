@@ -785,7 +785,7 @@ async function loadVideos() {
 }
 
 // Fungsi Navigasi Slider (Next/Prev)
-window.moveVideoSlide = function(direction) {
+function moveVideoSlide(direction) {
     if (!window.totalVideos) return;
     
     // Pause video saat ini sebelum geser
@@ -825,12 +825,12 @@ window.moveVideoSlide = function(direction) {
             newIframe.contentWindow.postMessage('{"event":"command","func":"playVideo","args":""}', 'https://www.youtube.com');
         }
     }
-};
+}
 
 loadVideos();
 
 // Fungsi Toggle Mute Global
-window.toggleVideoMute = function() {
+function toggleVideoMute() {
     window.isGlobalMuted = !window.isGlobalMuted;
     const videos = document.querySelectorAll('.slider-video');
     const btnIcon = document.querySelector('.video-mute-btn i');
@@ -851,7 +851,7 @@ window.toggleVideoMute = function() {
             }
         }
     });
-};
+}
 
 // --- EVENT LISTENERS FOR VIDEO CONTROLS (Fix ReferenceError) ---
 const videoPrevBtn = document.querySelector('.video-nav.prev');
@@ -902,5 +902,4 @@ if (videoSliderContainer) {
 // --- EXPOSE GLOBALS (Karena script sekarang type="module") ---
 window.moveVideoSlide = moveVideoSlide;
 window.toggleVideoMute = toggleVideoMute;
-window.manualHeroSlide = (direction) => { /* Logic hero slide ada di index.html, aman */ };
 // Pastikan fungsi lain yang dipanggil via onclick di HTML terekspos
