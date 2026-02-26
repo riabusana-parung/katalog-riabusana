@@ -1,16 +1,3 @@
-// Import Firebase SDK
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
-
-const firebaseConfig = {
-    apiKey: "AIzaSyBsqB9ojiGqt4Ljgm67nWw8LTTw2Mnb4Pk",
-    authDomain: "katalog-fashion.firebaseapp.com",
-    projectId: "katalog-fashion",
-    storageBucket: "katalog-fashion.firebasestorage.app",
-    messagingSenderId: "609453685879",
-    appId: "1:609453685879:web:f771120f1034a765265a72"
-};
-
 const humberger = document.querySelector('.hamburger');
 const menu = document.querySelector('.menu');
 
@@ -387,7 +374,7 @@ function renderProducts() {
         
         // Handle jika gambar rusak/404 (Fallback ke Logo)
         img.onerror = function() {
-            console.warn("Gambar tidak ditemukan (404):", product.src
+            console.warn("Gambar tidak ditemukan (404):", product.src);
             this.src = './assets/icons/favicon.png'; // Ganti dengan path logo Anda
             this.style.objectFit = 'contain';
             this.style.padding = '20px';
@@ -487,23 +474,13 @@ const updateProductVisibility = (filterValue, animate = false) => {
 // Fungsi Utama untuk Memuat Data dan Menyiapkan Filter
 async function initCatalog() {
     try {
-        // --- UPDATE: Menggunakan Firebase Firestore ---
-        const app = initializeApp(firebaseConfig);
-        const db = getFirestore(app);
-        const productsCol = collection(db, 'products');
-        const snapshot = await getDocs(productsCol);
+        // --- UPDATE: Kembali menggunakan File JSON/PHP (Tanpa Firebase) ---
+        const isLocalhost = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+        const isLiveServer = window.location.port.startsWith('55');
+        const endpoint = (isLocalhost && !isLiveServer) ? './get_products.php' : './products.json';
         
-        if (!snapshot.empty) {
-            products = snapshot.docs.map(doc => doc.data());
-        } else {
-            // Fallback ke PHP jika database kosong (agar tidak blank saat pertama kali)
-            console.log("Database kosong, mengambil dari folder...");
-            const isLocalhost = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
-            const isLiveServer = window.location.port.startsWith('55');
-            const endpoint = (isLocalhost && !isLiveServer) ? './get_products.php' : './products.json';
-            const response = await fetch(endpoint + '?v=' + new Date().getTime());
-            products = await response.json();
-        }
+        const response = await fetch(endpoint + '?v=' + new Date().getTime());
+        products = await response.json();
         
         // Render produk ke HTML
         renderProducts();
