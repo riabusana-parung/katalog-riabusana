@@ -387,6 +387,7 @@ function renderProducts() {
         
         // Handle jika gambar rusak/404 (Fallback ke Logo)
         img.onerror = function() {
+            console.warn("Gagal memuat gambar:", product.src); // Log error ke console untuk debugging
             this.onerror = null; // Mencegah loop infinite
             this.src = './assets/icons/favicon.png'; // Ganti dengan path logo Anda
             this.style.objectFit = 'contain';
