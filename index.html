@@ -730,9 +730,14 @@
                         totalCountDisplay.innerText = '0';
                     }
                 } catch (error) {
-                    console.error("Visitor Error:", error);
-                    dailyCountDisplay.innerText = 'N/A';
-                    totalCountDisplay.innerText = 'N/A';
+                    // Cek jika error disebabkan oleh AdBlocker (Network Error / Offline)
+                    if (error.code === 'unavailable' || error.message.includes('offline') || error.message.includes('Failed to get document')) {
+                        console.warn("Visitor Counter tidak aktif (Mungkin terblokir AdBlocker).");
+                    } else {
+                        console.error("Visitor Error:", error);
+                    }
+                    dailyCountDisplay.innerText = '-';
+                    totalCountDisplay.innerText = '-';
                 }
             }
             initVisitorCounter();
