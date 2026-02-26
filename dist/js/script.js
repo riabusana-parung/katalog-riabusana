@@ -387,8 +387,7 @@ function renderProducts() {
         
         // Handle jika gambar rusak/404 (Fallback ke Logo)
         img.onerror = function() {
-            console.warn("Gagal memuat gambar:", product.src); // Log error ke console untuk debugging
-            this.onerror = null; // Mencegah loop infinite
+            console.warn("Gambar tidak ditemukan (404):", product.src
             this.src = './assets/icons/favicon.png'; // Ganti dengan path logo Anda
             this.style.objectFit = 'contain';
             this.style.padding = '20px';
@@ -844,7 +843,10 @@ window.moveVideoSlide = function(direction) {
 
     if (newIframe) { 
         // Play video YouTube via API saat slide bergeser
-        newIframe.contentWindow.postMessage('{"event":"command","func":"playVideo","args":""}', 'https://www.youtube.com');
+        // Cek contentWindow sebelum postMessage untuk menghindari error
+        if (newIframe.contentWindow) {
+            newIframe.contentWindow.postMessage('{"event":"command","func":"playVideo","args":""}', 'https://www.youtube.com');
+        }
     }
 };
 
@@ -867,7 +869,9 @@ window.toggleVideoMute = function() {
             v.muted = window.isGlobalMuted;
         } else if (v.tagName === 'IFRAME') {
             const command = window.isGlobalMuted ? 'mute' : 'unMute';
-            v.contentWindow.postMessage(`{"event":"command","func":"${command}","args":""}`, 'https://www.youtube.com');
+            if (v.contentWindow) {
+                v.contentWindow.postMessage(`{"event":"command","func":"${command}","args":""}`, 'https://www.youtube.com');
+            }
         }
     });
 };

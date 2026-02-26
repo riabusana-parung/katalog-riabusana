@@ -18,7 +18,8 @@ if (is_dir($baseDir)) {
     foreach ($categories as $category) {
         if ($category === '.' || $category === '..') continue;
         
-        $categoryPath = $baseDir . $category;
+        $categoryLower = strtolower($category); // Ubah nama kategori ke huruf kecil
+        $categoryPath = $baseDir . $category; // Path asli untuk membaca file
         
         // Pastikan ini adalah folder
         if (is_dir($categoryPath)) {
@@ -32,11 +33,12 @@ if (is_dir($baseDir)) {
                 
                 // Hanya ambil file gambar
                 if (in_array($ext, ['jpg', 'jpeg', 'png', 'webp'])) {
-                    $filePath = $categoryPath . '/' . $file;
+                    $filePath = $baseDir . $categoryLower . '/' . $file; // Buat path baru dengan folder huruf kecil
+                    $realFilePath = $categoryPath . '/' . $file; // Path asli untuk cek filemtime
                     
                     // LOGIKA BARU: Dianggap "New" jika nama file mengandung 'new' DAN umurnya kurang dari 7 hari.
                     $containsNew = stripos($file, 'new') !== false;
-                    $fileAgeInSeconds = time() - filemtime($filePath);
+                    $fileAgeInSeconds = time() - filemtime($realFilePath);
                     $isRecent = $fileAgeInSeconds < (7 * 24 * 60 * 60); // 7 hari dalam detik
 
                     // Keduanya harus true agar label "New" muncul
@@ -44,7 +46,7 @@ if (is_dir($baseDir)) {
                     
                     $products[] = [
                         'src' => "./" . $filePath,      // Path gambar untuk HTML
-                        'filter' => strtolower($category), // Nama folder jadi kategori filter
+                        'filter' => $categoryLower, // Nama folder jadi kategori filter
                         'isNew' => $isNew
                     ];
                 }
