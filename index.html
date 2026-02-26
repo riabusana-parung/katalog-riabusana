@@ -648,10 +648,12 @@
             const charCount = document.getElementById('char-count');
             const maxChar = 150;
 
-            komentarInput.addEventListener('input', function() {
-                const currentLength = this.value.length;
-                charCount.innerText = maxChar - currentLength;
-            });
+            if(komentarInput && charCount) {
+                komentarInput.addEventListener('input', function() {
+                    const currentLength = this.value.length;
+                    charCount.innerText = maxChar - currentLength;
+                });
+            }
         </script>
         <!-- Firebase Ulasan Script -->
         <script type="module">
