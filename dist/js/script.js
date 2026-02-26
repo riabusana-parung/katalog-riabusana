@@ -385,6 +385,14 @@ function renderProducts() {
         img.alt = "produk image";
         img.loading = "lazy"; // Mengaktifkan Native Lazy Loading
         
+        // Handle jika gambar rusak/404 (Fallback ke Logo)
+        img.onerror = function() {
+            this.onerror = null; // Mencegah loop infinite
+            this.src = './assets/icons/favicon.png'; // Ganti dengan path logo Anda
+            this.style.objectFit = 'contain';
+            this.style.padding = '20px';
+        };
+
         img.onclick = () => {
             lightbox.classList.add('active');
             lightboxImg.src = product.src;
