@@ -321,6 +321,7 @@
                     const id = docSnap.id;
                     const dateString = data.tanggal && data.tanggal.toDate ? data.tanggal.toDate().toLocaleDateString("id-ID") : "-";
                     const isReplied = data.balasan ? true : false;
+                    const waLink = data.no_wa ? `https://wa.me/${data.no_wa.replace(/^0/, '62').replace(/[^0-9]/g, '')}?text=Halo Kak ${data.nama}, terimakasih atas ulasannya di Ria Busana...` : null;
 
                     const div = document.createElement('div');
                     div.className = `review-item ${isReplied ? 'replied' : ''}`;
@@ -335,6 +336,7 @@
                         ${isReplied ? `<div style="margin-top: 10px; padding: 10px; background: #f1f1f1; border-radius: 5px; font-size: 14px; border-left: 3px solid rebeccapurple;"><strong>Admin:</strong> ${data.balasan}</div>` : ''}
 
                         <div class="review-actions">
+                            ${waLink ? `<a href="${waLink}" target="_blank" class="btn-action" style="background-color: #25D366; text-decoration: none;"><i class="ri-whatsapp-line"></i> Chat WA</a>` : ''}
                             <button class="btn-action btn-delete" onclick="deleteReview('${id}')"><i class="ri-delete-bin-line"></i> Hapus</button>
                             <button class="btn-action btn-reply" onclick="toggleReply('${id}')"><i class="ri-reply-line"></i> ${isReplied ? 'Edit Balasan' : 'Balas'}</button>
                         </div>

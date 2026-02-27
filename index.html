@@ -412,43 +412,43 @@
             // Data Gambar dan Caption pasangannya
             const heroData = [
                 {
-                    src: "./assets/images/ekatalog/AWAL (1).jpg",
+                    src: "./assets/images/ekatalog/AWAL (2).jpg",
                     text: '"Sambut Ramadhan Penuh Berkah. Lengkapi kebahagiaan keluarga dengan koleksi busana muslim terbaik di Ria Busana Parung."'
                 },
                 {
-                    src: "./assets/images/ekatalog/AWAL (2).jpg",
+                    src: "./assets/images/ekatalog/AWAL (3).jpg",
                     text: '"Anggun di Bulan Suci. Temukan koleksi gamis dan tunik wanita terbaru yang santun dan stylish untuk menemani ibadah Anda."'
                 },
                 {
-                    src: "./assets/images/ekatalog/AWAL (3).jpg",
+                    src: "./assets/images/ekatalog/AWAL (4).jpg",
                     text: '"Tampil Keren Saat Hari Raya. Koleksi Baju Koko dan busana muslim pria modern untuk penampilan terbaik saat silaturahmi."'
                 },
                 {
-                    src: "./assets/images/ekatalog/AWAL (4).jpg",
+                    src: "./assets/images/ekatalog/AWAL (5).jpg",
                     text: '"Ceria Ramadhan Si Kecil. Pakaian muslim anak yang nyaman dan lucu, bikin si kecil makin semangat beribadah."'
                 },
                 {
-                    src: "./assets/images/ekatalog/AWAL (5).jpg",
+                    src: "./assets/images/ekatalog/AWAL (6).jpg",
                     text: '"Sentuhan Manis di Hari Fitri. Lengkapi penampilanmu dengan aksesoris cantik yang menyempurnakan gaya lebaran."'
                 },
                 {
-                    src: "./assets/images/ekatalog/AWAL (6).jpg",
+                    src: "./assets/images/ekatalog/AWAL (7).jpg",
                     text: '"Langkah Suci Menuju Kemenangan. Koleksi sepatu dan sandal nyaman untuk melangkah bersilaturahmi ke rumah sanak saudara."'
                 },
                 {
-                    src: "./assets/images/ekatalog/AWAL (7).jpg",
+                    src: "./assets/images/ekatalog/AWAL (8).jpg",
                     text: '"Nyaman di Hari Raya. Baju muslim bayi denganap bahan lembut, menjaga si kecil tetap tenang dan ceria saat lebaran."'
                 },                
                 {
-                    src: "./assets/images/ekatalog/AWAL (8).jpg",
+                    src: "./assets/images/ekatalog/AWAL (9).jpg",
                     text: '"Pesona Syar\'i yang Memikat. Ragam pilihan Gamis premium dengan desain kekinian, cocok untuk acara buka bersama hingga Idul Fitri."'
                 },
                 {
-                    src: "./assets/images/ekatalog/AWAL (9).jpg",
+                    src: "./assets/images/ekatalog/AWAL (10).jpg",
                     text: '"Persiapan Lebaran Terlengkap. Dari busana hingga perlengkapan sholat, temukan semua kebutuhan Ramadhan keluarga di sini."'
                 },
                 {
-                    src: "./assets/images/ekatalog/AWAL (10).jpg",
+                    src: "./assets/images/ekatalog/AWAL (11).jpg",
                     text: '"Promo Spesial Ramadhan! Follow Instagram @riabusana_official untuk info diskon THR dan koleksi lebaran terbaru."'
                 },
             ];
@@ -694,29 +694,34 @@
                     const hasVisited = sessionStorage.getItem('has_visited_rb');
 
                     if (!hasVisited) {
-                        // Gunakan transaction untuk update yang aman (mencegah race condition)
-                        await runTransaction(db, async (transaction) => {
-                            const visitorDoc = await transaction.get(visitorRef);
+                        try {
+                            // Gunakan transaction untuk update yang aman (mencegah race condition)
+                            await runTransaction(db, async (transaction) => {
+                                const visitorDoc = await transaction.get(visitorRef);
 
-                            if (!visitorDoc.exists()) {
-                                // Jika dokumen belum ada, buat baru
-                                transaction.set(visitorRef, {
-                                    total_count: 1,
-                                    daily_counts: { [today]: 1 }
-                                });
-                            } else {
-                                // Jika dokumen sudah ada, update
-                                const data = visitorDoc.data();
-                                const newTotal = (data.total_count || 0) + 1;
-                                const newDaily = (data.daily_counts?.[today] || 0) + 1;
+                                if (!visitorDoc.exists()) {
+                                    // Jika dokumen belum ada, buat baru
+                                    transaction.set(visitorRef, {
+                                        total_count: 1,
+                                        daily_counts: { [today]: 1 }
+                                    });
+                                } else {
+                                    // Jika dokumen sudah ada, update
+                                    const data = visitorDoc.data();
+                                    const newTotal = (data.total_count || 0) + 1;
+                                    const newDaily = (data.daily_counts?.[today] || 0) + 1;
 
-                                transaction.update(visitorRef, {
-                                    total_count: newTotal,
-                                    [`daily_counts.${today}`]: newDaily // Dot notation untuk update nested field
-                                });
-                            }
-                        });
-                        sessionStorage.setItem('has_visited_rb', 'true');
+                                    transaction.update(visitorRef, {
+                                        total_count: newTotal,
+                                        [`daily_counts.${today}`]: newDaily // Dot notation untuk update nested field
+                                    });
+                                }
+                            });
+                            sessionStorage.setItem('has_visited_rb', 'true');
+                        } catch (writeError) {
+                            console.warn("Gagal menambah visitor (Mungkin permission denied):", writeError);
+                            // Lanjut ke proses membaca agar data tetap tampil meskipun gagal update
+                        }
                     }
 
                     // Ambil dan tampilkan data terbaru
