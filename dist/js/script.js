@@ -666,7 +666,8 @@ async function loadVideos() {
                      const separator = video.src.includes('?') ? '&' : '?';
                      const origin = window.location.origin;
                      const iframeId = `yt-player-${index}`;
-                     const autoplayParams = (index === 0) ? '&autoplay=1&mute=1' : '';
+                     const autoplayParams = ''; // Matikan autoplay sementara
+                     
  
                      const iframe = document.createElement('iframe');
                      iframe.id = iframeId;
