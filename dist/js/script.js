@@ -821,9 +821,13 @@ function moveVideoSlide(direction) {
     if (newIframe) { 
         // Play video YouTube via API saat slide bergeser
         // Cek contentWindow sebelum postMessage untuk menghindari error
-        if (newIframe.contentWindow) {
-            newIframe.contentWindow.postMessage('{"event":"command","func":"playVideo","args":""}', 'https://www.youtube.com');
-        }
+        try {
+            if (newIframe.contentWindow) {
+                newIframe.contentWindow.postMessage('{"event":"command","func":"playVideo","args":""}', 'https://www.youtube.com');
+            }
+        } catch (e) {
+            // Abaikan error jika iframe diblokir browser/extension
+        } 
     }
 }
 
@@ -846,8 +850,12 @@ function toggleVideoMute() {
             v.muted = window.isGlobalMuted;
         } else if (v.tagName === 'IFRAME') {
             const command = window.isGlobalMuted ? 'mute' : 'unMute';
-            if (v.contentWindow) {
-                v.contentWindow.postMessage(`{"event":"command","func":"${command}","args":""}`, 'https://www.youtube.com');
+            try {
+                if (v.contentWindow) {
+                    v.contentWindow.postMessage(`{"event":"command","func":"${command}","args":""}`, 'https://www.youtube.com');
+                }
+            } catch (e) {
+                // Abaikan error
             }
         }
     });
