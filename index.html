@@ -118,8 +118,8 @@
                             <img src="./assets/images/ekatalog/AWAL (1).jpg" alt="Hero Image" id="hero-img" />
                             
                             <!-- Tombol Navigasi Manual -->
-                            <button class="hero-nav prev" onclick="manualHeroSlide('prev')"><i class="ri-arrow-left-s-line"></i></button>
-                            <button class="hero-nav next" onclick="manualHeroSlide('next')"><i class="ri-arrow-right-s-line"></i></button>
+                            <button class="hero-nav prev" onclick="controlHeroSlide('prev')"><i class="ri-arrow-left-s-line"></i></button>
+                            <button class="hero-nav next" onclick="controlHeroSlide('next')"><i class="ri-arrow-right-s-line"></i></button>
 
                             <!-- Indikator Dots -->
                             <div class="hero-dots" id="hero-dots"></div>
@@ -553,7 +553,7 @@
             }
 
             // Fungsi Manual (Klik Tombol / Swipe)
-            function manualHeroSlide(direction) {
+            function controlHeroSlide(direction) {
                 clearInterval(heroInterval); // Hentikan timer otomatis sebentar
                 if (direction === 'next') nextHeroSlide();
                 else prevHeroSlide();
@@ -594,8 +594,8 @@
             });
 
             function handleSwipe() {
-                if (touchEndX < touchStartX - 50) manualHeroSlide('next'); // Geser Kiri -> Next
-                if (touchEndX > touchStartX + 50) manualHeroSlide('prev'); // Geser Kanan -> Prev
+                if (touchEndX < touchStartX - 50) controlHeroSlide('next'); // Geser Kiri -> Next
+                if (touchEndX > touchStartX + 50) controlHeroSlide('prev'); // Geser Kanan -> Prev
             }
         </script>
 
