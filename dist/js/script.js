@@ -672,6 +672,11 @@ async function loadVideos() {
                      iframe.id = iframeId;
                      iframe.className = 'slider-video';
                      iframe.src = `${video.src}${separator}enablejsapi=1&rel=0&modestbranding=1&iv_load_policy=3&fs=0&color=white&origin=${origin}${autoplayParams}`;
+                     
+                     // FIX: Tambahkan atribut allow agar YouTube tidak menganggap ini bot/spam
+                     iframe.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share";
+                     iframe.referrerPolicy = "strict-origin-when-cross-origin";
+                     
                      iframe.allowFullscreen = true;
                      iframe.loading = 'lazy';
                      iframe.onload = hideSkeleton;
@@ -758,6 +763,11 @@ async function loadVideos() {
                     const separator = video.src.includes('?') ? '&' : '?';
                     const iframe = document.createElement('iframe');
                     iframe.src = `${video.src}${separator}rel=0&modestbranding=1&iv_load_policy=3&fs=0&color=white`;
+                    
+                    // FIX: Tambahkan atribut allow untuk grid video juga
+                    iframe.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share";
+                    iframe.referrerPolicy = "strict-origin-when-cross-origin";
+                    
                     iframe.allowFullscreen = true;
                     iframe.loading = 'lazy';
                     iframe.onload = hideSkeleton;
