@@ -387,6 +387,17 @@ function renderProducts() {
 
         card.appendChild(img);
 
+        // Tambahkan Tombol Quick View
+        const btnQuick = document.createElement('button');
+        btnQuick.className = 'btn-quick-view';
+        btnQuick.innerHTML = '<i class="ri-eye-line"></i> Quick View';
+        btnQuick.onclick = (e) => {
+            e.stopPropagation(); // Mencegah double trigger jika card juga punya event click
+            lightbox.classList.add('active');
+            lightboxImg.src = product.src;
+        };
+        card.appendChild(btnQuick);
+
         if (product.isNew) {
             card.setAttribute('data-new', 'true');
             const badge = document.createElement('span');
@@ -425,50 +436,71 @@ const updateProductVisibility = (filterValue, animate = false) => {
     let totalMatch = 0;
     let staggerIndex = 0;
 
-    // Animate out non-matching items first
+    // SHUFFLE EFFECT:
+    // 1. Jika animasi aktif, sembunyikan SEMUA kartu dulu (seperti dikocok ulang)
+    if (animate) {
+        imgfilter.forEach((img) => {
+            if (img.style.display !== 'none') {
+                // Beri delay acak agar efeknya seperti "hujan" atau shuffle
+                img.style.transitionDelay = (Math.random() * 0.15) + 's'; 
+                img.classList.add('anim-hide');
+            }
+        });
+    }
+
+    // Hitung total match dulu untuk keperluan Load More
     imgfilter.forEach((img) => {
         const cardFilter = img.getAttribute('data-filter');
         const isNew = img.getAttribute('data-new') === 'true';
         let match = (filterValue === 'all produk') || (filterValue === 'new arrival' && isNew) || (cardFilter === filterValue);
-
         if (match) totalMatch++;
-
-        if (animate && !match && img.style.display !== 'none') {
-            img.classList.add('anim-hide');
-        }
     });
 
-    // After a delay (for hide animation), update visibility and animate in new items
+    // 2. Tunggu animasi keluar selesai, baru tata ulang layout
+    const delayTime = animate ? 400 : 0;
+
     setTimeout(() => {
         imgfilter.forEach((img) => {
             const cardFilter = img.getAttribute('data-filter');
             const isNew = img.getAttribute('data-new') === 'true';
             let match = (filterValue === 'all produk') || (filterValue === 'new arrival' && isNew) || (cardFilter === filterValue);
 
+            // Reset delay transisi agar saat muncul urutannya rapi (staggered)
+            img.style.transitionDelay = '0s';
+
             if (match && visibleCount < itemsToShow) {
-                // This item should be visible
-                if (img.style.display === 'none') {
+                // Item ini harus muncul
+                if (img.style.display === 'none' || img.classList.contains('anim-hide')) {
                     img.style.display = 'block';
-                    img.classList.add('anim-hide'); // Start hidden
+                    
+                    // Pastikan class anim-hide ada sebelum kita remove (untuk memicu transisi)
+                    img.classList.add('anim-hide'); 
+                    
+                    // Force Reflow
+                    void img.offsetWidth; 
+
+                    // Munculkan dengan delay berurutan (Stagger)
                     setTimeout(() => {
-                        img.classList.remove('anim-hide'); // Animate in
-                    }, 50 + staggerIndex * 50);
+                        img.classList.remove('anim-hide');
+                    }, staggerIndex * 50); // 50ms per item
+                    
                     staggerIndex++;
                 } else {
-                    // If it was already visible, just ensure the hide class is removed
+                    // Jika sudah visible, pastikan anim-hide hilang
                     img.classList.remove('anim-hide');
                 }
                 visibleCount++;
             } else {
-                // Hide items that don't match or are beyond the limit
+                // Item tidak cocok atau di luar limit -> Sembunyikan
                 img.style.display = 'none';
+                img.classList.add('anim-hide');
             }
         });
 
         loadMoreBtn.style.display = (visibleCount >= totalMatch) ? 'none' : 'inline-block';
 
         if (typeof AOS !== 'undefined') setTimeout(() => AOS.refresh(), 400);
-    }, animate ? 400 : 0); // Wait for hide animation to finish
+    }, delayTime); 
 };
 
 // Fungsi Utama untuk Memuat Data dan Menyiapkan Filter
@@ -485,6 +517,9 @@ async function initCatalog() {
         // Render produk ke HTML
         renderProducts();
         
+        // Inisialisasi efek 3D setelah produk dirender
+        init3dCardEffect();
+
         // Update selector imgfilter setelah elemen dirender agar filter mendeteksi produk
         imgfilter = document.querySelectorAll('.produk-list .product-card');
 
@@ -524,6 +559,48 @@ async function initCatalog() {
 // Jalankan inisialisasi
 if (productContainer) {
     initCatalog();
+}
+
+// --- EFEK 3D TILT PADA KARTU PRODUK ---
+function init3dCardEffect() {
+    const cards = document.querySelectorAll('.product-card');
+    const maxRotate = 12; // Maksimum rotasi dalam derajat
+
+    cards.forEach(card => {
+        card.addEventListener('mousemove', (e) => {
+            const rect = card.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+
+            const centerX = rect.width / 2;
+            const centerY = rect.height / 2;
+
+            const deltaX = x - centerX;
+            const deltaY = y - centerY;
+
+            // Kalkulasi rotasi, semakin jauh dari tengah, semakin besar rotasinya
+            const rotateX = (deltaY / centerY) * -maxRotate;
+            const rotateY = (deltaX / centerX) * maxRotate;
+
+            // Terapkan transformasi 3D dengan perspektif dan sedikit pembesaran
+            card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.05, 1.05, 1.05)`;
+            
+            // Update posisi glare effect menggunakan CSS custom properties
+            card.style.setProperty('--glare-x', `${(x / rect.width) * 100}%`);
+            card.style.setProperty('--glare-y', `${(y / rect.height) * 100}%`);
+            
+            // Tambah class untuk memunculkan glare
+            card.classList.add('is-hovering');
+        });
+
+        card.addEventListener('mouseleave', () => {
+            // Reset transformasi saat mouse meninggalkan kartu
+            card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) scale3d(1, 1, 1)';
+            
+            // Hapus class untuk menyembunyikan glare
+            card.classList.remove('is-hovering');
+        });
+    });
 }
 
 // Event Listener Tombol Load More
