@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800;900&display=swap');
+
 * {
     margin: 0;
     padding: 0;
@@ -321,11 +323,180 @@ body {
 }
 
 .hero-box h1{
+    font-family: 'Playfair Display', serif;
+    font-weight: 800;
     font-size: 56px;
     line-height: 1.35;
     margin-bottom: 14px;
     color: rebeccapurple;
     text-shadow: 0 8px 20px rgba(102, 51, 153, 0.16);
+    perspective: 1200px;
+    letter-spacing: 0px;
+    --hero-text-color: rebeccapurple;
+}
+
+/* Style untuk animasi teks per karakter */
+.hero-title-line {
+    display: inline-block;
+}
+
+.hero-title-char {
+    display: inline-block;
+    position: relative;
+    opacity: 1;
+    animation: matrix-glitch 1.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+    transform-style: preserve-3d;
+    font-weight: 900;
+}
+
+@keyframes matrix-glitch {
+    0% {
+        opacity: 0;
+        transform: translateX(-30px) translateY(-50px) skewX(-35deg) scaleX(1.2);
+        color: #00FF00;
+        text-shadow: -4px 0 #FF0000, 4px 0 #00FFFF, -8px 0 #FFFF00;
+    }
+    5% {
+        opacity: 0;
+        transform: translateX(25px) translateY(40px) skewX(30deg) scaleX(0.9);
+        color: #FF0000;
+        text-shadow: 4px 0 #00FF00, -4px 0 #0000FF, 8px 0 #FF00FF;
+    }
+    10% {
+        opacity: 1;
+        transform: translateX(-15px) translateY(-25px) skewX(-15deg) scaleX(1.1);
+        color: #FFFF00;
+        text-shadow: -3px 0 #0000FF, 3px 0 #FF0000, -6px 0 #00FFFF;
+    }
+    15% {
+        opacity: 0.3;
+        transform: translateX(20px) translateY(15px) skewX(20deg) scaleX(0.95);
+        color: #00FFFF;
+        text-shadow: 3px 0 #FF00FF, -3px 0 #FFFF00, 6px 0 #00FF00;
+    }
+    20% {
+        opacity: 1;
+        transform: translateX(-25px) translateY(-35px) skewX(-25deg) scaleX(1.15);
+        color: #FF00FF;
+        text-shadow: -4px 0 #FFFF00, 4px 0 #FF0000, -8px 0 #00FF00;
+    }
+    25% {
+        opacity: 0;
+        transform: translateX(30px) translateY(30px) skewX(28deg) scaleX(0.85);
+        color: #00FF00;
+        text-shadow: 4px 0 #0000FF, -4px 0 #00FFFF, 8px 0 #FF00FF;
+    }
+    30% {
+        opacity: 1;
+        transform: translateX(-20px) translateY(-30px) skewX(-18deg) scaleX(1.05);
+        color: #00FFFF;
+        text-shadow: -3px 0 #FF0000, 3px 0 #FFFF00, -6px 0 #FF00FF;
+    }
+    35% {
+        opacity: 0.4;
+        transform: translateX(18px) translateY(20px) skewX(22deg) scaleX(1.08);
+        color: #FFFF00;
+        text-shadow: 3px 0 #00FF00, -3px 0 #0000FF, 6px 0 #FF0000;
+    }
+    40% {
+        opacity: 1;
+        transform: translateX(-28px) translateY(-45px) skewX(-32deg) scaleX(1.12);
+        color: #0000FF;
+        text-shadow: -4px 0 #00FFFF, 4px 0 #FFFF00, -8px 0 #FF00FF;
+    }
+    45% {
+        opacity: 0.2;
+        transform: translateX(22px) translateY(25px) skewX(25deg) scaleX(0.92);
+        color: #FF0000;
+        text-shadow: 4px 0 #00FF00, -4px 0 #FFFF00, 8px 0 #00FFFF;
+    }
+    50% {
+        opacity: 1;
+        transform: translateX(-12px) translateY(-20px) skewX(-12deg) scaleX(1.03);
+        color: #FF00FF;
+        text-shadow: -3px 0 #FFFF00, 3px 0 #0000FF, -6px 0 #00FF00;
+    }
+    55% {
+        opacity: 0;
+        transform: translateX(26px) translateY(35px) skewX(30deg) scaleX(0.98);
+        color: #00FFFF;
+        text-shadow: 3px 0 #FF0000, -3px 0 #FF00FF, 6px 0 #FFFF00;
+    }
+    60% {
+        opacity: 1;
+        transform: translateX(-24px) translateY(-40px) skewX(-28deg) scaleX(1.1);
+        color: #FFFF00;
+        text-shadow: -4px 0 #00FF00, 4px 0 #0000FF, -8px 0 #FF0000;
+    }
+    65% {
+        opacity: 0.35;
+        transform: translateX(19px) translateY(18px) skewX(18deg) scaleX(1.06);
+        color: #00FF00;
+        text-shadow: 4px 0 #FF00FF, -4px 0 #00FFFF, 8px 0 #FFFF00;
+    }
+    70% {
+        opacity: 1;
+        transform: translateX(-16px) translateY(-28px) skewX(-22deg) scaleX(1.04);
+        color: #0000FF;
+        text-shadow: -3px 0 #FF0000, 3px 0 #00FFFF, -6px 0 #FF00FF;
+    }
+    75% {
+        opacity: 0.15;
+        transform: translateX(23px) translateY(32px) skewX(26deg) scaleX(0.96);
+        color: #FF0000;
+        text-shadow: 3px 0 #FFFF00, -3px 0 #00FF00, 6px 0 #0000FF;
+    }
+    80% {
+        opacity: 1;
+        transform: translateX(-8px) translateY(-15px) skewX(-8deg) scaleX(1.02);
+        color: #00FFFF;
+        text-shadow: -2px 0 #FF00FF, 2px 0 #FFFF00, -4px 0 #FF0000;
+    }
+    85% {
+        opacity: 0.5;
+        transform: translateX(12px) translateY(10px) skewX(12deg) scaleX(1.01);
+        color: #FF00FF;
+        text-shadow: 2px 0 #00FF00, -2px 0 #00FFFF, 4px 0 #FFFF00;
+    }
+    90% {
+        opacity: 1;
+        transform: translateX(-4px) translateY(-8px) skewX(-4deg) scaleX(1.01);
+        color: #FFFF00;
+        text-shadow: -1px 0 #0000FF, 1px 0 #FF0000, -2px 0 #00FF00;
+    }
+    95% {
+        opacity: 1;
+        transform: translateX(2px) translateY(3px) skewX(2deg) scaleX(1.005);
+        color: rebeccapurple;
+        text-shadow: 1px 0 #00FFFF, -1px 0 #FFFF00;
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(0px) translateY(0px) skewX(0deg) scaleX(1);
+        color: var(--hero-text-color);
+        text-shadow: none;
+    }
+}
+
+/* Theme-specific hero title colors */
+body.dark-mode .hero-box h1 {
+    --hero-text-color: #9966cc;
+    color: #9966cc;
+}
+
+body.purple-mode .hero-box h1 {
+    --hero-text-color: #d68eff;
+    color: #d68eff;
+}
+
+body.bubu-mode .hero-box h1 {
+    --hero-text-color: #d9534f;
+    color: #d9534f;
+}
+
+body.ramadhan-mode .hero-box h1 {
+    --hero-text-color: #D4AF37;
+    color: #D4AF37;
 }
 
 .hero-box p{

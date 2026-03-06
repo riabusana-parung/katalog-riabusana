@@ -342,6 +342,38 @@ const initPreloaderSlider = () => {
 };
 initPreloaderSlider();
 
+// --- HERO TITLE ANIMATION ---
+function initHeroTitleAnimation() {
+    const heroTitle = document.querySelector('.hero-box h1');
+    if (!heroTitle) return;
+
+    // Split text by <br> tag to handle lines separately
+    const lines = heroTitle.innerHTML.split('<br>').map(line => line.trim());
+    heroTitle.innerHTML = ''; // Clear original content
+    let charIndex = 0;
+
+    lines.forEach((line, lineIndex) => {
+        const lineWrapper = document.createElement('span');
+        lineWrapper.classList.add('hero-title-line');
+
+        line.split('').forEach(char => {
+            const charSpan = document.createElement('span');
+            charSpan.classList.add('hero-title-char');
+            charSpan.innerText = char === ' ' ? '\u00A0' : char; // Use non-breaking space for spaces
+            charSpan.style.animationDelay = `${charIndex * 0.1}s`; // Stagger delay untuk efek cascading lebih visible
+            lineWrapper.appendChild(charSpan);
+            charIndex++;
+        });
+
+        heroTitle.appendChild(lineWrapper);
+
+        // Add <br> back if it's not the last line
+        if (lineIndex < lines.length - 1) {
+            heroTitle.appendChild(document.createElement('br'));
+        }
+    });
+}
+
 // Coba putar musik setelah preloader selesai (setelah 2 detik)
 // Ini untuk mencoba autoplay saat halaman pertama kali dibuka
 window.addEventListener('load', () => {
@@ -353,6 +385,9 @@ window.addEventListener('load', () => {
             preloader.classList.add('hide');
             if (typeof AOS !== 'undefined') AOS.refresh(); // Refresh animasi AOS
         }
+
+        // Jalankan animasi judul hero
+        initHeroTitleAnimation();
 
         // SEGERA setelah preloader hilang, pasang listener untuk klik pertama.
         // Ini memastikan musik akan play pada klik pertama kali setelah loading.
