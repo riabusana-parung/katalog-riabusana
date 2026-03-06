@@ -43,6 +43,8 @@ body {
     box-shadow: 0 12px 30px rgba(57, 23, 92, 0.12);
     border-radius: 18px;
     padding: 10px 18px;
+    position: relative; /* Tambahkan agar z-index bekerja */
+    z-index: 2; /* Pastikan navbar di atas banner */
 }
 
 .navbar-box .menu{
@@ -157,12 +159,15 @@ body {
         transform: translateX(-50%);
         flex-direction: column;
         text-align: center;
-        background: linear-gradient(160deg, rgba(102, 51, 153, 0.97), rgba(76, 36, 120, 0.97));
+        /* --- ENHANCEMENT: Glassmorphism Effect --- */
+        background: rgba(30, 10, 50, 0.8); /* Darker, more transparent purple */
+        backdrop-filter: blur(15px);
+        -webkit-backdrop-filter: blur(15px);
         width: calc(100% - 24px);
         margin-top: 8px;
         padding: 26px 16px;
         border-radius: 16px;
-        transition: all .28s ease-in-out;
+        transition: top .4s ease-in-out, opacity .4s ease-in-out; /* Pisahkan transisi agar lebih spesifik */
         opacity: 0;
         z-index: 1000; /* Agar menu menutupi konten hero saat dibuka */
         box-shadow: 0 20px 35px rgba(37, 14, 61, 0.32);
@@ -179,10 +184,35 @@ body {
         margin-bottom: 8px;
     }
 
+    /* --- ENHANCEMENT: Staggered Animation --- */
+    /* Atur kondisi awal setiap item menu */
+    .navbar-box .menu li {
+        opacity: 0;
+        transform: translateX(-30px);
+        transition: opacity 0.4s ease, transform 0.4s ease;
+    }
+
+    /* Saat menu aktif, animasikan item satu per satu */
+    .navbar-box .menu.menu-active li {
+        opacity: 1;
+        transform: translateX(0);
+    }
+
+    /* Beri jeda (delay) untuk setiap item agar muncul berurutan */
+    .navbar-box .menu.menu-active li:nth-child(1) { transition-delay: 0.1s; }
+    .navbar-box .menu.menu-active li:nth-child(2) { transition-delay: 0.15s; }
+    .navbar-box .menu.menu-active li:nth-child(3) { transition-delay: 0.2s; }
+    .navbar-box .menu.menu-active li:nth-child(4) { transition-delay: 0.25s; }
+    .navbar-box .menu.menu-active li:nth-child(5) { transition-delay: 0.3s; }
+    .navbar-box .menu.menu-active li:nth-child(6) { transition-delay: 0.35s; }
+    .navbar-box .menu.menu-active li:nth-child(7) { transition-delay: 0.4s; }
+    .navbar-box .menu.menu-active li:nth-child(8) { transition-delay: 0.45s; }
+
     .navbar-box .menu li.mobile-menu-header img {
         width: 120px;
-        filter: drop-shadow(0 0 12px rgba(212, 175, 55, 0.45));
+        height: auto;
         animation: float-kubah 3s ease-in-out infinite;
+        /* Style spesifik dipindah ke bawah agar bisa di-override per tema */
     }
 
     .navbar-box .menu li a{
@@ -192,11 +222,13 @@ body {
         padding: 12px 14px;
         border-radius: 10px;
         text-decoration: none;
+        transition: all 0.3s ease; /* Tambahkan transisi untuk hover */
     }
 
     .navbar-box .menu li a:hover{
         background-color: rgba(255, 255, 255, 0.14);
         color: #ffffff;
+        transform: scale(1.05); /* Efek membesar saat di-hover */
     }
 
     .logo img {
@@ -216,6 +248,7 @@ body {
     margin-top: 14px;
     width: 100%;
     position: relative;
+    z-index: 1; /* Pastikan banner di bawah navbar */
     border-radius: 18px;
     border: 1px solid rgba(102, 51, 153, 0.18);
     box-shadow: 0 14px 30px rgba(27, 10, 44, 0.16);
@@ -878,6 +911,10 @@ body {
         border-radius: 22px;
     }
 
+    .produk-box .produk-list {
+        gap: 20px;
+    }
+
     .produk-box ul {
         gap: 10px;
         margin-bottom: 30px;
@@ -889,7 +926,6 @@ body {
     }
 
     .product-card {
-        width: 200px;
         height: 280px;
         border-radius: 18px;
     }
@@ -914,8 +950,12 @@ body {
         line-height: 1.6;
     }
 
+    .produk-box .produk-list {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 15px;
+    }
+
     .product-card {
-        width: 160px;
         height: 220px;
     }
 }
@@ -2062,6 +2102,27 @@ body.bubu-mode .btn-quick-view:hover {
     }
     body.bubu-mode .navbar-box .menu li a { color: #442c2e; }
     body.bubu-mode .navbar-box .hamburger span { background-color: #442c2e; }
+}
+
+/* Style Logo Mobile Menu per Tema */
+@media (max-width: 768px) {
+    /* Default (Light, Dark, Purple) */
+    body:not(.bubu-mode):not(.ramadhan-mode) .mobile-menu-header img {
+        width: 80px;
+        height: 80px;
+        filter: drop-shadow(0 5px 10px rgba(0,0,0,0.2));
+        animation: none; /* Hapus animasi float */
+    }
+    /* Bubu Mode */
+    body.bubu-mode .mobile-menu-header img {
+        width: 140px;
+        filter: drop-shadow(0 8px 15px rgba(217, 83, 79, 0.3));
+    }
+    /* Ramadhan Mode */
+    body.ramadhan-mode .mobile-menu-header img {
+        width: 120px;
+        filter: drop-shadow(0 0 12px rgba(212, 175, 55, 0.45));
+    }
 }
 
 /*====== Ramadhan Theme ======*/
