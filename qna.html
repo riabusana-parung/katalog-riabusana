@@ -225,6 +225,17 @@
                 charCount.innerText = maxChar - currentLength;
             });
         }
+
+            // Deteksi Sumber dari Anniversary Popup
+            const urlParams = new URLSearchParams(window.location.search);
+            if (urlParams.get('source') === 'anniversary') {
+                const ulasanHeader = document.querySelector('.ulasan-box h1');
+                const ulasanLabel = document.querySelector('label[for="komentar"]');
+                const ulasanTextarea = document.getElementById('komentar');
+                if (ulasanHeader) ulasanHeader.innerText = "Kirim Ucapan Anniversary";
+                if (ulasanLabel) ulasanLabel.innerText = "Ucapan Anniversary";
+                if (ulasanTextarea) ulasanTextarea.placeholder = "Tuliskan doa dan harapan terbaikmu untuk Ria Busana Parung...";
+            }
     </script>
 
     <!-- Firebase Ulasan Script -->

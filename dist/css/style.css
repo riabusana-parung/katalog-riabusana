@@ -3479,6 +3479,164 @@ body.dark-mode .skeleton-loader {
     background-image: linear-gradient(90deg, #333 0px, #444 40px, #333 80px);
 }
 
+/* ======= ANNIVERSARY POPUP REDESIGN (Royal Fixed Overlay) ======= */
+.anniversary-popup {
+    position: fixed; /* KUNCI: Membuatnya melayang di atas semua konten */
+    top: 0; 
+    left: 0; 
+    width: 100%; 
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.85);
+    z-index: 30000; /* Pastikan muncul di atas tombol chat dan navbar */
+    display: none; /* Disembunyikan dulu sampai JS menambahkan class .active */
+    justify-content: center;
+    align-items: center;
+    backdrop-filter: blur(10px);
+    padding: 20px;
+}
+
+#fireworks-canvas {
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.anniversary-popup.active { 
+    display: flex; 
+    animation: fadeIn 0.5s ease; 
+}
+
+.anniversary-content {
+    background: linear-gradient(145deg, #2d1346, #1a082b);
+    border: 3px solid #D4AF37;
+    padding: 40px 30px;
+    border-radius: 30px;
+    width: 100%;
+    max-width: 420px;
+    text-align: center;
+    position: relative;
+    box-shadow: 0 0 60px rgba(212, 175, 55, 0.35);
+    z-index: 1;
+    overflow: hidden; /* Tetap hidden untuk memotong glow */
+    color: white;
+}
+
+/* Efek Kilau Berputar di Belakang */
+.anniversary-content::before {
+    content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%;
+    background: radial-gradient(circle, rgba(212, 175, 55, 0.15) 0%, transparent 70%);
+    animation: shimmerRotate 10s infinite linear;
+    pointer-events: none; /* KUNCI: Agar tidak menghalangi klik pada tombol */
+    z-index: -1; /* Pastikan berada di belakang konten teks/tombol */
+}
+
+.anniversary-header i { 
+    font-size: 50px; 
+    color: #D4AF37; 
+    display: block; 
+    margin-bottom: 10px;
+    filter: drop-shadow(0 0 10px rgba(212, 175, 55, 0.6));
+    animation: crownPulse 2s infinite ease-in-out;
+}
+
+.anniversary-content h2 { 
+    font-family: 'Playfair Display', serif; 
+    font-size: 32px; 
+    margin-bottom: 10px; 
+    background: linear-gradient(to bottom, #fff, #D4AF37);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-weight: 900;
+}
+
+/* Grid untuk Countdown agar tidak berantakan */
+.countdown-container { 
+    display: grid; 
+    grid-template-columns: repeat(4, 1fr); 
+    gap: 10px; 
+    margin: 25px 0; 
+}
+
+.count-box {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(212, 175, 55, 0.3);
+    padding: 12px 5px; 
+    border-radius: 15px;
+    backdrop-filter: blur(5px);
+}
+
+.count-box span { display: block; font-size: 26px; font-weight: 800; color: #D4AF37; line-height: 1; }
+.count-box small { font-size: 10px; color: #fff; text-transform: uppercase; opacity: 0.8; }
+
+/* Style Tombol Ucapan Baru */
+.anniversary-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    position: relative; /* Pastikan berada di konteks tumpukan */
+    z-index: 10; /* Berikan z-index tinggi agar di atas glow */
+    margin-top: 10px;
+}
+.btn-anniv {
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 12px 20px;
+    border-radius: 50px;
+    font-weight: 600;
+    font-size: 14px;
+    transition: all 0.3s ease;
+    box-shadow: 0 8px 15px rgba(0,0,0,0.2);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+.btn-ig { background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%); color: white; }
+.btn-web { background: linear-gradient(135deg, #D4AF37, #b8860b); color: #1a082b; }
+.btn-anniv:hover { transform: translateY(-3px); filter: brightness(1.1); box-shadow: 0 12px 20px rgba(212, 175, 55, 0.3); }
+
+.close-anniversary {
+    position: absolute; top: 15px; right: 20px; font-size: 32px;
+    color: rgba(255, 255, 255, 0.5); cursor: pointer; transition: 0.3s; z-index: 10;
+}
+.close-anniversary:hover { color: #D4AF37; transform: rotate(90deg); }
+
+/* Animasi */
+@keyframes crownPulse {
+    0%, 100% { transform: scale(1) translateY(0); }
+    50% { transform: scale(1.1) translateY(-5px); }
+}
+
+@keyframes shimmerRotate {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+@media (max-width: 480px) {
+    .anniversary-content { padding: 30px 20px; }
+    .anniversary-content h2 { font-size: 22px; }
+    .count-box span { font-size: 18px; }
+    .count-box { padding: 8px 2px; }
+}
+
+/* ======= NEON EFFECT FOR ANNIVERSARY ======= */
+.neon-anniversary {
+    font-size: 34px !important;
+    font-weight: 900 !important;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 20px !important;
+    animation: neon-rainbow 3s linear infinite, crownPulse 2s infinite ease-in-out;
+    display: block;
+}
+
+@keyframes neon-rainbow {
+    0%, 100% { color: #fff; text-shadow: 0 0 10px #fff, 0 0 20px #D4AF37, 0 0 40px #D4AF37, 0 0 60px #D4AF37; }
+    33% { color: #f3e5f5; text-shadow: 0 0 10px #fff, 0 0 20px #ce93d8, 0 0 40px #ce93d8, 0 0 60px #ce93d8; }
+    66% { color: #fff0f1; text-shadow: 0 0 10px #fff, 0 0 20px #ff8fab, 0 0 40px #ff8fab, 0 0 60px #ff8fab; }
+}
+
 /* Purple mode skeleton */
 body.purple-mode .skeleton-loader {
     background-color: #4a1b9a;
@@ -3490,8 +3648,3 @@ body.bubu-mode .skeleton-loader {
     background-color: #ffe4e1;
     background-image: linear-gradient(90deg, #ffe4e1 0px, #fff0f1 40px, #ffe4e1 80px);
 }
-
-/* Ramadhan mode skeleton */
-body.ramadhan-mode .skeleton-loader {
-    background-color: #1a4236;
-    background-image: linear-gradient(90deg, #2a5245 40px, #1a4236 80px);
