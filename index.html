@@ -21,6 +21,69 @@
         <!-- aos -->
         <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
 
+        <style>
+            /* Visitor Badge - Glass Pill Style */
+            .visitor-badge{
+                display: inline-flex;
+                align-items: center;
+                gap: 8px;
+                margin-top: 10px;
+                padding: 10px 14px;
+                border-radius: 999px;
+                color: #0f172a;
+                background: rgba(255,255,255,0.72);
+                border: 1px solid rgba(255,255,255,0.45);
+                backdrop-filter: blur(10px);
+                -webkit-backdrop-filter: blur(10px);
+                box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+                font: 600 13px/1 "Poppins", system-ui, sans-serif;
+                transition: transform .25s ease, box-shadow .25s ease, opacity .25s ease;
+                opacity: .95;
+            }
+
+            .visitor-badge:hover{
+                transform: translateY(-2px);
+                box-shadow: 0 12px 28px rgba(0,0,0,0.16);
+                opacity: 1;
+            }
+
+            .visitor-badge .icon{
+                width: 24px;
+                height: 24px;
+                border-radius: 50%;
+                display: grid;
+                place-items: center;
+                font-size: 12px;
+                color: #fff;
+                background: linear-gradient(135deg, #0f766e, #14b8a6);
+            }
+
+            .visitor-badge .label{
+                font-weight: 600;
+                color: #334155;
+            }
+
+            .visitor-badge .count{
+                font-weight: 800;
+                color: #0f766e;
+                letter-spacing: .2px;
+            }
+
+            @media (max-width: 576px){
+                .visitor-badge{
+                    padding: 9px 12px;
+                    font-size: 12px;
+                    gap: 6px;
+                }
+
+                .visitor-badge .icon{
+                    width: 22px;
+                    height: 22px;
+                    font-size: 11px;
+                }
+            }
+        </style>
+
     <title>Katalog Produk</title>
 </head>
 <body id="beranda">
@@ -254,8 +317,10 @@
             <div class="box">
                 <p>&copy; Copyright 2026 Katalog RiaBusana Parung by <span>Qonde</span>. All rights reserved.</p>
                 <div class="visitor-badge">
-                    <i class="ri-group-line"></i>
-                    <span>Hari Ini: <strong id="daily-visitor-count">...</strong> | Total: <strong id="total-visitor-count">...</strong></span>
+                    <span class="icon"><i class="ri-group-line"></i></span>
+                    <span class="label">Visitor</span>
+                    <span class="count">Hari Ini: <strong id="daily-visitor-count">...</strong></span>
+                    <span class="count">• Total: <strong id="total-visitor-count">...</strong></span>
                 </div>
             </div>
             <div class="box">
