@@ -1538,10 +1538,18 @@ body.ramadhan-mode .produk-subtitle {
 /*======footer======*/
 .footer{
     background-color: white;
-    padding: 20px;
+    padding: 30px 3%; /* Menggunakan persentase kecil agar tetap menempel ke pinggir */
     display: flex;
     justify-content: space-between;
     align-items: center;
+    width: 100%;
+    border-top: 1px solid rgba(102, 51, 153, 0.1);
+}
+
+.footer .box {
+    display: flex;
+    align-items: center;
+    gap: 20px;
 }
 
 .footer p span {
@@ -1549,18 +1557,15 @@ body.ramadhan-mode .produk-subtitle {
     color: rebeccapurple;
 }
 
-.footer .box:nth-child(2) {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-}
-
-.footer .box i{
+.footer .box i {
     cursor: pointer;
+    transition: 0.3s;
+    color: #333;
 }
 
-.footer .box i:hover{
+.footer .box i:hover {
     color: rebeccapurple;
+    transform: translateY(-3px);
 }
 
 /* Footer Shopee Icon Hover */
