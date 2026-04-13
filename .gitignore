@@ -8,3 +8,6 @@ Thumbs.db
 
 # IDE settings
 .vscode/
+
+# Log files
+npm-debug.log*
