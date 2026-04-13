@@ -177,8 +177,7 @@ let clockInterval; // Variabel untuk interval jam
 // Definisikan bentuk partikel untuk setiap tema
 const particleShapes = {
     bubu: ['❤️', '⭐', '🌸', '✨', '💖'],
-    ramadhan: ['🌙', '✨', '🕌', '🏮', '⭐'], // Bulan, kilau, masjid, lentera, bintang
-    anniversary: ['🎁', '🎈', '🎊', '✨', '👑', '🎉']
+    ramadhan: ['🌙', '✨', '🕌', '🏮', '⭐'] // Bulan, kilau, masjid, lentera, bintang
 };
 
 const startParticles = (theme) => {
@@ -688,136 +687,6 @@ window.addEventListener('load', () => {
 
     // Popup 2 (Landscape): Muncul detik ke-15, Hilang detik ke-25
     handlePopup('promo-popup-2', 15000, 25000);
-
-    // --- ROAD TO ANNIVERSARY LOGIC (10 APRIL 2026) ---
-    const anniversaryPopup = document.getElementById('anniversary-popup');
-    const targetDate = new Date("April 10, 2026 00:00:00").getTime();
-
-    let fireworksActive = false;
-    let fireworksReq;
-
-    function startFireworks() {
-        if (fireworksActive) return;
-        const canvas = document.getElementById('fireworks-canvas');
-        if (!canvas) return;
-        const ctx = canvas.getContext('2d');
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
-
-        let particles = [];
-        const colors = ['#D4AF37', '#ce93d8', '#ffffff', '#ffeb3b', '#ff4081'];
-
-        class FireworkParticle {
-            constructor(x, y, color) {
-                this.x = x; this.y = y; this.color = color;
-                this.velocity = { x: (Math.random() - 0.5) * 10, y: (Math.random() - 0.5) * 10 };
-                this.alpha = 1; this.friction = 0.95;
-            }
-            draw() {
-                ctx.save(); ctx.globalAlpha = this.alpha;
-                ctx.beginPath(); ctx.arc(this.x, this.y, 2.5, 0, Math.PI * 2);
-                ctx.fillStyle = this.color; ctx.fill(); ctx.restore();
-            }
-            update() {
-                this.velocity.x *= this.friction; this.velocity.y *= this.friction;
-                this.x += this.velocity.x; this.y += this.velocity.y;
-                this.alpha -= 0.012;
-            }
-        }
-
-        function animate() {
-            fireworksReq = requestAnimationFrame(animate);
-            ctx.fillStyle = 'rgba(0, 0, 0, 0.15)';
-            ctx.fillRect(0, 0, canvas.width, canvas.height);
-            
-            if (Math.random() < 0.1) {
-                const x = Math.random() * canvas.width;
-                const y = Math.random() * canvas.height * 0.5; // Muncul di bagian atas
-                const color = colors[Math.floor(Math.random() * colors.length)];
-                for (let i = 0; i < 40; i++) particles.push(new FireworkParticle(x, y, color));
-            }
-
-            particles.forEach((p, i) => {
-                if (p.alpha > 0) { p.update(); p.draw(); }
-                else { particles.splice(i, 1); }
-            });
-        }
-        fireworksActive = true;
-        animate();
-    }
-
-    function stopFireworks() {
-        fireworksActive = false;
-        cancelAnimationFrame(fireworksReq);
-    }
-
-    const updateCountdown = () => {
-        const now = new Date().getTime();
-        const distance = targetDate - now;
-
-        if (distance < 0) {
-            if (anniversaryPopup) {
-                startFireworks(); // Ledakkan kembang api!
-                stopParticles(); // Ganti partikel kado biasa dengan kembang api
-                const title = anniversaryPopup.querySelector('h3');
-                title.innerText = "Happy Anniversary!";
-                title.classList.add('neon-anniversary'); // Tambahkan efek neon
-                anniversaryPopup.querySelector('p').innerText = "Rayakan kebersamaan bersama kami hari ini!";
-                document.querySelector('.countdown-container').style.display = 'none';
-            }
-            return;
-        }
-
-        const d = Math.floor(distance / (1000 * 60 * 60 * 24));
-        const h = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-        const m = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-        const s = Math.floor((distance % (1000 * 60)) / 1000);
-
-        if(document.getElementById("days")) document.getElementById("days").innerText = d.toString().padStart(2, '0');
-        if(document.getElementById("hours")) document.getElementById("hours").innerText = h.toString().padStart(2, '0');
-        if(document.getElementById("minutes")) document.getElementById("minutes").innerText = m.toString().padStart(2, '0');
-        if(document.getElementById("seconds")) document.getElementById("seconds").innerText = s.toString().padStart(2, '0');
-    };
-
-    // Inisialisasi Countdown
-    if (anniversaryPopup) {
-        setInterval(updateCountdown, 1000);
-        updateCountdown();
-
-        // Munculkan popup Anniversary setelah 2 detik halaman load
-        setTimeout(() => {
-            anniversaryPopup.classList.add('active');
-            startParticles('anniversary'); // Hujan kado dan balon 🎉
-        }, 2000);
-
-        // Close button logic
-        const closeAnniv = document.querySelector('.close-anniversary');
-        if (closeAnniv) {
-            closeAnniv.onclick = () => {
-                anniversaryPopup.classList.remove('active');
-                stopParticles();
-                stopFireworks();
-            };
-        }
-        
-        // Otomatis tutup popup jika link internal diklik
-        const webLink = anniversaryPopup.querySelector('.btn-web');
-        if (webLink) {
-            webLink.onclick = (e) => {
-                // Jangan tambahkan e.preventDefault() di sini agar link tetap jalan
-                anniversaryPopup.classList.remove('active');
-                stopFireworks();
-                // Biarkan navigasi ke qna.html berjalan
-            };
-        }
-
-        anniversaryPopup.onclick = (e) => {
-            if (e.target === anniversaryPopup) {
-                anniversaryPopup.classList.remove('active');
-                stopParticles();
-            }
-        };
-    }
 
     // --- THEME NOTIFICATION LOGIC ---
     const themeNotif = document.getElementById('theme-notification');
