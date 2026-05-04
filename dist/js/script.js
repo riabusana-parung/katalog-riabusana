@@ -51,7 +51,7 @@ const body = document.body;
 const themeIcon = themeToggleBtn.querySelector('i');
 
 // Daftar tema: Light -> Dark -> Purple -> Bubu -> Ramadhan
-const themes = ['light', 'dark', 'purple', 'bubu'];
+const themes = ['light', 'dark', 'purple', 'bubu', 'ramadhan'];
 
 // --- DATA JADWAL IMSAKIYAH (API & Fallback) ---
 const jadwalFallback = { imsak: "04:31", subuh: "04:41", dzuhur: "12:00", ashar: "15:15", maghrib: "18:08", isya: "19:18" };
@@ -176,7 +176,7 @@ let clockInterval; // Variabel untuk interval jam
 
 // Definisikan bentuk partikel untuk setiap tema
 const particleShapes = {
-    bubu: ['❤️', '⭐', '🌸', '✨', '💖'],
+    bubu: ['🎁', '🎈', '⭐', '🌸', '✨'],
     ramadhan: ['🌙', '✨', '🕌', '🏮', '⭐'] // Bulan, kilau, masjid, lentera, bintang
 };
 
@@ -287,7 +287,7 @@ const applyTheme = (themeName) => {
 };
 
 // Load tema tersimpan
-let currentTheme = localStorage.getItem('theme') || 'light';
+let currentTheme = localStorage.getItem('theme') || 'bubu';
 if (!themes.includes(currentTheme)) currentTheme = 'light';
 applyTheme(currentTheme);
 
@@ -338,7 +338,7 @@ const initPreloaderSlider = () => {
         slides[index].classList.remove('active');
         index = (index + 1) % slides.length;
         slides[index].classList.add('active');
-    }, 800); // Ganti gambar setiap 0.8 detik
+    }, 1500); // Ganti gambar setiap 1.5 detik agar lebih jelas
 };
 initPreloaderSlider();
 
@@ -378,12 +378,23 @@ function initHeroTitleAnimation() {
 // Ini untuk mencoba autoplay saat halaman pertama kali dibuka
 window.addEventListener('load', () => {
     const preloader = document.getElementById('preloader');
+    const anniversaryGreeting = document.getElementById('anniversary-greeting');
 
     // Sembunyikan preloader setelah 2 detik
     setTimeout(() => {
         if (preloader) {
             preloader.classList.add('hide');
             if (typeof AOS !== 'undefined') AOS.refresh(); // Refresh animasi AOS
+        }
+
+        // Munculkan Ucapan Anniversary
+        if (anniversaryGreeting) {
+            anniversaryGreeting.classList.add('active');
+            
+            // Sembunyikan otomatis setelah 3.5 detik
+            setTimeout(() => {
+                anniversaryGreeting.classList.remove('active');
+            }, 3500);
         }
 
         // Jalankan animasi judul hero
@@ -394,7 +405,7 @@ window.addEventListener('load', () => {
         document.addEventListener('click', () => {
             if (bgMusic.paused) toggleMusic();
         }, { once: true }); // `{ once: true }` agar event ini hanya berjalan sekali.
-    }, 500); // Waktu tunggu dikurangi agar preloader cepat hilang setelah load selesai
+    }, 3000); // Menambah durasi preloader agar gambar slider terlihat jelas
 });
 
 // --- DATA PRODUK (JSON Array) ---
@@ -687,6 +698,26 @@ window.addEventListener('load', () => {
 
     // Popup 2 (Landscape): Muncul detik ke-15, Hilang detik ke-25
     handlePopup('promo-popup-2', 15000, 25000);
+
+    // --- S&K HADIAH MANUAL POPUP ---
+    const skBtn = document.getElementById('btn-sk-hadiah');
+    const skPopup = document.getElementById('sk-hadiah-popup');
+    const skClose = document.getElementById('close-sk-hadiah');
+    const skPaham = document.getElementById('btn-paham-sk');
+
+    if (skBtn && skPopup) {
+        skBtn.onclick = () => skPopup.classList.add('show');
+        
+        const closeSk = () => skPopup.classList.remove('show');
+        
+        if (skClose) skClose.onclick = closeSk;
+        if (skPaham) skPaham.onclick = closeSk;
+
+        // Tutup jika klik di luar area konten
+        skPopup.onclick = (e) => {
+            if (e.target === skPopup) closeSk();
+        };
+    }
 
     // --- THEME NOTIFICATION LOGIC ---
     const themeNotif = document.getElementById('theme-notification');

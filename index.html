@@ -55,7 +55,7 @@
                 place-items: center;
                 font-size: 12px;
                 color: #fff;
-                background: linear-gradient(135deg, #0f766e, #14b8a6);
+                background: linear-gradient(135deg, #d9534f, #ff8fab);
             }
 
             .visitor-badge .label{
@@ -65,7 +65,7 @@
 
             .visitor-badge .count{
                 font-weight: 800;
-                color: #0f766e;
+                color: #d9534f;
                 letter-spacing: .2px;
             }
 
@@ -86,7 +86,7 @@
 
     <title>Katalog Produk</title>
 </head>
-<body id="beranda">
+<body id="beranda" class="bubu-mode">
 
         <!-- Background Music -->
         <audio id="bg-music" src="./assets/audio/rb-asyik.mpeg" loop></audio>
@@ -98,6 +98,8 @@
                     <img src="./assets/images/bubu-riri.png" class="active" alt="Loading..." />
                     <img src="./assets/images/bubu-riri2.png" alt="Loading..." />
                     <img src="./assets/images/bubu-riri3.png" alt="Loading..." />
+                    <img src="./assets/images/props-aniv.png" alt="Loading..." />
+                    <img src="./assets/images/props-aniv2.png" alt="Loading..." />
                 </div>
                 <h2>Selamat Datang</h2>
                 <p>Mohon tunggu sebentar...</p>
@@ -107,6 +109,14 @@
                     <span></span>
                     <span></span>
                 </div>
+            </div>
+        </div>
+
+        <!-- Anniversary Greeting -->
+        <div id="anniversary-greeting" class="anniversary-overlay">
+            <div class="anniversary-content">
+                <h1 class="anniversary-text">Happy 30th Anniversary</h1>
+                <p class="anniversary-subtext">Ria Busana - Amazing 30 Years</p>
             </div>
         </div>
 
@@ -223,6 +233,51 @@
             </div>
         </div>
         <!-- Layanan Section -->
+
+        <!-- Hadiah Undian Section -->
+        <div class="hadiah" id="hadiah" style="padding-bottom: 80px;">
+            <div class="container">
+                <div class="hadiah-box">
+                    <h1 data-aos="fade-up" data-aos-duration="1000" style="text-align: center; margin-bottom: 40px;">Hadiah Undian Anniversary</h1>
+                    <div class="hadiah-grid">
+                        <div class="hadiah-card" data-aos="zoom-in" data-aos-duration="1000">
+                            <span class="hadiah-label">Hadiah Utama</span>
+                            <img src="./assets/images/hadiah-umroh.png" alt="Hadiah Paket Umroh">
+                            <h3>Paket Umroh</h3>
+                        </div>
+                        <div class="hadiah-card" data-aos="zoom-in" data-aos-duration="1000" data-aos-delay="100">
+                            <span class="hadiah-label">Hadiah Utama</span>
+                            <img src="./assets/images/hadiah-bali.png" alt="Hadiah Tour Bali">
+                            <h3>Paket Tour Bali</h3>
+                        </div>
+                        <div class="hadiah-card" data-aos="zoom-in" data-aos-duration="1000" data-aos-delay="200">
+                            <img src="./assets/images/hadiah-kipas.png" alt="Hadiah Kipas Angin">
+                            <h3>Kipas Angin</h3>
+                        </div>
+                        <div class="hadiah-card" data-aos="zoom-in" data-aos-duration="1000" data-aos-delay="300">
+                            <img src="./assets/images/hadiah-tv.png" alt="Hadiah TV LED">
+                            <h3>TV LED</h3>
+                        </div>
+                        <div class="hadiah-card" data-aos="zoom-in" data-aos-duration="1000" data-aos-delay="400">
+                            <img src="./assets/images/hadiah-kulkas.png" alt="Hadiah Kulkas">
+                            <h3>Kulkas 2 Pintu</h3>
+                        </div>
+                        <div class="hadiah-card" data-aos="zoom-in" data-aos-duration="1000" data-aos-delay="500">
+                            <img src="./assets/images/hadiah-mesincuci.png" alt="Hadiah Mesin Cuci">
+                            <h3>Mesin Cuci</h3>
+                        </div>
+                    </div>
+                    <div style="text-align: center; margin-top: 40px;" data-aos="fade-up">
+                        <button id="btn-sk-hadiah" class="btn-load-more" style="margin-bottom: 20px;">
+                            <i class="ri-information-line"></i> Syarat & Ketentuan
+                        </button>
+                        <p style="font-style: italic; color: #888; font-size: 14px;">
+                        *Syarat & Ketentuan Berlaku. Belanja sebanyak-banyaknya untuk raih kesempatan menang!
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
 
         <!--produk-->
         <div class="produk" id="produk">
@@ -396,6 +451,26 @@
                         <img src="./assets/images/promo-kesatu.jpg" alt="Promo Event 1">
                         <img src="./assets/images/promo-ketiga.jpg" alt="Promo Event 3">
                     </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- S&K Hadiah Popup -->
+        <div id="sk-hadiah-popup" class="promo-popup">
+            <div class="promo-content sk-content-modal">
+                <span class="close-promo" id="close-sk-hadiah">&times;</span>
+                <div class="sk-body">
+                    <h2><i class="ri-medal-line"></i> Syarat & Ketentuan Undian</h2>
+                    <ul class="sk-list">
+                        <li>Setiap customer yang sudah bertransaksi minimal <strong>Rp. 500.000,- net</strong> dalam 1 struk pembelian, berhak mengikuti promo undian berhadiah.</li>
+                        <li>Promo berlaku untuk transaksi <strong>barang normal, diskon</strong> atau penggabungan keduanya.</li>
+                        <li>Promo <strong>tidak berlaku</strong> dalam kelipatan transaksi.</li>
+                        <li>Promo berlaku di <strong>semua toko Ria Busana dan Victoria Busana</strong>.</li>
+                        <li>Promo tidak berlaku untuk <strong>karyawan</strong>.</li>
+                        <li>Pengundian pemenang akan dilakukan pada hari <strong>Sabtu, 11 Juli 2026</strong> di Live IG Official Ria Busana <a href="https://www.instagram.com/riabusana_official/" target="_blank" style="color: #d9534f; text-decoration: underline;"><strong>@riabusana_official</strong></a>.</li>
+                        <li>Pengumuman pemenang akan di-share pada <strong>Sosial Media & inform di toko</strong> pada hari <strong>Minggu, 12 Juli 2026</strong>.</li>
+                    </ul>
+                    <button class="btn-kirim" id="btn-paham-sk">Saya Mengerti</button>
                 </div>
             </div>
         </div>
