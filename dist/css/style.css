@@ -3541,59 +3541,131 @@ body.bubu-mode .skeleton-loader {
 }
 
 .hadiah-card {
-    background: white;
-    padding: 25px;
-    border-radius: 20px;
+    background: rgba(255, 255, 255, 0.1); /* Lebih transparan */
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    padding: 25px 18px; /* Sesuaikan padding */
+    border-radius: 20px; /* Sedikit lebih kecil */
     text-align: center;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.05);
-    transition: all 0.3s ease;
-    border: 1px solid rgba(102, 51, 153, 0.1);
+    box-shadow: 0 8px 30px rgba(0,0,0,0.1); /* Bayangan lebih halus */
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    border: 1px solid rgba(255, 255, 255, 0.2); /* Border lebih transparan */
+    position: relative;
+    overflow: hidden;
+    isolation: isolate; /* Penting untuk z-index pseudo-elements */
+    transform-style: preserve-3d; /* Untuk efek 3D yang lebih baik */
 }
 
 .hadiah-card:hover {
     transform: translateY(-10px);
-    box-shadow: 0 15px 35px rgba(217, 83, 79, 0.2);
+    box-shadow: 0 20px 45px rgba(217, 83, 79, 0.25); /* Bayangan lebih kuat */
+    border-color: rgba(217, 83, 79, 0.4);
+}
+
+/* Efek Border Glowing (menggantikan pedestal) */
+.hadiah-card::before {
+    content: '';
+    position: absolute;
+    inset: -2px; /* Sedikit lebih besar dari kartu */
+    background: linear-gradient(45deg, #ff8fab, #d9534f, #ff8fab); /* Gradasi default bubu */
+    border-radius: 22px; /* Sesuaikan dengan border-radius kartu + inset */
+    z-index: -1; /* Di belakang konten kartu */
+    opacity: 0;
+    transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+.hadiah-card:hover::before {
+    opacity: 1; /* Munculkan glow saat hover */
+    transform: scale(1.02); /* Sedikit membesar */
+}
+
+/* Efek Kilau Internal Halus */
+.hadiah-card::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at 50% 50%, rgba(255,255,255,0.05) 0%, transparent 70%);
+    z-index: 0; /* Di belakang gambar, di atas border glow */
+    opacity: 0;
+    transition: opacity 0.4s ease;
+}
+
+.hadiah-card:hover::after {
+    opacity: 1;
 }
 
 .hadiah-card img {
     width: 100%;
     height: 180px;
     object-fit: contain;
-    margin-bottom: 15px;
+    margin-bottom: 15px; /* Sesuaikan margin */
     filter: drop-shadow(0 5px 15px rgba(0,0,0,0.1));
+    position: relative;
+    z-index: 1;
+    transition: transform 0.4s ease;
+}
+
+.hadiah-card:hover img {
+    transform: scale(1.1) rotate(3deg);
 }
 
 .hadiah-card h3 {
-    font-size: 18px;
-    font-weight: 700;
-    color: #442c2e;
+    font-size: 19px;
+    font-weight: 800;
+    color: #442c2e; /* Warna default */
+    position: relative;
+    z-index: 2; /* Pastikan di atas gambar */
 }
 
 /* Theme Support for Hadiah */
-body.dark-mode .hadiah-card { background-color: #2c2c2c; border-color: #444; }
+body.dark-mode .hadiah-card { background-color: rgba(44, 44, 44, 0.1); border-color: rgba(255, 255, 255, 0.1); }
 body.dark-mode .hadiah-card h3 { color: #f1f1f1; }
-body.purple-mode .hadiah-card { background-color: #4a148c; border-color: #6a1b9a; }
+body.dark-mode .hadiah-card:hover { border-color: rgba(153, 102, 204, 0.4); }
+body.dark-mode .hadiah-card::before { background: linear-gradient(45deg, #9966cc, #6a1b9a, #9966cc); }
+body.dark-mode .hadiah-card::after { background: radial-gradient(circle at 50% 50%, rgba(255,255,255,0.08) 0%, transparent 70%); }
+
+body.purple-mode .hadiah-card { background-color: rgba(74, 20, 140, 0.1); border-color: rgba(214, 142, 255, 0.1); }
 body.purple-mode .hadiah-card h3 { color: #f3e5f5; }
-body.ramadhan-mode .hadiah-card { background-color: rgba(255, 255, 255, 0.05); border-color: rgba(212, 175, 55, 0.3); }
+body.purple-mode .hadiah-card:hover { border-color: rgba(214, 142, 255, 0.4); }
+body.purple-mode .hadiah-card::before { background: linear-gradient(45deg, #d68eff, #7b1fa2, #d68eff); }
+body.purple-mode .hadiah-card::after { background: radial-gradient(circle at 50% 50%, rgba(255,255,255,0.05) 0%, transparent 70%); }
+
+body.ramadhan-mode .hadiah-card { background-color: rgba(255, 255, 255, 0.02); border-color: rgba(212, 175, 55, 0.1); }
 body.ramadhan-mode .hadiah-card h3 { color: #D4AF37; }
+body.ramadhan-mode .hadiah-card:hover { border-color: rgba(212, 175, 55, 0.4); }
+body.ramadhan-mode .hadiah-card::before { background: linear-gradient(45deg, #D4AF37, #c09e32, #D4AF37); }
+body.ramadhan-mode .hadiah-card::after { background: radial-gradient(circle at 50% 50%, rgba(255,255,255,0.05) 0%, transparent 70%); }
 
 /* Style untuk label "Hadiah Utama" */
 .hadiah-card {
     position: relative; /* Penting untuk positioning absolute label */
 }
 
+/* Label Hadiah Utama (diperbarui agar lebih mewah) */
 .hadiah-card .hadiah-label {
     position: absolute;
-    top: 10px;
+    top: 15px;
     left: 50%;
     transform: translateX(-50%);
-    background-color: #d9534f; /* Warna pink dari tema bubu */
+    background: linear-gradient(45deg, #d9534f, #ff8fab); /* Gradasi default bubu */
     color: white;
-    padding: 4px 10px;
-    border-radius: 5px;
-    font-size: 11px;
-    font-weight: 600;
-    z-index: 10; /* Pastikan di atas gambar */
+    padding: 5px 15px;
+    border-radius: 50px;
+    font-size: 10px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    z-index: 10;
+    box-shadow: 0 8px 20px rgba(217, 83, 79, 0.3);
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.hadiah-card .hadiah-label::before {
+    content: '\eb80'; /* ri-vip-crown-fill */
+    font-family: 'remixicon';
+    font-size: 12px;
 }
 
 /* ======= S&K MODAL STYLE ======= */

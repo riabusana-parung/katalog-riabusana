@@ -676,6 +676,27 @@ if (loadMoreBtn) {
 
 // --- PROMO POPUP LOGIC ---
 window.addEventListener('load', () => {
+    // --- EFEK KONFETI HADIAH UTAMA ---
+    const hadiahCards = document.querySelectorAll('.hadiah-card');
+    hadiahCards.forEach(card => {
+        const label = card.querySelector('.hadiah-label');
+        // Hanya berikan efek pada kartu yang memiliki label "Hadiah Utama"
+        if (label && label.innerText.includes('Hadiah Utama')) {
+            card.style.cursor = 'pointer'; // Beri indikasi bahwa kartu bisa diklik
+            card.addEventListener('click', () => {
+                if (typeof confetti === 'function') {
+                    confetti({
+                        particleCount: 150,
+                        spread: 70,
+                        origin: { y: 0.7 },
+                        colors: ['#d9534f', '#ff8fab', '#D4AF37', '#ffffff'],
+                        zIndex: 20000 // Pastikan muncul di atas elemen lain
+                    });
+                }
+            });
+        }
+    });
+
     // Fungsi Helper untuk menangani banyak popup
     const handlePopup = (id, showDelay, hideDelay) => {
         const popup = document.getElementById(id);
