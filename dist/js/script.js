@@ -1085,6 +1085,12 @@ async function loadLogos() {
 
         if (logoPaths.length === 0) return;
 
+        // Acak urutan logo agar posisi tidak selalu sama setiap refresh (Fisher-Yates Shuffle)
+        for (let i = logoPaths.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [logoPaths[i], logoPaths[j]] = [logoPaths[j], logoPaths[i]];
+        }
+
         track.innerHTML = ''; // Bersihkan kontainer
 
         // Fungsi untuk membuat elemen logo

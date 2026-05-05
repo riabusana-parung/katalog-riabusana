@@ -18,6 +18,9 @@ if (is_dir($dir)) {
     }
 }
 
+// Acak urutan logo di sisi server
+shuffle($logos);
+
 // Simpan ke logos.json agar bisa terbaca di GitHub Pages (hosting statis)
 file_put_contents('logos.json', json_encode($logos));
 

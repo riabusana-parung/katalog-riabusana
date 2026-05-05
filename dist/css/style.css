@@ -3761,8 +3761,8 @@ body.ramadhan-mode .brand-item img {
     .brand-item { width: 150px; padding: 0 20px; }
     .brand-item img { max-width: 90px; }
     .brand-track {
-        /* Mempercepat durasi di mobile agar tidak terasa lambat */
-        animation-duration: 25s; 
+        /* Menyesuaikan durasi agar gerakan logo lebih santai di mobile */
+        animation-duration: 40s; 
     }
 }
     left: 0;
@@ -3770,5 +3770,7 @@ body.ramadhan-mode .brand-item img {
     font-weight: bold;
 }
 
+body.dark-mode .sk-content-modal { background-color: #2c2c2c !important; }
+body.dark-mode .sk-list li { color: #f1f1f1; }
 body.dark-mode .sk-content-modal { background-color: #2c2c2c !important; }
 body.dark-mode .sk-list li { color: #f1f1f1; }
