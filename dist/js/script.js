@@ -1067,3 +1067,44 @@ if (videoSliderContainer) {
 window.moveVideoSlide = moveVideoSlide;
 window.toggleVideoMute = toggleVideoMute;
 // Pastikan fungsi lain yang dipanggil via onclick di HTML terekspos
+
+// --- LOGIKA LOAD LOGO OTOMATIS ---
+async function loadLogos() {
+    const track = document.querySelector('.brand-track');
+    if (!track) return;
+
+    try {
+        const isLocalhost = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+        const isLiveServer = window.location.port.startsWith('55');
+        
+        // Jika di localhost (XAMPP), panggil PHP. Jika di GitHub, panggil JSON statis.
+        const endpoint = (isLocalhost && !isLiveServer) ? './get_logos.php' : './logos.json';
+
+        const response = await fetch(endpoint + '?v=' + new Date().getTime());
+        const logoPaths = await response.json();
+
+        if (logoPaths.length === 0) return;
+
+        track.innerHTML = ''; // Bersihkan kontainer
+
+        // Fungsi untuk membuat elemen logo
+        const createLogoItem = (path) => {
+            const item = document.createElement('div');
+            item.className = 'brand-item';
+            const img = document.createElement('img');
+            img.src = path;
+            img.alt = "Brand Logo";
+            item.appendChild(img);
+            return item;
+        };
+
+        // Render set pertama dan set kedua (untuk infinite loop)
+        logoPaths.forEach(path => track.appendChild(createLogoItem(path)));
+        logoPaths.forEach(path => track.appendChild(createLogoItem(path)));
+
+    } catch (error) {
+        console.error("Gagal memuat logo merk:", error);
+    }
+}
+
+loadLogos();

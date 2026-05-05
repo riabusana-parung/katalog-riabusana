@@ -3638,5 +3638,136 @@ body.ramadhan-mode .hadiah-card h3 { color: #D4AF37; }
     font-weight: bold;
 }
 
+/* ======= BRANDS SECTION ======= */
+.brands-section {
+    padding: 60px 0;
+    overflow: hidden;
+    background: transparent;
+}
+
+.brands-box h1 {
+    text-align: center;
+    margin-bottom: 40px;
+    font-size: 32px;
+    color: rebeccapurple;
+}
+
+.brand-slider {
+    position: relative;
+    width: 100%;
+    height: 150px;
+    display: flex;
+    align-items: center;
+    /* Efek Fade di sisi kiri dan kanan */
+    mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+    -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(5px);
+    border-radius: 20px;
+}
+
+.brand-track {
+    display: flex;
+    width: max-content; /* Mengikuti lebar konten secara otomatis */
+    animation: scrollBrands 60s linear infinite; /* Kecepatan disesuaikan dengan banyaknya logo */
+}
+
+.brand-track:hover {
+    animation-play-state: paused; /* Berhenti saat di-hover */
+}
+
+.brand-item {
+    width: 180px;
+    height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 30px;
+    perspective: 1000px; /* Untuk efek 3D */
+    animation: floatingLogo 4s ease-in-out infinite;
+}
+
+.brand-item:nth-child(even) {
+    animation-duration: 3.2s;
+    animation-delay: 0.5s;
+}
+
+.brand-item:nth-child(3n) {
+    animation-duration: 5.5s;
+    animation-delay: 1.2s;
+}
+
+.brand-item:nth-child(5n) {
+    animation-duration: 4.8s;
+    animation-delay: 0.2s;
+}
+
+.brand-item:hover {
+    animation-play-state: paused; /* Berhenti mengambang saat kursor diarahkan agar stabil */
+}
+
+.brand-item img {
+    max-width: 130px;
+    max-height: 70px;
+    object-fit: contain;
+    filter: grayscale(100%) brightness(0.8) opacity(0.6);
+    transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.brand-item:hover img {
+    filter: grayscale(0%) brightness(1.1) opacity(1);
+    transform: scale(1.2) rotateY(10deg) translateZ(20px);
+    drop-shadow: 0 10px 20px rgba(0,0,0,0.2);
+}
+
+@keyframes scrollBrands {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); } /* Geser tepat setengah dari total track */
+}
+
+@keyframes floatingLogo {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-12px); }
+}
+
+/* Theme Overrides */
+body.dark-mode .brands-box h1 { color: #f1f1f1; }
+body.dark-mode .brand-item img { 
+    filter: grayscale(100%) invert(1) brightness(1.8) opacity(0.7); 
+}
+
+body.purple-mode .brands-box h1 { color: #d68eff; }
+body.purple-mode .brand-item img { 
+    filter: grayscale(100%) brightness(1.4) sepia(1) hue-rotate(240deg) saturate(5) opacity(0.8); 
+}
+
+body.bubu-mode .brands-box h1 { color: #d9534f; }
+body.bubu-mode .brand-item img { 
+    filter: grayscale(100%) brightness(1.2) sepia(1) hue-rotate(315deg) saturate(3) opacity(0.8); 
+}
+
+body.ramadhan-mode .brands-box h1 { color: #D4AF37; }
+body.ramadhan-mode .brand-item img { 
+    filter: grayscale(100%) brightness(1.2) sepia(1) hue-rotate(5deg) saturate(6) opacity(0.8); 
+}
+
+/* Kembalikan warna asli saat kursor diarahkan ke logo (Hover) di semua tema */
+.brand-item:hover img {
+    filter: grayscale(0%) brightness(1.1) opacity(1) !important;
+    transform: scale(1.2) rotateY(10deg) translateZ(20px);
+}
+
+@media (max-width: 768px) {
+    .brand-item { width: 150px; padding: 0 20px; }
+    .brand-item img { max-width: 90px; }
+    @keyframes scrollBrands {
+        100% { transform: translateX(calc(-150px * 6)); }
+    }
+}
+    left: 0;
+    color: #25D366;
+    font-weight: bold;
+}
+
 body.dark-mode .sk-content-modal { background-color: #2c2c2c !important; }
 body.dark-mode .sk-list li { color: #f1f1f1; }
