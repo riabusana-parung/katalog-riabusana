@@ -3762,7 +3762,7 @@ body.ramadhan-mode .brand-item img {
     .brand-item img { max-width: 90px; }
     .brand-track {
         /* Menyesuaikan durasi agar gerakan logo lebih santai di mobile */
-        animation-duration: 50s; 
+        animation-duration: 60s; 
     }
 }
 
