@@ -3760,8 +3760,9 @@ body.ramadhan-mode .brand-item img {
 @media (max-width: 768px) {
     .brand-item { width: 150px; padding: 0 20px; }
     .brand-item img { max-width: 90px; }
-    @keyframes scrollBrands {
-        100% { transform: translateX(calc(-150px * 6)); }
+    .brand-track {
+        /* Mempercepat durasi di mobile agar tidak terasa lambat */
+        animation-duration: 25s; 
     }
 }
     left: 0;
