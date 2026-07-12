@@ -2393,9 +2393,9 @@ body.purple-mode .btn-quick-view:hover {
 
 /*====== Bubu Riri Theme ======*/
 @keyframes bubu-slideshow {
-    0%, 100% { background-image: url('../../assets/images/bubu-riri.jpg'); }
-    33% { background-image: url('../../assets/images/bubu-riri2.jpg'); }
-    66% { background-image: url('../../assets/images/bubu-riri3.jpg'); }
+    0%, 100% { background-image: url('../../assets/images/bubu-riri.png'); }
+    33% { background-image: url('../../assets/images/bubu-riri2.png'); }
+    66% { background-image: url('../../assets/images/bubu-riri3.png'); }
 }
 
 body.bubu-mode {

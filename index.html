@@ -82,11 +82,123 @@
                     font-size: 11px;
                 }
             }
+
+            .winner-showcase{
+                position: relative;
+                overflow: hidden;
+                border-radius: 28px;
+                padding: 32px;
+                margin-bottom: 28px;
+                background: linear-gradient(135deg, #fff4d6 0%, #ffe2eb 45%, #e8f0ff 100%);
+                box-shadow: 0 18px 45px rgba(0, 0, 0, 0.12);
+                border: 1px solid rgba(255, 255, 255, 0.7);
+            }
+
+            .winner-showcase::before{
+                content: "";
+                position: absolute;
+                inset: -40px -20px auto auto;
+                width: 220px;
+                height: 220px;
+                background: radial-gradient(circle, rgba(255, 255, 255, 0.8) 0%, rgba(255, 255, 255, 0) 70%);
+                pointer-events: none;
+            }
+
+            .winner-badge{
+                display: inline-flex;
+                align-items: center;
+                gap: 8px;
+                padding: 8px 14px;
+                border-radius: 999px;
+                background: rgba(255,255,255,0.85);
+                color: #b42318;
+                font-weight: 700;
+                font-size: 13px;
+                letter-spacing: 0.04em;
+                text-transform: uppercase;
+                margin-bottom: 14px;
+            }
+
+            .winner-title{
+                font-size: clamp(24px, 3vw, 32px);
+                color: #2d1b69;
+                margin: 0 0 10px;
+                font-weight: 800;
+            }
+
+            .winner-subtitle{
+                color: #5f4d87;
+                font-size: 16px;
+                margin: 0 0 24px;
+                max-width: 700px;
+            }
+
+            .winner-card{
+                display: grid;
+                grid-template-columns: minmax(220px, 320px) 1fr;
+                gap: 22px;
+                align-items: center;
+                background: rgba(255,255,255,0.72);
+                border: 1px solid rgba(255,255,255,0.8);
+                backdrop-filter: blur(12px);
+                -webkit-backdrop-filter: blur(12px);
+                border-radius: 24px;
+                padding: 18px;
+            }
+
+            .winner-card img{
+                width: 100%;
+                height: 100%;
+                max-height: 320px;
+                object-fit: cover;
+                border-radius: 18px;
+                box-shadow: 0 12px 30px rgba(0, 0, 0, 0.16);
+                cursor: zoom-in;
+                transition: transform 0.25s ease, box-shadow 0.25s ease;
+            }
+
+            .winner-card img:hover{
+                transform: scale(1.02);
+                box-shadow: 0 14px 32px rgba(0, 0, 0, 0.2);
+            }
+
+            .winner-info h3{
+                font-size: 24px;
+                color: #1f2937;
+                margin: 0 0 8px;
+            }
+
+            .winner-info p{
+                margin: 0 0 12px;
+                color: #4b5563;
+                line-height: 1.7;
+            }
+
+            .winner-chip{
+                display: inline-block;
+                padding: 7px 12px;
+                border-radius: 999px;
+                background: linear-gradient(135deg, #f59e0b, #ef4444);
+                color: white;
+                font-size: 12px;
+                font-weight: 700;
+                margin-bottom: 10px;
+            }
+
+            @media (max-width: 768px){
+                .winner-showcase{
+                    padding: 22px;
+                }
+
+                .winner-card{
+                    grid-template-columns: 1fr;
+                }
+            }
         </style>
 
     <title>Katalog Produk</title>
 </head>
-<body id="beranda" class="bubu-mode">
+<body id="beranda" class="">
 
         <!-- Background Music -->
         <audio id="bg-music" src="./assets/audio/rb-asyik.mpeg" loop></audio>
@@ -98,8 +210,6 @@
                     <img src="./assets/images/bubu-riri.png" class="active" alt="Loading..." />
                     <img src="./assets/images/bubu-riri2.png" alt="Loading..." />
                     <img src="./assets/images/bubu-riri3.png" alt="Loading..." />
-                    <img src="./assets/images/props-aniv.png" alt="Loading..." />
-                    <img src="./assets/images/props-aniv2.png" alt="Loading..." />
                 </div>
                 <h2>Selamat Datang</h2>
                 <p>Mohon tunggu sebentar...</p>
@@ -109,14 +219,6 @@
                     <span></span>
                     <span></span>
                 </div>
-            </div>
-        </div>
-
-        <!-- Anniversary Greeting -->
-        <div id="anniversary-greeting" class="anniversary-overlay">
-            <div class="anniversary-content">
-                <h1 class="anniversary-text">Happy 30th Anniversary</h1>
-                <p class="anniversary-subtext">Ria Busana - Amazing 30 Years</p>
             </div>
         </div>
 
@@ -238,41 +340,29 @@
         <div class="hadiah" id="hadiah" style="padding-bottom: 80px;">
             <div class="container">
                 <div class="hadiah-box">
-                    <h1 data-aos="fade-up" data-aos-duration="1000" style="text-align: center; margin-bottom: 40px;">Hadiah Undian Anniversary</h1>
-                    <div class="hadiah-grid">
-                        <div class="hadiah-card" data-aos="zoom-in" data-aos-duration="1000">
-                            <span class="hadiah-label">Hadiah Utama</span>
-                            <img src="./assets/images/hadiah-umroh.png" alt="Hadiah Paket Umroh">
-                            <h3>Paket Umroh</h3>
+                    <h1 data-aos="fade-up" data-aos-duration="1000" style="text-align: center; margin-bottom: 24px;">Pengumuman Pemenang Anniversary</h1>
+
+                    <div class="winner-showcase" data-aos="zoom-in" data-aos-duration="1000">
+                        <div class="winner-badge">
+                            <i class="ri-trophy-fill"></i> Selamat kepada pemenang
                         </div>
-                        <div class="hadiah-card" data-aos="zoom-in" data-aos-duration="1000" data-aos-delay="100">
-                            <span class="hadiah-label">Hadiah Utama</span>
-                            <img src="./assets/images/hadiah-bali.png" alt="Hadiah Tour Bali">
-                            <h3>Paket Tour Bali</h3>
-                        </div>
-                        <div class="hadiah-card" data-aos="zoom-in" data-aos-duration="1000" data-aos-delay="200">
-                            <img src="./assets/images/hadiah-kipas.png" alt="Hadiah Kipas Angin">
-                            <h3>Kipas Angin</h3>
-                        </div>
-                        <div class="hadiah-card" data-aos="zoom-in" data-aos-duration="1000" data-aos-delay="300">
-                            <img src="./assets/images/hadiah-tv.png" alt="Hadiah TV LED">
-                            <h3>TV LED</h3>
-                        </div>
-                        <div class="hadiah-card" data-aos="zoom-in" data-aos-duration="1000" data-aos-delay="400">
-                            <img src="./assets/images/hadiah-kulkas.png" alt="Hadiah Kulkas">
-                            <h3>Kulkas 2 Pintu</h3>
-                        </div>
-                        <div class="hadiah-card" data-aos="zoom-in" data-aos-duration="1000" data-aos-delay="500">
-                            <img src="./assets/images/hadiah-mesincuci.png" alt="Hadiah Mesin Cuci">
-                            <h3>Mesin Cuci</h3>
+                        <h2 class="winner-title">Promo Anniversary telah selesai, kini saatnya kami umumkan pemenangnya.</h2>
+                        <p class="winner-subtitle">Terima kasih untuk seluruh pelanggan yang sudah berpartisipasi. Semoga keberuntungan selalu menyertai Anda.</p>
+
+                        <div class="winner-card">
+                            <img src="./assets/images/nama_pemenang.jpg" alt="Foto pemenang undian Anniversary" class="winner-image-trigger">
+                            <div class="winner-info">
+                                <span class="winner-chip">Pemenang Beruntung</span>
+                                <h3>Nama Pemenang</h3>
+                                <p>Meraih hadiah utama undian Anniversary dengan penampilan yang lebih istimewa dan penuh kebahagiaan.</p>
+                                <p><strong>Hadiah:</strong> Paket Umroh & berbagai hadiah menarik lainnya.</p>
+                            </div>
                         </div>
                     </div>
-                    <div style="text-align: center; margin-top: 40px;" data-aos="fade-up">
-                        <button id="btn-sk-hadiah" class="btn-load-more" style="margin-bottom: 20px;">
-                            <i class="ri-information-line"></i> Syarat & Ketentuan
-                        </button>
+
+                    <div style="text-align: center; margin-top: 24px;" data-aos="fade-up">
                         <p style="font-style: italic; color: #888; font-size: 14px;">
-                        *Syarat & Ketentuan Berlaku. Belanja sebanyak-banyaknya untuk raih kesempatan menang!
+                        *Pengumuman ini resmi disampaikan untuk acara Anniversary kami.
                         </p>
                     </div>
                 </div>
@@ -463,29 +553,9 @@
                 <span class="close-promo">&times;</span>
                 <div class="promo-slider-container">
                     <div class="promo-slider-wrapper">
-                        <img src="./assets/images/promo-kesatu.jpg" alt="Promo Event 1">
+                        <img src="./assets/images/promo-kedua.jpg" alt="Promo Event 1">
                         <img src="./assets/images/promo-ketiga.jpg" alt="Promo Event 3">
                     </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- S&K Hadiah Popup -->
-        <div id="sk-hadiah-popup" class="promo-popup">
-            <div class="promo-content sk-content-modal">
-                <span class="close-promo" id="close-sk-hadiah">&times;</span>
-                <div class="sk-body">
-                    <h2><i class="ri-medal-line"></i> Syarat & Ketentuan Undian</h2>
-                    <ul class="sk-list">
-                        <li>Setiap customer yang sudah bertransaksi minimal <strong>Rp. 500.000,- net</strong> dalam 1 struk pembelian, berhak mengikuti promo undian berhadiah.</li>
-                        <li>Promo berlaku untuk transaksi <strong>barang normal, diskon</strong> atau penggabungan keduanya.</li>
-                        <li>Promo <strong>tidak berlaku</strong> dalam kelipatan transaksi.</li>
-                        <li>Promo berlaku di <strong>semua toko Ria Busana dan Victoria Busana</strong>.</li>
-                        <li>Promo tidak berlaku untuk <strong>karyawan</strong>.</li>
-                        <li>Pengundian pemenang akan dilakukan pada hari <strong>Sabtu, 11 Juli 2026</strong> di Live IG Official Ria Busana <a href="https://www.instagram.com/riabusana_official/" target="_blank" style="color: #d9534f; text-decoration: underline;"><strong>@riabusana_official</strong></a>.</li>
-                        <li>Pengumuman pemenang akan di-share pada <strong>Sosial Media & inform di toko</strong> pada hari <strong>Minggu, 12 Juli 2026</strong>.</li>
-                    </ul>
-                    <button class="btn-kirim" id="btn-paham-sk">Saya Mengerti</button>
                 </div>
             </div>
         </div>

@@ -287,7 +287,7 @@ const applyTheme = (themeName) => {
 };
 
 // Load tema tersimpan
-let currentTheme = localStorage.getItem('theme') || 'bubu';
+let currentTheme = localStorage.getItem('theme') || 'light';
 if (!themes.includes(currentTheme)) currentTheme = 'light';
 applyTheme(currentTheme);
 
@@ -378,23 +378,12 @@ function initHeroTitleAnimation() {
 // Ini untuk mencoba autoplay saat halaman pertama kali dibuka
 window.addEventListener('load', () => {
     const preloader = document.getElementById('preloader');
-    const anniversaryGreeting = document.getElementById('anniversary-greeting');
 
     // Sembunyikan preloader setelah 2 detik
     setTimeout(() => {
         if (preloader) {
             preloader.classList.add('hide');
             if (typeof AOS !== 'undefined') AOS.refresh(); // Refresh animasi AOS
-        }
-
-        // Munculkan Ucapan Anniversary
-        if (anniversaryGreeting) {
-            anniversaryGreeting.classList.add('active');
-            
-            // Sembunyikan otomatis setelah 3.5 detik
-            setTimeout(() => {
-                anniversaryGreeting.classList.remove('active');
-            }, 3500);
         }
 
         // Jalankan animasi judul hero
@@ -720,24 +709,33 @@ window.addEventListener('load', () => {
     // Popup 2 (Landscape): Muncul detik ke-15, Hilang detik ke-25
     handlePopup('promo-popup-2', 15000, 25000);
 
-    // --- S&K HADIAH MANUAL POPUP ---
-    const skBtn = document.getElementById('btn-sk-hadiah');
-    const skPopup = document.getElementById('sk-hadiah-popup');
-    const skClose = document.getElementById('close-sk-hadiah');
-    const skPaham = document.getElementById('btn-paham-sk');
+    const winnerImage = document.querySelector('.winner-image-trigger');
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = document.getElementById('lightbox-img');
+    const closeLightbox = document.querySelector('.close-lightbox');
 
-    if (skBtn && skPopup) {
-        skBtn.onclick = () => skPopup.classList.add('show');
-        
-        const closeSk = () => skPopup.classList.remove('show');
-        
-        if (skClose) skClose.onclick = closeSk;
-        if (skPaham) skPaham.onclick = closeSk;
+    if (winnerImage && lightbox && lightboxImg) {
+        winnerImage.addEventListener('click', () => {
+            lightboxImg.src = winnerImage.src;
+            lightbox.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        });
+    }
 
-        // Tutup jika klik di luar area konten
-        skPopup.onclick = (e) => {
-            if (e.target === skPopup) closeSk();
-        };
+    if (closeLightbox && lightbox) {
+        closeLightbox.addEventListener('click', () => {
+            lightbox.classList.remove('active');
+            document.body.style.overflow = '';
+        });
+    }
+
+    if (lightbox) {
+        lightbox.addEventListener('click', (e) => {
+            if (e.target === lightbox) {
+                lightbox.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+        });
     }
 
     // --- THEME NOTIFICATION LOGIC ---
