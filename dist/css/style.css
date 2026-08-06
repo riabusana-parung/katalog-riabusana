@@ -3037,7 +3037,18 @@ body.bubu-mode .reply-header { color: #d9534f; }
 
 /* Style Khusus Popup Landscape (Promo Kedua) */
 .promo-content-landscape {
-    max-width: 700px; /* Lebih lebar agar gambar landscape terlihat jelas */
+    max-width: 560px; /* Diperkecil agar tidak terlalu dominan di layar */
+    width: min(92vw, 560px);
+    max-height: 90vh;
+    overflow: auto;
+}
+
+.promo-content-landscape img {
+    width: 100%;
+    height: auto;
+    max-height: none;
+    object-fit: contain;
+    display: block;
 }
 
 /* Hapus Efek Tali Gantungan */
