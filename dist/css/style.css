@@ -2994,11 +2994,11 @@ body.bubu-mode .reply-header { color: #d9534f; }
 
 .promo-content {
     position: relative;
-    width: 90%;
-    max-width: 500px; /* Lebar maksimal disesuaikan */
+    width: 92%;
+    max-width: 600px; /* Lebar maksimal disesuaikan */
     background: transparent; /* Hapus background putih */
     padding: 0; /* Hapus padding agar gambar full */
-    border-radius: 10px;
+    border-radius: 14px;
     box-shadow: none; 
     animation: zoomInPopup 0.5s ease forwards; /* Ganti animasi ayunan dengan zoom simpel */
 }
@@ -3006,12 +3006,14 @@ body.bubu-mode .reply-header { color: #d9534f; }
 /* === Style Khusus Popup 1 (Portrait) dengan Efek Gantungan === */
 #promo-popup .promo-content {
     background: #fff; /* Frame putih */
-    padding: 10px;
-    box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+    padding: 12px;
+    box-shadow: 0 25px 60px rgba(0,0,0,0.55), 0 0 0 3px rgba(255,255,255,0.15);
     transform-origin: top center;
     animation: dropSwing 1.5s ease-out forwards, windSway 3s ease-in-out infinite alternate 1.5s;
-    max-width: 280px; /* Ukuran diperkecil lagi agar lebih manis */
-    margin-top: 80px; /* Turunkan posisi agar tali gantungan terlihat jelas */
+    max-width: 380px; /* Diperbesar agar gambar promo terlihat jelas */
+    width: min(90vw, 380px);
+    margin-top: 60px; /* Turunkan posisi agar tali gantungan terlihat jelas */
+    border-radius: 14px;
 }
 
 /* Efek Goyang Lebih Kencang Saat Hover */
@@ -3037,10 +3039,12 @@ body.bubu-mode .reply-header { color: #d9534f; }
 
 /* Style Khusus Popup Landscape (Promo Kedua) */
 .promo-content-landscape {
-    max-width: 560px; /* Diperkecil agar tidak terlalu dominan di layar */
-    width: min(92vw, 560px);
+    max-width: 680px; /* Diperbesar agar gambar landscape terlihat optimal */
+    width: min(95vw, 680px);
     max-height: 90vh;
     overflow: auto;
+    box-shadow: 0 30px 70px rgba(0,0,0,0.6);
+    border-radius: 16px;
 }
 
 .promo-content-landscape img {
@@ -3049,6 +3053,7 @@ body.bubu-mode .reply-header { color: #d9534f; }
     max-height: none;
     object-fit: contain;
     display: block;
+    border-radius: 14px;
 }
 
 /* Hapus Efek Tali Gantungan */
@@ -3060,8 +3065,8 @@ body.bubu-mode .reply-header { color: #d9534f; }
 .promo-slider-container {
     width: 100%;
     overflow: hidden;
-    border-radius: 10px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.3); /* Shadow dipindah ke container gambar */
+    border-radius: 12px;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.35); /* Shadow dipindah ke container gambar */
     background-color: #fff; /* Background putih jaga-jaga jika gambar transparan */
 }
 
@@ -3078,31 +3083,33 @@ body.bubu-mode .reply-header { color: #d9534f; }
     height: auto;
     object-fit: cover;
     display: block;
+    border-radius: 12px;
 }
 
 .close-promo {
     position: absolute;
-    top: -12px;
-    right: -12px;
-    width: 30px;
-    height: 30px;
-    background-color: rebeccapurple;
+    top: -15px;
+    right: -15px;
+    width: 36px;
+    height: 36px;
+    background: linear-gradient(135deg, #7b2ff7, #5a0db0);
     color: white;
     border-radius: 50%;
     text-align: center;
-    line-height: 28px;
+    line-height: 32px;
     font-weight: bold;
-    font-size: 18px;
+    font-size: 20px;
     cursor: pointer;
-    border: 2px solid white;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.2);
-    transition: transform 0.3s;
+    border: 3px solid white;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.35);
+    transition: transform 0.3s ease, background 0.3s ease, box-shadow 0.3s ease;
     z-index: 10; /* Pastikan tombol di atas gambar */
 }
 
 .close-promo:hover {
-    transform: scale(1.1) rotate(90deg);
-    background-color: #ff5722;
+    transform: scale(1.15) rotate(90deg);
+    background: linear-gradient(135deg, #ff5722, #e64a19);
+    box-shadow: 0 6px 20px rgba(255, 87, 34, 0.5);
 }
 
 /* Animasi Zoom In Simpel */

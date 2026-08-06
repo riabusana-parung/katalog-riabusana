@@ -574,8 +574,8 @@ async function initCatalog() {
         // Update selector imgfilter setelah elemen dirender agar filter mendeteksi produk
         imgfilter = document.querySelectorAll('.produk-list .product-card');
 
-        // Update visibilitas awal
-        updateProductVisibility('all produk');
+        // Update visibilitas awal ke New Arrival
+        updateProductVisibility('new arrival');
         
         // Setup Filter Buttons
         btnfilter.forEach((btn) =>{
@@ -601,6 +601,12 @@ async function initCatalog() {
                 updateProductVisibility(filterKey, true);
             };
         });
+
+        const initialFilterBtn = document.querySelector('.produk-box ul li[data-filter-key="new arrival"]');
+        if (initialFilterBtn) {
+            btnfilter.forEach(b => b.className = "");
+            initialFilterBtn.className = "active";
+        }
 
     } catch (error) {
         console.error("Gagal memuat produk:", error);

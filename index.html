@@ -194,11 +194,263 @@
                     grid-template-columns: 1fr;
                 }
             }
+
+            body.august-themed{
+                background:
+                    radial-gradient(circle at top left, rgba(220, 38, 38, 0.12) 0%, transparent 30%),
+                    linear-gradient(135deg, #fffef8 0%, #fff5f5 55%, #fff2f2 100%);
+            }
+
+            body.august-themed .navbar{
+                background: linear-gradient(90deg, #fff3f3 0%, #ffffff 45%, #ffe7e7 100%);
+                border-bottom: 1px solid rgba(185, 28, 28, 0.12);
+                box-shadow: 0 10px 24px rgba(185, 28, 28, 0.08);
+            }
+
+            body.august-themed .navbar .menu a{
+                color: #7c2d12;
+                font-weight: 600;
+                transition: color 0.2s ease, transform 0.2s ease;
+            }
+
+            body.august-themed .navbar .menu a:hover{
+                color: #dc2626;
+                transform: translateY(-1px);
+            }
+
+            body.august-themed .hero{
+                padding-top: 60px;
+                background: linear-gradient(135deg, rgba(248, 113, 113, 0.1) 0%, rgba(255, 255, 255, 0.95) 45%, rgba(220, 38, 38, 0.08) 100%);
+            }
+
+            .august-banner{
+                display: inline-flex;
+                align-items: center;
+                gap: 8px;
+                margin: 18px auto 0;
+                padding: 10px 16px;
+                border-radius: 999px;
+                background: linear-gradient(90deg, #dc2626 0%, #f43f5e 50%, #fff5f5 100%);
+                color: #7f1d1d;
+                font-size: 13px;
+                font-weight: 700;
+                letter-spacing: 0.04em;
+                text-transform: uppercase;
+                box-shadow: 0 10px 22px rgba(220, 38, 38, 0.18);
+            }
+
+            .august-flag-badge{
+                display: inline-flex;
+                align-items: center;
+                gap: 8px;
+                width: fit-content;
+                padding: 8px 14px;
+                margin-bottom: 16px;
+                border-radius: 999px;
+                background: linear-gradient(90deg, #dc2626 0%, #f43f5e 50%, #fff5f5 100%);
+                color: #7f1d1d;
+                font-size: 13px;
+                font-weight: 700;
+                letter-spacing: 0.04em;
+                text-transform: uppercase;
+                box-shadow: 0 10px 24px rgba(220, 38, 38, 0.16);
+            }
+
+            .august-hero-card{
+                border: 2px solid rgba(220, 38, 38, 0.12);
+                box-shadow: 0 18px 40px rgba(185, 28, 28, 0.12);
+            }
+
+            .august-theme-ornament{
+                position: absolute;
+                top: 18px;
+                right: 18px;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                gap: 4px;
+                padding: 10px 12px;
+                border-radius: 16px;
+                background: rgba(255, 255, 255, 0.9);
+                color: #b91c1c;
+                font-weight: 800;
+                box-shadow: 0 10px 24px rgba(0, 0, 0, 0.08);
+                z-index: 2;
+            }
+
+            .august-theme-ornament span{
+                font-size: 20px;
+                line-height: 1;
+            }
+
+            .august-theme-ornament small{
+                font-size: 11px;
+                letter-spacing: 0.08em;
+                text-transform: uppercase;
+            }
+
+            .hero-buttons .august-cta{
+                background: linear-gradient(135deg, #dc2626, #ef4444);
+                color: #fff;
+                box-shadow: 0 12px 24px rgba(220, 38, 38, 0.16);
+                border: 1px solid rgba(255,255,255,0.25);
+            }
+
+            .hero-buttons .august-cta:hover{
+                transform: translateY(-2px);
+                box-shadow: 0 14px 28px rgba(220, 38, 38, 0.2);
+            }
+
+            .btn-shopee,
+            .btn-load-more,
+            .btn-kirim,
+            .btn-maps{
+                transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
+            }
+
+            .btn-shopee:hover,
+            .btn-load-more:hover,
+            .btn-kirim:hover,
+            .btn-maps:hover{
+                transform: translateY(-2px);
+                box-shadow: 0 10px 20px rgba(220, 38, 38, 0.14);
+            }
+
+            .hero .box h1,
+            .hero .box p{
+                position: relative;
+                z-index: 1;
+            }
+
+            .august-section-card{
+                position: relative;
+                overflow: hidden;
+                border-radius: 24px;
+                padding: 24px;
+                background: linear-gradient(135deg, rgba(255,247,237,0.95) 0%, rgba(255,255,255,0.95) 100%);
+                border: 1px solid rgba(220, 38, 38, 0.1);
+                box-shadow: 0 16px 32px rgba(185, 28, 28, 0.08);
+            }
+
+            .august-section-card::before{
+                content: "";
+                position: absolute;
+                inset: auto -20px -20px auto;
+                width: 140px;
+                height: 140px;
+                background: radial-gradient(circle, rgba(248, 113, 113, 0.15) 0%, rgba(248, 113, 113, 0) 70%);
+                pointer-events: none;
+            }
+
+            .august-section-title{
+                display: inline-flex;
+                align-items: center;
+                gap: 8px;
+                margin-bottom: 12px;
+                color: #b91c1c;
+                font-weight: 800;
+                font-size: 14px;
+                letter-spacing: 0.08em;
+                text-transform: uppercase;
+            }
+
+            .august-section-title i{
+                color: #dc2626;
+            }
+
+            .august-section-card .box,
+            .august-section-card .produk-box,
+            .august-section-card .tv-media-box,
+            .august-section-card .lokasi-box{
+                position: relative;
+                z-index: 1;
+            }
+
+            .august-decor-top{
+                position: fixed;
+                inset: 0 0 auto 0;
+                height: 80px;
+                pointer-events: none;
+                z-index: 19;
+                overflow: hidden;
+            }
+
+            .august-decor-top::before,
+            .august-decor-top::after{
+                content: "";
+                position: absolute;
+                top: 0;
+                width: 180px;
+                height: 60px;
+                background: linear-gradient(90deg, #dc2626 0%, #fff 50%, #ef4444 100%);
+                border-radius: 0 0 24px 24px;
+                opacity: 0.95;
+                box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+            }
+
+            .august-decor-top::before{
+                left: -20px;
+                transform: rotate(-8deg);
+            }
+
+            .august-decor-top::after{
+                right: -20px;
+                transform: rotate(8deg);
+            }
+
+            .august-garland{
+                position: absolute;
+                top: 14px;
+                left: 50%;
+                transform: translateX(-50%);
+                display: flex;
+                gap: 8px;
+                z-index: 20;
+            }
+
+            .august-garland span{
+                width: 10px;
+                height: 10px;
+                border-radius: 50%;
+                background: linear-gradient(135deg, #dc2626, #f43f5e, #ffffff);
+                box-shadow: 0 0 0 3px rgba(255,255,255,0.6);
+                animation: augustPulse 1.8s ease-in-out infinite;
+            }
+
+            .august-garland span:nth-child(2){ animation-delay: .2s; }
+            .august-garland span:nth-child(3){ animation-delay: .4s; }
+            .august-garland span:nth-child(4){ animation-delay: .6s; }
+
+            @keyframes augustPulse{
+                0%, 100% { transform: scale(0.9); opacity: 0.8; }
+                50% { transform: scale(1.15); opacity: 1; }
+            }
+
+            body.august-themed .footer{
+                background: linear-gradient(135deg, #7f1d1d 0%, #b91c1c 45%, #dc2626 100%);
+                color: #fff7ed;
+            }
+
+            body.august-themed .footer a,
+            body.august-themed .footer i{
+                color: #fff7ed;
+            }
+
+            body.august-themed .footer .visitor-badge{
+                background: rgba(255,255,255,0.16);
+                color: #fff;
+                border-color: rgba(255,255,255,0.22);
+            }
         </style>
 
     <title>Katalog Produk</title>
 </head>
-<body id="beranda" class="">
+<body id="beranda" class="august-themed">
+        <div class="august-decor-top" aria-hidden="true">
+            <div class="august-garland">
+                <span></span><span></span><span></span><span></span>
+            </div>
+        </div>
 
         <!-- Background Music -->
         <audio id="bg-music" src="./assets/audio/rb-asyik.mpeg" loop></audio>
@@ -279,16 +531,21 @@
                 <div class="container">
                     <div class="hero-box">
                         <div class="box">
+                            <div class="august-flag-badge"><i class="ri-star-fill"></i> Nuansa Agustusan</div>
                             <h1>Katalog <br /> Produk Riabusana</h1>
-                            <p id="hero-caption">"Pusat Fashion Muslim Terlengkap. Temukan koleksi trendi yang memadukan kenyamanan dan gaya syar'i untuk menyempurnakan penampilan harian Anda."</p>
+                            <p id="hero-caption">"Meriahkan 17 Agustus dengan fashion yang penuh semangat, nyaman, dan penuh warna kebanggaan."</p>
                             <div class="hero-buttons">
-                                <a href="#produk">Detail Produk Kami</a>
+                                <a href="#produk" class="august-cta">Lihat Koleksi</a>
                                 <a href="https://shopee.co.id/riabusana" target="_blank" class="btn-shopee">
                                     <i class="ri-shopping-bag-3-fill"></i> Beli di Shopee
                                 </a>
                             </div>
                         </div>
-                        <div class="box hero-image-container" data-aos="zoom-in" data-aos-duration="1000">
+                        <div class="box hero-image-container august-hero-card" data-aos="zoom-in" data-aos-duration="1000">
+                            <div class="august-theme-ornament">
+                                <span>17</span>
+                                <small>Agustus</small>
+                            </div>
                             <div class="hero-blob"></div> <!-- Dekorasi Background -->
                             <img src="./assets/images/ekatalog/AWAL (1).jpg" alt="Hero Image" id="hero-img" />
                             
@@ -315,7 +572,7 @@
         <!-- Layanan Section -->
         <div class="layanan" id="layanan">
             <div class="container">
-                <div class="layanan-box">
+                <div class="layanan-box august-section-card">
                     <div class="box" data-aos="fade-up" data-aos-duration="1000">
                         <i class="ri-star-fill ri-2x"></i>
                         <h2>Produk Terbaik </h2>
@@ -372,14 +629,14 @@
         <!--produk-->
         <div class="produk" id="produk">
             <div class="container">
-                <div class="produk-box">
+                <div class="produk-box august-section-card">
                     <h1 data-aos="fade-up" data-aos-duration="1000">Produk Kami</h1>
                     <p class="produk-subtitle" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="150">
                         Pilihan fashion terbaik dengan gaya modern, kualitas premium, dan harga yang ramah untuk semua kalangan.
                     </p>
                     <ul data-aos="fade-up" data-aos-duration="1000" data-aos-delay="300">
-                    <li class="active">All Produk</li>
-                    <li>New Arrival</li>
+                    <li>All Produk</li>
+                    <li class="active">New Arrival</li>
                     <li>PRIA</li>
                     <li>WANITA</li>
                     <li>ANAK</li>
@@ -424,7 +681,7 @@
         <!-- TV Media Section -->
         <div class="tv-media" id="tv-media">
             <div class="container">
-                <div class="tv-media-box">
+                <div class="tv-media-box august-section-card">
                     <h1 data-aos="fade-up" data-aos-duration="1000">Ria Busana TV</h1>
                     
                     <!-- Video Slider Container -->
@@ -448,7 +705,7 @@
         <!-- Lokasi Section -->
         <div class="lokasi" id="lokasi">
             <div class="container">
-                <div class="lokasi-box">
+                <div class="lokasi-box august-section-card">
                     <h1 data-aos="fade-up" data-aos-duration="1000">Kunjungi Toko Kami</h1>
                     <div class="lokasi-content">
                         <div class="map-container" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="200">
