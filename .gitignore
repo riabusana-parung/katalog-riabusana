@@ -11,3 +11,12 @@ Thumbs.db
 
 # Log files
 npm-debug.log*
+
+# Large media files (exceeds GitHub 100MB limit)
+*.mp4
+*.mov
+*.avi
+*.mkv
+*.wmv
+*.flv
+*.webm
