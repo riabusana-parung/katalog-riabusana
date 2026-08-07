@@ -241,8 +241,8 @@ const applyTheme = (themeName) => {
             mobileMenuLogo.src = './assets/images/kubah.png';
             mobileMenuLogo.alt = 'Kubah Masjid';
         } else { // Default untuk light, dark, purple
-            mobileMenuLogo.src = './assets/icons/favicon.png';
-            mobileMenuLogo.alt = 'RB Logo';
+            mobileMenuLogo.src = './assets/images/gebyar.png';
+            mobileMenuLogo.alt = 'Gebyar Logo';
         }
     }
 

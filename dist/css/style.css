@@ -47,6 +47,22 @@ body {
     padding: 10px 18px;
     position: relative; /* Tambahkan agar z-index bekerja */
     z-index: 2; /* Pastikan navbar di atas banner */
+    overflow: visible;
+}
+
+.navbar-box::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: -10px;
+    transform: translateY(-50%) rotate(-12deg);
+    width: 38px;
+    height: 18px;
+    background: linear-gradient(180deg, #c8102e 50%, #ffffff 50%);
+    border-radius: 4px;
+    box-shadow: inset 0 0 0 1px rgba(0,0,0,0.08), 0 4px 10px rgba(0,0,0,0.08);
+    pointer-events: none;
+    transform-origin: top left;
 }
 
 .navbar-box .menu{
@@ -76,9 +92,17 @@ body {
     transition: all 0.28s ease;
 }
 
-.navbar-box .menu li a:hover{
-    color: rebeccapurple;
-    background-color: rgba(102, 51, 153, 0.12);
+.navbar-box .menu li a:hover,
+.navbar-box .menu li a.active,
+.navbar-box .menu li.active a {
+    color: #b91c1c;
+    background-color: rgba(244, 63, 94, 0.14);
+}
+
+.navbar-box .menu li a.active,
+.navbar-box .menu li.active a {
+    background-color: rgba(254, 226, 226, 0.9);
+    box-shadow: inset 0 0 0 1px rgba(185, 28, 28, 0.15);
 }
 
 .logo {
@@ -161,8 +185,7 @@ body {
         transform: translateX(-50%);
         flex-direction: column;
         text-align: center;
-        /* --- ENHANCEMENT: Glassmorphism Effect --- */
-        background: rgba(30, 10, 50, 0.8); /* Darker, more transparent purple */
+        background: rgba(255, 250, 246, 0.96); /* Nuansa merah-putih kemerdekaan */
         backdrop-filter: blur(15px);
         -webkit-backdrop-filter: blur(15px);
         width: calc(100% - 24px);
@@ -172,8 +195,23 @@ body {
         transition: top .4s ease-in-out, opacity .4s ease-in-out; /* Pisahkan transisi agar lebih spesifik */
         opacity: 0;
         z-index: 1000; /* Agar menu menutupi konten hero saat dibuka */
-        box-shadow: 0 20px 35px rgba(37, 14, 61, 0.32);
-        border: 1px solid rgba(255, 255, 255, 0.18);
+        box-shadow: 0 20px 35px rgba(185, 28, 28, 0.18);
+        border: 1px solid rgba(185, 28, 28, 0.18);
+    }
+
+    .navbar-box .menu::before {
+        content: '';
+        position: absolute;
+        top: 16px;
+        left: -14px;
+        width: 28px;
+        height: 14px;
+        background: linear-gradient(180deg, #c8102e 50%, #ffffff 50%);
+        border-radius: 3px;
+        pointer-events: none;
+        transform: rotate(-12deg);
+        transform-origin: top left;
+        box-shadow: inset 0 0 0 1px rgba(0,0,0,0.08), 0 3px 8px rgba(0,0,0,0.1);
     }
 
     .navbar-box .menu.menu-active{
@@ -218,7 +256,7 @@ body {
     }
 
     .navbar-box .menu li a{
-        color: white;
+        color: #2f2240;
         font-size: 17px;
         width: 100%;
         padding: 12px 14px;
@@ -227,10 +265,12 @@ body {
         transition: all 0.3s ease; /* Tambahkan transisi untuk hover */
     }
 
-    .navbar-box .menu li a:hover{
-        background-color: rgba(255, 255, 255, 0.14);
-        color: #ffffff;
-        transform: scale(1.05); /* Efek membesar saat di-hover */
+    .navbar-box .menu li a:hover,
+    .navbar-box .menu li a.active,
+    .navbar-box .menu li.active a {
+        color: #b91c1c;
+        background-color: rgba(254, 226, 226, 0.95);
+        transform: scale(1.03);
     }
 
     .logo img {
@@ -1073,8 +1113,8 @@ body.ramadhan-mode .hero-box h1 {
     top: 0;
     left: 0;
     width: 100%;
-    height: 5px;
-    background: linear-gradient(90deg, rebeccapurple, #d68eff);
+    height: 6px;
+    background: linear-gradient(90deg, #c8102e 0%, #c8102e 50%, #ffffff 50%, #ffffff 100%);
     transform: scaleX(0);
     transform-origin: left;
     transition: transform 0.4s ease;
@@ -1106,17 +1146,68 @@ body.ramadhan-mode .hero-box h1 {
     color: white;
 }
 
-@media (max-width:992px){
-    .layanan-box{
-        grid-template-columns: repeat(2, 1fr);
-    } 
+.layanan-box .box,
+.august-section-card,
+.winner-card,
+.video-card,
+.ulasan-card,
+.hadiah-card {
+    position: relative;
 }
 
-@media (max-width:575px){
-    .layanan-box{
-        grid-template-columns: 1fr;
-    } 
+.layanan-box .box:first-child:not(.no-flag)::after,
+.august-section-card::after,
+.winner-card::after,
+.video-card::after,
+.ulasan-card::after,
+.hadiah-card::after {
+    content: '';
+    position: absolute;
+    top: 16px;
+    left: 16px;
+    width: 40px;
+    height: 24px;
+    border-radius: 5px;
+    background: linear-gradient(180deg, #c8102e 50%, #ffffff 50%);
+    border: 1px solid rgba(0,0,0,0.08);
+    box-shadow: 0 8px 22px rgba(0,0,0,0.12);
+    z-index: 2;
+    pointer-events: none;
 }
+
+@media (max-width: 768px) {
+    .layanan {
+        padding-top: 80px;
+        padding-bottom: 80px;
+    }
+
+    .layanan-box {
+        grid-template-columns: 1fr;
+        gap: 18px;
+    }
+
+    .layanan-box .box {
+        padding: 28px 22px;
+        border-radius: 18px;
+        text-align: left;
+    }
+
+    .layanan-box .box i {
+        font-size: 38px;
+        margin-bottom: 16px;
+    }
+
+    .layanan-box .box h2 {
+        font-size: 18px;
+        margin-bottom: 12px;
+    }
+
+    .layanan-box .box p {
+        font-size: 14px;
+        line-height: 1.75;
+    }
+}
+/*======end layanan======*/
 /*======end layanan======*/
 
 /*======produk======*/
@@ -2994,25 +3085,25 @@ body.bubu-mode .reply-header { color: #d9534f; }
 
 .promo-content {
     position: relative;
-    width: 92%;
-    max-width: 600px; /* Lebar maksimal disesuaikan */
+    width: 90%;
+    max-width: 420px; /* Lebih kecil namun tetap terlihat */
     background: transparent; /* Hapus background putih */
     padding: 0; /* Hapus padding agar gambar full */
     border-radius: 14px;
-    box-shadow: none; 
+    box-shadow: none;
     animation: zoomInPopup 0.5s ease forwards; /* Ganti animasi ayunan dengan zoom simpel */
 }
 
 /* === Style Khusus Popup 1 (Portrait) dengan Efek Gantungan === */
 #promo-popup .promo-content {
     background: #fff; /* Frame putih */
-    padding: 12px;
-    box-shadow: 0 25px 60px rgba(0,0,0,0.55), 0 0 0 3px rgba(255,255,255,0.15);
+    padding: 10px;
+    box-shadow: 0 22px 50px rgba(0,0,0,0.45), 0 0 0 2px rgba(255,255,255,0.12);
     transform-origin: top center;
     animation: dropSwing 1.5s ease-out forwards, windSway 3s ease-in-out infinite alternate 1.5s;
-    max-width: 380px; /* Diperbesar agar gambar promo terlihat jelas */
-    width: min(90vw, 380px);
-    margin-top: 60px; /* Turunkan posisi agar tali gantungan terlihat jelas */
+    max-width: 340px; /* Ukuran lebih kecil agar popup lebih compact */
+    width: min(85vw, 340px);
+    margin-top: 40px;
     border-radius: 14px;
 }
 
@@ -3039,18 +3130,18 @@ body.bubu-mode .reply-header { color: #d9534f; }
 
 /* Style Khusus Popup Landscape (Promo Kedua) */
 .promo-content-landscape {
-    max-width: 680px; /* Diperbesar agar gambar landscape terlihat optimal */
-    width: min(95vw, 680px);
-    max-height: 90vh;
-    overflow: auto;
-    box-shadow: 0 30px 70px rgba(0,0,0,0.6);
+    max-width: 520px; /* Lebih compact agar tidak terlalu besar */
+    width: min(90vw, 520px);
+    max-height: 80vh;
+    overflow: hidden;
+    box-shadow: 0 24px 50px rgba(0,0,0,0.5);
     border-radius: 16px;
 }
 
 .promo-content-landscape img {
     width: 100%;
     height: auto;
-    max-height: none;
+    max-height: 80vh;
     object-fit: contain;
     display: block;
     border-radius: 14px;
@@ -3081,9 +3172,46 @@ body.bubu-mode .reply-header { color: #d9534f; }
     min-width: 100%;
     flex-shrink: 0;
     height: auto;
-    object-fit: cover;
+    max-height: 80vh;
+    object-fit: contain;
     display: block;
     border-radius: 12px;
+}
+
+@media (max-width: 576px) {
+    .promo-popup {
+        align-items: center;
+        padding: 12px 0 16px;
+    }
+
+    .promo-content,
+    #promo-popup .promo-content {
+        width: 92%;
+        max-width: 320px;
+        margin-top: 0;
+        padding: 8px;
+        border-radius: 16px;
+    }
+
+    .promo-content-landscape {
+        width: 92%;
+        max-width: 320px;
+        max-height: 75vh;
+    }
+
+    .promo-content img,
+    .promo-content-landscape img {
+        max-height: 68vh;
+    }
+
+    .close-promo {
+        width: 32px;
+        height: 32px;
+        top: 8px;
+        right: 8px;
+        line-height: 28px;
+        font-size: 18px;
+    }
 }
 
 .close-promo {
