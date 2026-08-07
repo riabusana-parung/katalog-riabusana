@@ -342,6 +342,23 @@ const initPreloaderSlider = () => {
 };
 initPreloaderSlider();
 
+const launchPreloaderConfetti = () => {
+    if (typeof window.confetti !== 'function') return;
+
+    const burst = () => {
+        window.confetti({
+            particleCount: 140,
+            spread: 90,
+            startVelocity: 40,
+            colors: ['#dc2626', '#ffffff', '#f59e0b', '#1f2937'],
+            origin: { y: 0.45 }
+        });
+    };
+
+    burst();
+    setTimeout(burst, 220);
+};
+
 // --- HERO TITLE ANIMATION ---
 function initHeroTitleAnimation() {
     const heroTitle = document.querySelector('.hero-box h1');
@@ -382,6 +399,7 @@ window.addEventListener('load', () => {
     // Sembunyikan preloader setelah 2 detik
     setTimeout(() => {
         if (preloader) {
+            launchPreloaderConfetti();
             preloader.classList.add('hide');
             if (typeof AOS !== 'undefined') AOS.refresh(); // Refresh animasi AOS
         }
