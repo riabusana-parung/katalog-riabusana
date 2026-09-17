@@ -1,0 +1,917 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+        <!-- favicon -->
+        <link rel="shortcut icon" href="./assets/icons/favicon.png" type="image/x-icon" />
+
+        <!-- font poppins -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+        
+        <!-- css -->
+        <link rel="stylesheet" href="./dist/css/style.css" />
+
+        <!-- Remix Icons -->
+        <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet" />
+
+        <!-- aos -->
+        <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+
+        <style>
+            /* Visitor Badge - Glass Pill Style */
+            .visitor-badge{
+                display: inline-flex;
+                align-items: center;
+                gap: 8px;
+                margin-top: 10px;
+                padding: 10px 14px;
+                border-radius: 999px;
+                color: #0f172a;
+                background: rgba(255,255,255,0.72);
+                border: 1px solid rgba(255,255,255,0.45);
+                backdrop-filter: blur(10px);
+                -webkit-backdrop-filter: blur(10px);
+                box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+                font: 600 13px/1 "Poppins", system-ui, sans-serif;
+                transition: transform .25s ease, box-shadow .25s ease, opacity .25s ease;
+                opacity: .95;
+            }
+
+            .visitor-badge:hover{
+                transform: translateY(-2px);
+                box-shadow: 0 12px 28px rgba(0,0,0,0.16);
+                opacity: 1;
+            }
+
+            .visitor-badge .icon{
+                width: 24px;
+                height: 24px;
+                border-radius: 50%;
+                display: grid;
+                place-items: center;
+                font-size: 12px;
+                color: #fff;
+                background: linear-gradient(135deg, #d9534f, #ff8fab);
+            }
+
+            .visitor-badge .label{
+                font-weight: 600;
+                color: #334155;
+            }
+
+            .visitor-badge .count{
+                font-weight: 800;
+                color: #d9534f;
+                letter-spacing: .2px;
+            }
+
+            @media (max-width: 576px){
+                .visitor-badge{
+                    padding: 9px 12px;
+                    font-size: 12px;
+                    gap: 6px;
+                }
+
+                .visitor-badge .icon{
+                    width: 22px;
+                    height: 22px;
+                    font-size: 11px;
+                }
+            }
+
+            .winner-showcase{
+                position: relative;
+                overflow: hidden;
+                border-radius: 28px;
+                padding: 32px;
+                margin-bottom: 28px;
+                background: linear-gradient(135deg, #fff4d6 0%, #ffe2eb 45%, #e8f0ff 100%);
+                box-shadow: 0 18px 45px rgba(0, 0, 0, 0.12);
+                border: 1px solid rgba(255, 255, 255, 0.7);
+            }
+
+            .winner-showcase::before{
+                content: "";
+                position: absolute;
+                inset: -40px -20px auto auto;
+                width: 220px;
+                height: 220px;
+                background: radial-gradient(circle, rgba(255, 255, 255, 0.8) 0%, rgba(255, 255, 255, 0) 70%);
+                pointer-events: none;
+            }
+
+            .winner-badge{
+                display: inline-flex;
+                align-items: center;
+                gap: 8px;
+                padding: 8px 14px;
+                border-radius: 999px;
+                background: rgba(255,255,255,0.85);
+                color: #b42318;
+                font-weight: 700;
+                font-size: 13px;
+                letter-spacing: 0.04em;
+                text-transform: uppercase;
+                margin-bottom: 14px;
+            }
+
+            .winner-title{
+                font-size: clamp(24px, 3vw, 32px);
+                color: #2d1b69;
+                margin: 0 0 10px;
+                font-weight: 800;
+            }
+
+            .winner-subtitle{
+                color: #5f4d87;
+                font-size: 16px;
+                margin: 0 0 24px;
+                max-width: 700px;
+            }
+
+            .winner-card{
+                display: grid;
+                grid-template-columns: minmax(220px, 320px) 1fr;
+                gap: 22px;
+                align-items: center;
+                background: rgba(255,255,255,0.72);
+                border: 1px solid rgba(255,255,255,0.8);
+                backdrop-filter: blur(12px);
+                -webkit-backdrop-filter: blur(12px);
+                border-radius: 24px;
+                padding: 18px;
+            }
+
+            .winner-card img{
+                width: 100%;
+                height: 100%;
+                max-height: 320px;
+                object-fit: cover;
+                border-radius: 18px;
+                box-shadow: 0 12px 30px rgba(0, 0, 0, 0.16);
+                cursor: zoom-in;
+                transition: transform 0.25s ease, box-shadow 0.25s ease;
+            }
+
+            .winner-card img:hover{
+                transform: scale(1.02);
+                box-shadow: 0 14px 32px rgba(0, 0, 0, 0.2);
+            }
+
+            .winner-info h3{
+                font-size: 24px;
+                color: #1f2937;
+                margin: 0 0 8px;
+            }
+
+            .winner-info p{
+                margin: 0 0 12px;
+                color: #4b5563;
+                line-height: 1.7;
+            }
+
+            .winner-chip{
+                display: inline-block;
+                padding: 7px 12px;
+                border-radius: 999px;
+                background: linear-gradient(135deg, #f59e0b, #ef4444);
+                color: white;
+                font-size: 12px;
+                font-weight: 700;
+                margin-bottom: 10px;
+            }
+
+            @media (max-width: 768px){
+                .winner-showcase{
+                    padding: 22px;
+                }
+
+                .winner-card{
+                    grid-template-columns: 1fr;
+                }
+            }
+
+        </style>
+
+    <title>Katalog Produk</title>
+</head>
+<body id="beranda">
+
+        <!-- Background Music -->
+        <audio id="bg-music" src="./assets/audio/rb-asyik.mpeg" loop></audio>
+
+        <!-- Preloader -->
+        <div class="preloader" id="preloader">
+            <div class="preloader-content">
+                <div class="image-slider">
+                    <img src="./assets/images/bubu-riri.png" class="active" alt="Loading..." />
+                    <img src="./assets/images/bubu-riri2.png" alt="Loading..." />
+                    <img src="./assets/images/bubu-riri3.png" alt="Loading..." />
+                </div>
+                <h2>Selamat Datang</h2>
+                <p>Mohon tunggu sebentar...</p>
+                <!-- Animasi Loading Dots Baru -->
+                <div class="loading-dots">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Navbar -->
+        <div class="navbar">
+            <div class="container">
+                <div class="navbar-box">
+                    <div class="logo">
+                        <img src="./assets/icons/favicon.png" alt="RB Logo" />
+                        <h1>Parung.</h1>
+                    </div>
+                    <ul class="menu">
+                        <li class="mobile-menu-header">
+                            <img src="./assets/images/gebyar.png" alt="Gebyar Logo">
+                        </li>
+                        <li>
+                            <a href="#beranda">Beranda</a>
+                        </li>
+                        <li>
+                            <a href="#layanan">Layanan</a>
+                        </li>
+                        <li>
+                            <a href="#tv-media">TV Media</a>
+                        </li>
+                        <li>
+                            <a href="#produk">Produk Kami</a>
+                        </li>
+                        <li>
+                            <a href="qna.html">QnA</a>
+                        </li>
+                        <li>
+                            <a href="member.html">Member</a>
+                        </li>
+                        <li>
+                            <a href="#kontak">Kontak</a>
+                        </li>
+                    </ul>
+
+                    <!-- Humberger -->
+                    <div class="hamburger">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+                    </div>
+
+                <!-- Promo Banner Event (Spanduk) -->
+                <div class="promo-banner">
+                    <img src="./assets/images/spanduk-1.jpg" class="active" alt="Promo Event 1">
+                    <img src="./assets/images/spanduk-2.jpg" alt="Promo Event 2">
+                </div>
+            </div>
+        </div>
+        <!-- End Navbar -->
+
+        <!-- Hero Section -->
+            <section class="hero">
+                <div class="container">
+                    <div class="hero-box">
+                        <div class="box">
+                            <h1>Katalog <br /> Produk Riabusana</h1>
+                            <p id="hero-caption">Temukan fashion yang nyaman, modern, dan sesuai untuk setiap momen.</p>
+                            <div class="hero-buttons">
+                                <a href="#produk">Lihat Koleksi</a>
+                                <a href="https://shopee.co.id/riabusana" target="_blank" class="btn-shopee">
+                                    <i class="ri-shopping-bag-3-fill"></i> Beli di Shopee
+                                </a>
+                            </div>
+                        </div>
+                        <div class="box hero-image-container" data-aos="zoom-in" data-aos-duration="1000">
+                            <div class="hero-blob"></div> <!-- Dekorasi Background -->
+                            <img src="./assets/images/ekatalog/AWAL (1).jpg" alt="Hero Image" id="hero-img" />
+                            
+                            <!-- Tombol Navigasi Manual -->
+                            <button class="hero-nav prev" onclick="controlHeroSlide('prev')"><i class="ri-arrow-left-s-line"></i></button>
+                            <button class="hero-nav next" onclick="controlHeroSlide('next')"><i class="ri-arrow-right-s-line"></i></button>
+
+                            <!-- Indikator Dots -->
+                            <div class="hero-dots" id="hero-dots"></div>
+
+                            <!-- Badge Melayang -->
+                            <div class="hero-badge">
+                                <i class="ri-fire-fill"></i>
+                                <div class="badge-text">                
+                                    <span>Produk Terbaru</span>
+                                    <!--small>Minggu Ini</small-->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+        <!-- Hero Section End -->
+
+        <!-- Layanan Section -->
+        <div class="layanan" id="layanan">
+            <div class="container">
+                <div class="layanan-box">
+                    <div class="box" data-aos="fade-up" data-aos-duration="1000">
+                        <i class="ri-star-fill ri-2x"></i>
+                        <h2>Produk Terbaik </h2>
+                        <p>Kami berkomitmen penuh untuk menghadirkan Produk Terbaik demi kepuasan pelanggan, menggabungkan inovasi mutakhir dengan dedikasi tanpa batas untuk mencapai standar kualitas yang tak tertandingi di industri global saat ini.</p>
+                    </div>
+                    <div class="box" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="200">
+                        <i class="ri-price-tag-fill ri-2x"></i>
+                        <h2>Harga Terjangkau </h2>
+                        <p>Kami percaya bahwa setiap orang berhak mendapatkan layanan berkualitas tinggi. Itulah alasan kami tetap konsisten menawarkan Harga Terjangkau sebagai bentuk komitmen kami dalam mendukung pertumbuhan ekonomi masyarakat luas.</p>
+                    </div>
+                    <div class="box" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="400"> 
+                        <i class="ri-store-fill ri-2x"></i>
+                        <h2>Cabang dimana-mana </h2>
+                        <p>Nikmati kemudahan layanan kami di seluruh penjuru negeri karena cabang ada dimana-mana, siap melayani kebutuhan Anda dengan standar kualitas yang konsisten dan keramahan staf profesional kami di setiap lokasi.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Layanan Section -->
+
+        <!-- Hadiah Undian Section -->
+        <div class="hadiah" id="hadiah" style="padding-bottom: 80px;">
+            <div class="container">
+                <div class="hadiah-box">
+                    <h1 data-aos="fade-up" data-aos-duration="1000" style="text-align: center; margin-bottom: 24px;">Pengumuman Pemenang Anniversary</h1>
+
+                    <div class="winner-showcase" data-aos="zoom-in" data-aos-duration="1000">
+                        <div class="winner-badge">
+                            <i class="ri-trophy-fill"></i> Selamat kepada pemenang
+                        </div>
+                        <h2 class="winner-title">Promo Anniversary telah selesai, kini saatnya kami umumkan pemenangnya.</h2>
+                        <p class="winner-subtitle">Terima kasih untuk seluruh pelanggan yang sudah berpartisipasi. Semoga keberuntungan selalu menyertai Anda.</p>
+
+                        <div class="winner-card">
+                            <img src="./assets/images/nama_pemenang.jpg" alt="Foto pemenang undian Anniversary" class="winner-image-trigger">
+                            <div class="winner-info">
+                                <span class="winner-chip">Pemenang Beruntung</span>
+                                <h3>Nama Pemenang</h3>
+                                <p>Meraih hadiah utama undian Anniversary dengan penampilan yang lebih istimewa dan penuh kebahagiaan.</p>
+                                <p><strong>Hadiah:</strong> Paket Umroh & berbagai hadiah menarik lainnya.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div style="text-align: center; margin-top: 24px;" data-aos="fade-up">
+                        <p style="font-style: italic; color: #888; font-size: 14px;">
+                        *Pengumuman ini resmi disampaikan untuk acara Anniversary kami.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!--produk-->
+        <div class="produk" id="produk">
+            <div class="container">
+                <div class="produk-box">
+                    <h1 data-aos="fade-up" data-aos-duration="1000">Produk Kami</h1>
+                    <p class="produk-subtitle" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="150">
+                        Pilihan fashion terbaik dengan gaya modern, kualitas premium, dan harga yang ramah untuk semua kalangan.
+                    </p>
+                    <ul data-aos="fade-up" data-aos-duration="1000" data-aos-delay="300">
+                    <li>All Produk</li>
+                    <li class="active">New Arrival</li>
+                    <li>PRIA</li>
+                    <li>WANITA</li>
+                    <li>ANAK</li>
+                    <li>AKSESORIS</li>
+                    <li>BABY</li>
+                    <li>GAMIS</li>
+                    </ul> 
+
+                    <div class="produk-list">
+                        <!-- Produk akan di-render otomatis oleh script.js -->
+                    </div>
+
+                    <!-- Tombol Load More -->
+                    <div class="load-more-container" style="text-align: center; margin-top: 40px;">
+                        <button id="load-more-btn" class="btn-load-more">Lihat Lebih Banyak</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--produk-->
+
+        <!-- Brands Section -->
+        <div class="brands-section" id="brands">
+            <div class="container">
+                <div class="brands-box" style="padding: 20px 0;">
+                    <h1 data-aos="fade-up" data-aos-duration="1000">Supported By</h1>
+                    <div class="brand-slider" data-aos="zoom-in" data-aos-duration="1200">
+                        <div class="brand-track">
+                            <!-- Logo-logo akan dimuat secara otomatis oleh script.js -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End Brands Section -->
+
+        <!-- Garis Pemisah dengan Ikon -->
+        <div class="section-separator-icon" data-aos="zoom-in" data-aos-duration="1000">
+            <i class="ri-t-shirt-2-line"></i>
+        </div>
+
+        <!-- TV Media Section -->
+        <div class="tv-media" id="tv-media">
+            <div class="container">
+                <div class="tv-media-box">
+                    <h1 data-aos="fade-up" data-aos-duration="1000">Ria Busana TV</h1>
+                    
+                    <!-- Video Slider Container -->
+                    <div class="video-slider-container" data-aos="zoom-in" data-aos-duration="1000">
+                        <div class="video-slider-wrapper" id="video-slider-wrapper">
+                            <!-- Video slides akan dimuat di sini -->
+                        </div>
+                        
+                        <!-- Tombol Navigasi -->
+                        <button class="video-nav prev"><i class="ri-arrow-left-s-line"></i></button>
+                        <button class="video-nav next"><i class="ri-arrow-right-s-line"></i></button>
+
+                        <!-- Tombol Mute Global -->
+                        <button class="video-mute-btn"><i class="ri-volume-up-line"></i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End TV Media Section -->
+
+        <!-- Lokasi Section -->
+        <div class="lokasi" id="lokasi">
+            <div class="container">
+                <div class="lokasi-box">
+                    <h1 data-aos="fade-up" data-aos-duration="1000">Kunjungi Toko Kami</h1>
+                    <div class="lokasi-content">
+                        <div class="map-container" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="200">
+                            <!-- Embed Map Ria Busana Parung -->
+                            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3965.262827822765!2d106.7262443749915!3d-6.412761693577786!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e69e9a69139151d%3A0x10569255625620!2sRia%20Busana%20Parung!5e0!3m2!1sid!2sid!4v1708930000000!5m2!1sid!2sid" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                        </div>
+                        <div class="jam-operasional" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="300">
+                            <h3>Jam Operasional</h3>
+                            <ul>
+                                <li><span>Senin - Jumat</span> <strong>09:00 - 21:00</strong></li>
+                                <li><span>Sabtu</span> <strong>09:00 - 22:00</strong></li>
+                                <li><span>Minggu</span> <strong>09:00 - 22:00</strong></li>
+                                <li><span>Hari Libur Nasional</span> <strong>Buka (Sesuai Jam)</strong></li>
+                            </ul>
+                            <a href="https://maps.app.goo.gl/R3pK6gAWpFcsD6sXA" target="_blank" class="btn-maps">
+                                <i class="ri-map-pin-line"></i> Buka di Google Maps
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End Lokasi Section -->
+
+        <!-- Footer -->
+        <div class="footer" id="kontak">
+            <div class="box">
+                <p>&copy; Copyright 2026 Katalog RiaBusana Parung by <span>Qonde</span>. All rights reserved.</p>
+                <div class="visitor-badge">
+                    <span class="icon"><i class="ri-group-line"></i></span>
+                    <span class="label">Visitor</span>
+                    <span class="count">Hari Ini: <strong id="daily-visitor-count">...</strong></span>
+                    <span class="count">• Total: <strong id="total-visitor-count">...</strong></span>
+                </div>
+            </div>
+            <div class="box">
+                <a href="https://wa.me/6285710995295" target="_blank" style="color: inherit;"><i class="ri-whatsapp-fill ri-2x"></i></a>
+                <a href="https://www.facebook.com/Riabusana.Retail.Fashion" target="_blank" style="color: inherit;">
+                    <i class="ri-facebook-fill ri-2x"></i>
+                </a>
+                <a href="https://www.instagram.com/riabusana_official/" target="_blank" style="color: inherit;">
+                    <i class="ri-instagram-fill ri-2x"></i>
+                </a>
+                <a href="https://www.tiktok.com/@riabusana_officialnew" target="_blank" style="color: inherit;">
+                    <i class="ri-tiktok-fill ri-2x"></i>
+                </a>
+                <a href="https://shopee.co.id/riabusana" target="_blank" style="color: inherit;" title="Kunjungi Shopee Kami">
+                    <i class="ri-shopping-bag-3-fill ri-2x shopee-icon"></i>
+                </a>
+            </div>
+        </div>
+        <!-- Footer -->
+
+        <!-- Chat Widget -->
+        <div class="chat-widget">
+            <div class="chat-box" id="chat-box">
+                <div class="chat-header">
+                    <span>Asisten Ria Busana</span>
+                    <i class="ri-close-line" style="cursor: pointer;" onclick="toggleChat()"></i>
+                </div>
+                <div class="chat-body" id="chat-body">
+                    <p class="bot-message">Halo! Selamat datang di Ria Busana. 👋</p>
+                </div>
+                <div class="chat-footer">
+                    <a href="https://wa.me/6285710995295?text=Halo%20kak,%20saya%20tertarik%20dengan%20produk%20Ria%20Busana..." target="_blank" class="btn-wa">
+                        <i class="ri-whatsapp-line ri-lg"></i> Chat Admin via WhatsApp
+                    </a>
+                    <a href="https://shopee.co.id/riabusana" target="_blank" class="btn-shopee-chat">
+                        <i class="ri-shopping-bag-3-fill ri-lg"></i> Official Store Shopee
+                    </a>
+                </div>
+            </div>
+            <div class="chat-toggle" onclick="toggleChat()">
+                <i class="ri-message-3-fill ri-2x"></i>
+            </div>
+        </div>
+
+        <!-- Music Toggle Button -->
+        <div class="music-toggle" id="music-toggle">
+            <i class="ri-volume-mute-line"></i>
+        </div>
+
+        <!-- Theme Toggle Button -->
+        <div class="theme-toggle" id="theme-toggle">
+            <i class="ri-moon-line"></i>
+        </div>
+
+        <!-- Scroll to Top Button -->
+        <div class="scroll-top">
+            <i class="ri-arrow-up-line"></i>
+        </div>
+
+        <!-- Lightbox (Popup Gambar) -->
+        <div id="lightbox" class="lightbox">
+            <span class="close-lightbox">&times;</span>
+            <img class="lightbox-content" id="lightbox-img" alt="Detail Produk">
+        </div>
+
+        <!-- Promo Popup (Iklan Event) -->
+        <div id="promo-popup" class="promo-popup">
+            <div class="promo-content">
+                <span class="close-promo">&times;</span>
+                <div class="promo-slider-container">
+                    <div class="promo-slider-wrapper">
+                        <img src="./assets/images/promo-kedua.jpg" alt="Promo Event 1">
+                        <img src="./assets/images/promo-ketiga.jpg" alt="Promo Event 3">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Promo Popup 2 (Khusus Landscape - Promo Kedua) -->
+        <div id="promo-popup-2" class="promo-popup">
+            <div class="promo-content promo-content-landscape">
+                <span class="close-promo">&times;</span>
+                <img src="./assets/images/promo-kedua.jpg" alt="Promo Event 2">
+            </div>
+        </div>
+
+        <!-- js -->
+        <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+        <script type="module" src="./dist/js/script.js"></script>
+
+        <!-- aos -->
+        <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+        <script>
+            AOS.init({
+                once: true,   /* Animasi hanya berjalan sekali (mencegah glitch saat scroll naik turun) */
+                offset: 50,   /* Trigger animasi lebih awal (50px sebelum elemen terlihat penuh) */
+                duration: 1000,
+            });
+        </script>
+
+        <!-- Hero Slider Script -->
+        <script>
+            let heroImg = document.getElementById('hero-img'); // Ubah const ke let agar bisa di-update
+            const heroCaption = document.getElementById('hero-caption');
+            const heroContainer = document.querySelector('.hero-image-container');
+            const heroDotsContainer = document.getElementById('hero-dots');
+            
+            // Data Gambar dan Caption pasangannya
+            const heroData = [
+                {
+                    src: "./assets/images/ekatalog/AWAL (1).jpg",
+                    text: '"Transformasi instan di Riabusana: Dari biasa jadi bintang! Outfit ready-to-wear, mix-match mudah. Cek yuk! ⭐👗 #RiabusanaMagic #StyleUpgrade."'
+                },
+                {
+                    src: "./assets/images/ekatalog/AWAL (2).jpg",
+                    text: '"Riabusana: Tempatnya fashionista pintar berbelanja. Stylish, nyaman, terjangkau! Tag temanmu yang butuh update look! 👯‍♀️🌟 #RiabusanaLovers #ShopSmart"'
+                },
+                {
+                    src: "./assets/images/ekatalog/AWAL (3).jpg",
+                    text: '"Mau outfit yang bikin iri teman? Riabusana punya semuanya! Quality top, price bottom. Yuk cus ke store terdekat! 😎👖 #RiabusanaHits #OotdGoals"'
+                },
+                {
+                    src: "./assets/images/ekatalog/AWAL (4).jpg",
+                    text: '"Gaya Maskulin yang Berwibawa. Pilihan Baju Koko modern dengan detail minimalis, sangat tepat untuk ibadah maupun acara formal."'
+                },
+                {
+                    src: "./assets/images/ekatalog/AWAL (5).jpg",
+                    text: '"Keceriaan Fashion Si Kecil. Hadirkan senyum di wajah buah hati dengan pakaian muslim anak yang trendi, warna-warni, dan berbahan lembut."'
+                },
+                {
+                    src: "./assets/images/ekatalog/AWAL (11).jpg",
+                    text: '"Banjir Promo & Diskon Spesial! Dapatkan penawaran harga terbaik untuk koleksi favorit Anda. Belanja hemat hanya di Ria Busana Parung."'
+                },
+            ];
+            
+            let currentHeroIndex = 0;
+            let heroInterval;
+            let isAnimating = false; // Mencegah klik ganda cepat
+            let isHovering = false; // Status hover mouse
+
+            // Fungsi Membuat Dots
+            function createHeroDots() {
+                heroDotsContainer.innerHTML = '';
+                heroData.forEach((_, index) => {
+                    const dot = document.createElement('div');
+                    dot.classList.add('hero-dot');
+                    if (index === 0) dot.classList.add('active');
+                    
+                    dot.onclick = () => {
+                        if (isAnimating || currentHeroIndex === index) return;
+                        clearInterval(heroInterval);
+                        const direction = index > currentHeroIndex ? 'next' : 'prev';
+                        currentHeroIndex = index;
+                        updateHeroSlide(direction);
+                        if (!isHovering) startHeroAutoSlide(); // Hanya restart jika tidak sedang hover
+                    };
+                    heroDotsContainer.appendChild(dot);
+                });
+            }
+
+            // Fungsi Ganti Slide
+            function updateHeroSlide(direction = 'next') {
+                if (isAnimating) return;
+                isAnimating = true;
+
+                const nextData = heroData[currentHeroIndex];
+
+                // 1. Buat elemen gambar baru
+                const newImg = document.createElement('img');
+                newImg.src = nextData.src;
+                newImg.alt = "Hero Image";
+                newImg.classList.add('hero-slide-anim'); // Tambah class animasi
+
+                // 2. Tentukan posisi awal gambar baru (Kiri atau Kanan)
+                if (direction === 'next') {
+                    newImg.style.transform = 'translateX(100%)'; // Mulai dari kanan
+                } else {
+                    newImg.style.transform = 'translateX(-100%)'; // Mulai dari kiri
+                }
+
+                heroContainer.appendChild(newImg);
+
+                // 3. Jalankan Animasi (Slide In & Slide Out)
+                // Gunakan setTimeout kecil agar browser sempat merender posisi awal
+                setTimeout(() => {
+                    heroImg.style.transition = 'transform 0.5s ease-in-out';
+                    
+                    if (direction === 'next') {
+                        heroImg.style.transform = 'translateX(-100%)'; // Gambar lama geser ke kiri
+                        newImg.style.transform = 'translateX(0)';      // Gambar baru masuk ke tengah
+                    } else {
+                        heroImg.style.transform = 'translateX(100%)';  // Gambar lama geser ke kanan
+                        newImg.style.transform = 'translateX(0)';      // Gambar baru masuk ke tengah
+                    }
+                }, 50);
+
+                // 4. Update Caption (Fade Effect)
+                heroCaption.style.opacity = 0;
+                setTimeout(() => {
+                    heroCaption.innerText = nextData.text;
+                    heroCaption.style.opacity = 1;
+                }, 250); // Ganti teks di tengah-tengah animasi slide
+
+                // 6. Update Dots Active State
+                document.querySelectorAll('.hero-dot').forEach((dot, idx) => {
+                    if (idx === currentHeroIndex) dot.classList.add('active');
+                    else dot.classList.remove('active');
+                });
+
+                // 5. Bersihkan setelah animasi selesai
+                setTimeout(() => {
+                    heroImg.remove(); // Hapus gambar lama dari DOM
+                    heroImg = newImg; // Update referensi variabel ke gambar baru
+                    
+                    // Reset style gambar baru agar menjadi statis (bukan absolute lagi)
+                    newImg.classList.remove('hero-slide-anim');
+                    newImg.style.transform = '';
+                    newImg.style.transition = '';
+                    newImg.id = 'hero-img'; // Kembalikan ID asli
+
+                    isAnimating = false;
+                }, 550); // Tunggu sedikit lebih lama dari durasi transisi (0.5s)
+            }
+
+            function nextHeroSlide() {
+                currentHeroIndex = (currentHeroIndex + 1) % heroData.length;
+                updateHeroSlide('next');
+            }
+
+            function prevHeroSlide() {
+                currentHeroIndex = (currentHeroIndex - 1 + heroData.length) % heroData.length;
+                updateHeroSlide('prev');
+            }
+
+            // Fungsi Manual (Klik Tombol / Swipe)
+            function controlHeroSlide(direction) {
+                clearInterval(heroInterval); // Hentikan timer otomatis sebentar
+                if (direction === 'next') nextHeroSlide();
+                else prevHeroSlide();
+                if (!isHovering) startHeroAutoSlide(); // Mulai lagi timer otomatis hanya jika tidak hover
+            }
+
+            function startHeroAutoSlide() {
+                clearInterval(heroInterval); // Reset timer lama untuk mencegah duplikasi
+                heroInterval = setInterval(nextHeroSlide, 10000); // Ganti gambar setiap 10 detik
+            }
+
+            // Jalankan Slider Otomatis
+            createHeroDots(); // Buat dots saat inisialisasi
+            startHeroAutoSlide();
+
+            // --- Fitur Pause on Hover ---
+            heroContainer.addEventListener('mouseenter', () => {
+                isHovering = true;
+                clearInterval(heroInterval); // Hentikan slider saat mouse masuk
+            });
+
+            heroContainer.addEventListener('mouseleave', () => {
+                isHovering = false;
+                startHeroAutoSlide(); // Jalankan lagi saat mouse keluar
+            });
+
+            // --- Fitur Swipe (Geser) untuk Mobile ---
+            let touchStartX = 0;
+            let touchEndX = 0;
+
+            heroContainer.addEventListener('touchstart', e => {
+                touchStartX = e.changedTouches[0].screenX;
+            });
+
+            heroContainer.addEventListener('touchend', e => {
+                touchEndX = e.changedTouches[0].screenX;
+                handleSwipe();
+            });
+
+            function handleSwipe() {
+                if (touchEndX < touchStartX - 50) controlHeroSlide('next'); // Geser Kiri -> Next
+                if (touchEndX > touchStartX + 50) controlHeroSlide('prev'); // Geser Kanan -> Prev
+            }
+        </script>
+
+        <!-- Proactive Chat Assistant Script -->
+        <script>
+            const chatBox = document.getElementById('chat-box');
+            const chatBody = document.getElementById('chat-body');
+            let hasTriggered = false; // Agar tidak muncul berulang kali
+
+            // Fungsi Buka/Tutup Chat
+            function toggleChat() {
+                chatBox.classList.toggle('active');
+            }
+
+            // Fungsi Menambah Pesan Otomatis
+            function addBotMessage(message) {
+                const p = document.createElement('p');
+                p.classList.add('bot-message');
+                p.innerHTML = message;
+                chatBody.appendChild(p);
+                chatBody.scrollTop = chatBody.scrollHeight; // Auto scroll ke bawah
+            }
+
+            // Muncul otomatis setelah beberapa detik dengan pesan sesuai waktu
+            setTimeout(() => {
+                if (!hasTriggered) {
+                    hasTriggered = true;
+                    chatBox.classList.add('active');
+                    
+                    // Logika pesan berdasarkan waktu
+                    const jam = new Date().getHours();
+                    let pesanSapaan;
+
+                    if (jam >= 5 && jam < 12) { // Pagi (05:00 - 11:59)
+                        pesanSapaan = "Selamat pagi! ☀️ <br><b>Lagi cari outfit untuk memulai hari?</b> Kami punya koleksi casual yang nyaman.";
+                    } else if (jam >= 12 && jam < 18) { // Siang/Sore (12:00 - 17:59)
+                        pesanSapaan = "Selamat siang! 😊 <br><b>Butuh baju baru untuk acara nanti sore?</b> Cek koleksi best-seller kami.";
+                    } else { // Malam (18:00 - 04:59)
+                        pesanSapaan = "Selamat malam! 🌙 <br><b>Ada yang bisa kami bantu?</b> Jangan ragu bertanya tentang produk kami.";
+                    }
+
+                    addBotMessage(pesanSapaan);
+                }
+            }, 5000); // Muncul 5 detik setelah halaman dibuka
+        </script>
+
+        <!-- Character Counter Script -->
+        <script>
+            const komentarInput = document.getElementById('komentar');
+            const charCount = document.getElementById('char-count');
+            const maxChar = 150;
+
+            if(komentarInput && charCount) {
+                komentarInput.addEventListener('input', function() {
+                    const currentLength = this.value.length;
+                    charCount.innerText = maxChar - currentLength;
+                });
+            }
+        </script>
+        <!-- Firebase Ulasan Script -->
+        <script type="module">
+            // Import Firebase SDK
+            import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+            import { getFirestore, doc, getDoc, runTransaction } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+
+            // --- KONFIGURASI FIREBASE ---
+            // Ganti nilai di bawah ini dengan konfigurasi dari Firebase Console Anda
+            const firebaseConfig = {
+                apiKey: "AIzaSyBsqB9ojiGqt4Ljgm67nWw8LTTw2Mnb4Pk",
+                authDomain: "katalog-fashion.firebaseapp.com",
+                projectId: "katalog-fashion",
+                storageBucket: "katalog-fashion.firebasestorage.app",
+                messagingSenderId: "609453685879",
+                appId: "1:609453685879:web:f771120f1034a765265a72"
+            };
+
+            // Initialize Firebase
+            const app = initializeApp(firebaseConfig);
+            const db = getFirestore(app);
+
+            // Visitor Counter Logic
+            async function initVisitorCounter() {
+                const dailyCountDisplay = document.getElementById('daily-visitor-count');
+                const totalCountDisplay = document.getElementById('total-visitor-count');
+                const visitorRef = doc(db, "stats", "visitors"); // Simpan di koleksi 'stats', dokumen 'visitors'
+
+                // Inisialisasi tampilan awal
+                dailyCountDisplay.innerText = '...';
+                totalCountDisplay.innerText = '...';
+
+                // Dapatkan tanggal hari ini dalam format YYYY-MM-DD
+                const today = new Date().toISOString().split('T')[0];
+
+                try {
+                    // Cek session storage agar refresh halaman tidak menambah counter
+                    const hasVisited = sessionStorage.getItem('has_visited_rb');
+
+                    if (!hasVisited) {
+                        try {
+                            // Gunakan transaction untuk update yang aman (mencegah race condition)
+                            await runTransaction(db, async (transaction) => {
+                                const visitorDoc = await transaction.get(visitorRef);
+
+                                if (!visitorDoc.exists()) {
+                                    // Jika dokumen belum ada, buat baru
+                                    transaction.set(visitorRef, {
+                                        total_count: 1,
+                                        daily_counts: { [today]: 1 }
+                                    });
+                                } else {
+                                    // Jika dokumen sudah ada, update
+                                    const data = visitorDoc.data();
+                                    const newTotal = (data.total_count || 0) + 1;
+                                    const newDaily = (data.daily_counts?.[today] || 0) + 1;
+
+                                    transaction.update(visitorRef, {
+                                        total_count: newTotal,
+                                        [`daily_counts.${today}`]: newDaily // Dot notation untuk update nested field
+                                    });
+                                }
+                            });
+                            sessionStorage.setItem('has_visited_rb', 'true');
+                        } catch (writeError) {
+                            console.warn("Gagal menambah visitor (Mungkin permission denied):", writeError);
+                            // Lanjut ke proses membaca agar data tetap tampil meskipun gagal update
+                        }
+                    }
+
+                    // Ambil dan tampilkan data terbaru
+                    const updatedSnap = await getDoc(visitorRef);
+                    if (updatedSnap.exists()) {
+                        const data = updatedSnap.data();
+                        dailyCountDisplay.innerText = data.daily_counts?.[today] || 0;
+                        totalCountDisplay.innerText = data.total_count || 0;
+                    } else {
+                        dailyCountDisplay.innerText = '0';
+                        totalCountDisplay.innerText = '0';
+                    }
+                } catch (error) {
+                    // Cek jika error disebabkan oleh AdBlocker (Network Error / Offline)
+                    if (error.code === 'unavailable' || error.message.includes('offline') || error.message.includes('Failed to get document')) {
+                        console.warn("Visitor Counter tidak aktif (Mungkin terblokir AdBlocker).");
+                    } else {
+                        console.error("Visitor Error:", error);
+                    }
+                    dailyCountDisplay.innerText = '-';
+                    totalCountDisplay.innerText = '-';
+                }
+            }
+            initVisitorCounter();
+        </script>
+</body>
+</html>
