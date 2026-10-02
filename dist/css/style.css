@@ -3072,39 +3072,17 @@ body.bubu-mode .reply-header { color: #d9534f; }
     animation: zoomInPopup 0.5s ease forwards; /* Ganti animasi ayunan dengan zoom simpel */
 }
 
-/* === Style Khusus Popup 1 (Portrait) dengan Efek Gantungan === */
+/* Popup promo portrait tanpa frame */
 #promo-popup .promo-content {
-    background: #fff; /* Frame putih */
-    padding: 10px;
-    box-shadow: 0 22px 50px rgba(0,0,0,0.45), 0 0 0 2px rgba(255,255,255,0.12);
-    transform-origin: top center;
-    animation: dropSwing 1.5s ease-out forwards, windSway 3s ease-in-out infinite alternate 1.5s;
-    max-width: 340px; /* Ukuran lebih kecil agar popup lebih compact */
+    background: transparent;
+    padding: 0;
+    box-shadow: none;
+    animation: zoomInPopup 0.5s ease forwards;
+    max-width: 340px;
     width: min(85vw, 340px);
-    margin-top: 40px;
+    margin-top: 0;
     border-radius: 14px;
 }
-
-/* Efek Goyang Lebih Kencang Saat Hover */
-#promo-popup .promo-content:hover {
-    animation: windSway 0.5s ease-in-out infinite alternate;
-}
-
-/* Tali Gantungan untuk Popup 1 */
-#promo-popup .promo-content::before,
-#promo-popup .promo-content::after {
-    content: '';
-    position: absolute;
-    bottom: 100%; /* Mulai dari atas frame */
-    width: 4px;
-    height: 100vh; /* Panjang tali sampai atas layar */
-    background: linear-gradient(to right, #888, #ccc, #888); /* Efek metal/tali */
-    z-index: -1;
-    display: block;
-}
-
-#promo-popup .promo-content::before { left: 30px; }
-#promo-popup .promo-content::after { right: 30px; }
 
 /* Style Khusus Popup Landscape (Promo Kedua) */
 .promo-content-landscape {
@@ -3135,8 +3113,7 @@ body.bubu-mode .reply-header { color: #d9534f; }
     width: 100%;
     overflow: hidden;
     border-radius: 12px;
-    box-shadow: 0 15px 40px rgba(0,0,0,0.35); /* Shadow dipindah ke container gambar */
-    background-color: #fff; /* Background putih jaga-jaga jika gambar transparan */
+    background-color: transparent;
 }
 
 .promo-slider-wrapper {
@@ -3167,7 +3144,7 @@ body.bubu-mode .reply-header { color: #d9534f; }
         width: 92%;
         max-width: 320px;
         margin-top: 0;
-        padding: 8px;
+        padding: 0;
         border-radius: 16px;
     }
 
