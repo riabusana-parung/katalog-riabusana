@@ -1647,33 +1647,59 @@ body.ramadhan-mode .produk-subtitle {
 
 /*======QnA======*/
 .qna {
-    padding-bottom: 150px;
+    padding: 56px 0 72px;
 }
 
 .qna-box h1 {
     text-align: center;
-    margin-bottom: 50px;
+    max-width: 760px;
+    margin: 0 auto 12px;
+    color: #173c6c;
+    font-size: 38px;
+    line-height: 1.2;
+}
+
+.qna-eyebrow,
+.review-eyebrow {
+    margin: 0 0 10px;
+    color: #b45309;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 1.2px;
+    text-align: center;
+}
+
+.qna-intro,
+.review-intro {
+    max-width: 680px;
+    margin: 0 auto 28px;
+    color: #64748b;
+    font-size: 15px;
+    line-height: 1.75;
+    text-align: center;
 }
 
 .qna-search {
-    max-width: 800px;
-    margin: 0 auto 30px auto;
+    max-width: 720px;
+    margin: 0 auto 24px;
     position: relative;
 }
 
 .qna-search input {
     width: 100%;
     padding: 15px 20px 15px 50px;
-    border: 1px solid #ddd;
-    border-radius: 50px;
-    font-size: 16px;
+    border: 1px solid #d6dee8;
+    border-radius: 10px;
+    background: #fff;
+    color: #1f2937;
+    font-size: 15px;
     outline: none;
-    transition: all 0.3s ease;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
 .qna-search input:focus {
-    border-color: rebeccapurple;
-    box-shadow: 0 0 10px rgba(102, 51, 153, 0.1);
+    border-color: #173c6c;
+    box-shadow: 0 0 0 3px rgba(23, 60, 108, 0.12);
 }
 
 .qna-search i {
@@ -1681,36 +1707,47 @@ body.ramadhan-mode .produk-subtitle {
     left: 20px;
     top: 50%;
     transform: translateY(-50%);
-    color: #888;
+    color: #64748b;
     font-size: 20px;
 }
 
+.qna-search-empty {
+    max-width: 720px;
+    margin: -8px auto 20px;
+    color: #64748b;
+    font-size: 14px;
+    text-align: center;
+}
+
 .accordion-container {
-    max-width: 800px;
+    max-width: 720px;
     margin: 0 auto;
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 10px;
 }
 
 .accordion-item {
-    background-color: white;
-    padding: 20px;
+    background-color: #fff;
+    padding: 18px 20px;
+    border: 1px solid #e2e8f0;
     border-radius: 10px;
     cursor: pointer;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
-    transition: all 0.3s ease;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
-.accordion-item:hover {
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+.accordion-item:hover,
+.accordion-item[open] {
+    border-color: #b9c9dc;
+    box-shadow: 0 8px 20px rgba(23, 60, 108, 0.07);
 }
 
 .accordion-item summary {
     font-weight: 600;
-    font-size: 18px;
+    gap: 16px;
+    font-size: 16px;
     list-style: none;
-    color: rebeccapurple;
+    color: #173c6c;
     outline: none;
     display: flex;
     justify-content: space-between;
@@ -1723,20 +1760,56 @@ body.ramadhan-mode .produk-subtitle {
 
 .accordion-item summary::after {
     content: '+';
-    font-size: 24px;
+    flex: 0 0 28px;
+    display: grid;
+    place-items: center;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: #eaf1f8;
+    color: #173c6c;
+    font-size: 20px;
     font-weight: bold;
 }
 
 .accordion-item[open] summary::after {
-    content: '-';
+    content: '\2212';
 }
 
 .accordion-item p {
     margin-top: 15px;
-    line-height: 1.6;
-    color: #555;
-    border-top: 1px solid #eee;
-    padding-top: 15px;
+    line-height: 1.75;
+    color: #526174;
+    border-top: 1px solid #e8edf3;
+    padding-top: 14px;
+}
+
+@media (max-width: 600px) {
+    .qna {
+        padding: 36px 0 52px;
+    }
+
+    .qna-box h1 {
+        font-size: 30px;
+    }
+
+    .qna-intro,
+    .review-intro {
+        font-size: 14px;
+    }
+
+    .qna-search input {
+        padding: 13px 14px 13px 44px;
+        font-size: 14px;
+    }
+
+    .accordion-item {
+        padding: 15px;
+    }
+
+    .accordion-item summary {
+        font-size: 15px;
+    }
 }
 /*======End QnA======*/
 
@@ -2117,16 +2190,23 @@ body.ramadhan-mode .produk-subtitle {
 
 .ulasan-box h1 {
     text-align: center;
-    margin-bottom: 40px;
+    margin: 0 auto 12px;
+    color: #173c6c;
+    font-size: 34px;
+}
+
+.ulasan-box .review-intro {
+    margin-bottom: 28px;
 }
 
 .ulasan-box form {
     max-width: 600px;
     margin: 0 auto;
-    background-color: white;
-    padding: 30px;
-    border-radius: 15px; /* Sudut membulat */
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1); /* Efek bayangan */
+    background-color: #fff;
+    padding: 28px;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    box-shadow: 0 14px 34px rgba(23, 60, 108, 0.08);
 }
 
 .input-group {
@@ -2137,7 +2217,7 @@ body.ramadhan-mode .produk-subtitle {
     display: block;
     margin-bottom: 8px;
     font-weight: 600;
-    color: #333;
+    color: #24364b;
 }
 
 .input-group input,
@@ -2145,23 +2225,38 @@ body.ramadhan-mode .produk-subtitle {
 .input-group textarea {
     width: 100%;
     padding: 12px;
-    border: 1px solid #ddd;
+    border: 1px solid #d6dee8;
     border-radius: 8px;
+    background: #fff;
+    color: #1f2937;
     font-size: 14px;
     outline: none;
-    transition: border-color 0.3s;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
 .input-group input:focus,
 .input-group select:focus,
 .input-group textarea:focus {
-    border-color: rebeccapurple;
+    border-color: #173c6c;
+    box-shadow: 0 0 0 3px rgba(23, 60, 108, 0.1);
+}
+
+.input-group textarea {
+    min-height: 120px;
+    resize: vertical;
+}
+
+.field-hint {
+    display: block;
+    margin-top: 6px;
+    color: #64748b;
+    font-size: 12px;
 }
 
 .char-info {
     text-align: right;
     font-size: 12px;
-    color: #777;
+    color: #64748b;
     margin-top: 5px;
 }
 
@@ -2181,6 +2276,39 @@ body.ramadhan-mode .produk-subtitle {
 .btn-kirim:hover {
     background-color: #5a2d82;
 }
+
+.ulasan-box .btn-kirim {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 9px;
+    background-color: #173c6c;
+}
+
+.ulasan-box .btn-kirim:hover {
+    background-color: #102f56;
+}
+
+.ulasan-box .btn-kirim:disabled {
+    cursor: wait;
+    opacity: 0.7;
+}
+
+.review-privacy {
+    display: flex;
+    align-items: flex-start;
+    gap: 7px;
+    margin: 14px 0 0;
+    color: #64748b;
+    font-size: 12px;
+    line-height: 1.5;
+}
+
+.review-privacy i {
+    flex: 0 0 auto;
+    color: #173c6c;
+    font-size: 16px;
+}
 /*====== End Ulasan ======*/
 
 /*====== Hasil Ulasan (Review Cards) ======*/
@@ -2194,10 +2322,11 @@ body.ramadhan-mode .produk-subtitle {
 }
 
 .ulasan-card {
-    background: #f8f9fa;
-    padding: 15px;
+    background: #fff;
+    padding: 18px;
+    border: 1px solid #e2e8f0;
+    border-left: 4px solid #173c6c;
     border-radius: 10px;
-    border-left: 4px solid rebeccapurple;
     animation: fadeInUp 0.5s ease;
 }
 
@@ -2205,7 +2334,27 @@ body.ramadhan-mode .produk-subtitle {
     display: flex;
     justify-content: space-between;
     margin-bottom: 8px;
-    color: rebeccapurple;
+    color: #173c6c;
+}
+
+.ulasan-card > p {
+    color: #334155;
+    line-height: 1.7;
+    overflow-wrap: anywhere;
+}
+
+@media (max-width: 600px) {
+    .ulasan-box h1 {
+        font-size: 29px;
+    }
+
+    .ulasan-box form {
+        padding: 20px 16px;
+    }
+
+    .ulasan-container {
+        gap: 12px;
+    }
 }
 
 .text-muted {

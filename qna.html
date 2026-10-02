@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -43,7 +43,7 @@
                     <li><a href="index.html#layanan">Layanan</a></li>
                     <li><a href="index.html#tv-media">TV Media</a></li>
                     <li><a href="index.html#produk">Produk Kami</a></li>
-                    <li><a href="#" style="color: rebeccapurple; font-weight: 600; border-bottom: 3px solid rebeccapurple;">QnA</a></li>
+                    <li><a href="#" class="active" aria-current="page">QnA</a></li>
                     <li><a href="member.html">Member</a></li>
                     <li><a href="#kontak">Kontak</a></li>
                 </ul>
@@ -57,21 +57,24 @@
     </div>
 
     <!-- QnA Section -->
-    <div class="qna" id="qna" style="padding-top: 50px; padding-bottom: 50px;">
+    <div class="qna" id="qna">
         <div class="container">
             <div class="qna-box">
-                <h1 data-aos="fade-up" data-aos-duration="1000">Pertanyaan Umum</h1>
+                <p class="qna-eyebrow">BANTUAN & INFORMASI</p>
+                <h1 data-aos="fade-up" data-aos-duration="1000">Ada yang ingin Anda tanyakan?</h1>
+                <p class="qna-intro">Temukan jawaban seputar belanja di Ria Busana. Belum menemukan yang dicari? Tim kami siap membantu.</p>
                 
                 <!-- Live Search Input -->
                 <div class="qna-search" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="100">
                     <i class="ri-search-line"></i>
-                    <input type="text" id="qna-search-input" placeholder="Cari pertanyaan Anda di sini..." />
+                    <input type="search" id="qna-search-input" placeholder="Cari promo, pemesanan, pembayaran..." aria-label="Cari pertanyaan umum" />
                 </div>
+                <p class="qna-search-empty" id="qna-search-empty" role="status" hidden>Pertanyaan belum ditemukan. Coba kata kunci lain atau kirim pertanyaan Anda di bawah.</p>
 
                 <div class="accordion-container">
                     <details class="accordion-item" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="200">
-                        <summary>Apakah barang yang dijual Barang nya Diskon?</summary>
-                        <p>Ya, semua produk fashion yang kami jual di Ria Busana dijamin 100% banyak diskonan dan Barangnya berkualitas.</p>
+                        <summary>Apakah produk Ria Busana sering memiliki promo?</summary>
+                        <p>Ria Busana menghadirkan berbagai promo pada periode tertentu. Kunjungi toko atau kanal resmi kami untuk melihat penawaran yang sedang berlangsung.</p>
                     </details>
                     
                     <details class="accordion-item" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="300">
@@ -80,13 +83,13 @@
                     </details>
                     
                     <details class="accordion-item" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="400">
-                        <summary>Bagaimana regulasi pertukaran barang?</summary>
-                        <p>Penukaran barang dapat dilakukan maksimal 2 hari setelah diterima jika terdapat cacat produk, dengan syarat label masih terpasang dan menyertakan Struk Pembayaran.</p>
+                        <summary>Bagaimana ketentuan penukaran barang?</summary>
+                        <p>Penukaran dapat diajukan maksimal 2 hari setelah barang diterima apabila terdapat cacat produk. Label harus masih terpasang dan struk pembayaran disertakan.</p>
                     </details>
 
                     <details class="accordion-item" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="500">
                         <summary>Apa saja metode pembayaran yang diterima?</summary>
-                        <p>Kami menerima pembayaran secara tunai, melalui kartu debit Maupun kartu kredit dan transaksi online "QRIS".</p>
+                        <p>Kami menerima pembayaran tunai, kartu debit, kartu kredit, dan QRIS.</p>
                     </details>
                 </div>
             </div>
@@ -102,18 +105,21 @@
     <div class="ulasan" id="ulasan" style="padding-top: 50px;">
         <div class="container">
             <div class="ulasan-box">
-                <h1 data-aos="fade-up" data-aos-duration="1000">Ulasan Pelanggan</h1>
+                <p class="review-eyebrow">CERITA DARI PELANGGAN</p>
+                <h1 data-aos="fade-up" data-aos-duration="1000">Pengalaman Anda berarti</h1>
+                <p class="review-intro">Ceritakan pengalaman belanja Anda di Ria Busana. Ulasan Anda membantu kami melayani lebih baik dan membantu pelanggan lain berbelanja dengan yakin.</p>
                 <form id="ulasan-form" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="200">
                     <div class="input-group">
                         <label for="nama">Nama Lengkap</label>
-                        <input type="text" id="nama" name="nama" placeholder="Masukkan nama Anda..." required>
+                        <input type="text" id="nama" name="nama" placeholder="Nama yang ingin ditampilkan" autocomplete="name" required>
                     </div>
                     <div class="input-group">
                         <label for="no_wa">Nomor WhatsApp (Opsional)</label>
-                        <input type="tel" id="no_wa" name="no_wa" placeholder="Contoh: 0812xxx (Untuk balasan admin)">
+                        <input type="tel" id="no_wa" name="no_wa" placeholder="Contoh: 081234567890" autocomplete="tel">
+                        <small class="field-hint">Opsional, hanya jika Anda ingin dihubungi admin.</small>
                     </div>
                     <div class="input-group">
-                        <label for="rating">Rating Layanan</label>
+                        <label for="rating">Bagaimana pengalaman Anda?</label>
                         <select id="rating" name="rating">
                             <option value="5">⭐⭐⭐⭐⭐ (Sangat Puas)</option>
                             <option value="4">⭐⭐⭐⭐ (Puas)</option>
@@ -123,11 +129,12 @@
                         </select>
                     </div>
                     <div class="input-group">
-                        <label for="komentar">Ucapan / Komentar</label>
-                        <textarea id="komentar" name="komentar" rows="4" maxlength="150" placeholder="Tulis pengalaman belanja Anda di sini..."></textarea>
-                        <p class="char-info">Sisa karakter: <span id="char-count">150</span></p>
+                        <label for="komentar">Ceritakan pengalaman Anda</label>
+                        <textarea id="komentar" name="komentar" rows="4" maxlength="150" minlength="5" placeholder="Apa yang paling Anda sukai dari produk atau pelayanan kami?" required></textarea>
+                        <p class="char-info"><span id="char-count">150</span> karakter tersisa</p>
                     </div>
-                    <button type="submit" class="btn-kirim">Kirim Ulasan</button>
+                    <button type="submit" class="btn-kirim"><i class="ri-send-plane-fill"></i> Bagikan Ulasan</button>
+                    <p class="review-privacy"><i class="ri-shield-check-line"></i> Nomor WhatsApp bersifat opsional dan tidak ditampilkan pada ulasan.</p>
                 </form>
 
                 <!-- Wadah untuk menampilkan hasil ulasan -->
@@ -190,26 +197,23 @@
         const accordionItems = document.querySelectorAll('.accordion-item');
         if(searchInput){
             searchInput.addEventListener('input', (e) => {
-                const searchValue = e.target.value.toLowerCase();
+                const searchValue = e.target.value.trim().toLowerCase();
+                const emptyState = document.getElementById('qna-search-empty');
+                let visibleCount = 0;
                 accordionItems.forEach(item => {
                     const question = item.querySelector('summary').textContent.toLowerCase();
                     const answer = item.querySelector('p').textContent.toLowerCase();
                     if(question.includes(searchValue) || answer.includes(searchValue)) {
                         item.style.display = 'block';
+                        visibleCount++;
                     } else {
                         item.style.display = 'none';
                     }
                 });
+                if (emptyState) emptyState.hidden = visibleCount > 0;
             });
         }
 
-        // Chat Toggle Logic (Simple version for QnA page)
-        const chatBox = document.getElementById('chat-box');
-        if(chatBox) {
-            setTimeout(() => {
-                chatBox.classList.add('active');
-            }, 3000);
-        }
     </script>
 
     <!-- Character Counter Script -->
@@ -377,7 +381,7 @@
                 const btnKirim = document.querySelector('.btn-kirim');
 
                 btnKirim.disabled = true;
-                btnKirim.innerText = "Mengirim...";
+                btnKirim.innerHTML = '<i class="ri-loader-4-line"></i> Mengirim...';
 
                 try {
                     await addDoc(collection(db, "ulasan"), {
@@ -402,7 +406,7 @@
                     alert("Gagal mengirim ulasan.");
                 } finally {
                     btnKirim.disabled = false;
-                    btnKirim.innerText = "Kirim Ulasan";
+                    btnKirim.innerHTML = '<i class="ri-send-plane-fill"></i> Bagikan Ulasan';
                 }
             });
         }

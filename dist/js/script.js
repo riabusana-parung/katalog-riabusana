@@ -309,20 +309,21 @@ themeToggleBtn.addEventListener('click', () => {
 // --- BACKGROUND MUSIC CONTROL ---
 const musicToggleBtn = document.getElementById('music-toggle');
 const bgMusic = document.getElementById('bg-music');
-if (musicToggleBtn && bgMusic) {
+const toggleMusic = () => {
+    if (!musicToggleBtn || !bgMusic) return;
+
     const musicIcon = musicToggleBtn.querySelector('i');
+    if (bgMusic.paused) {
+        bgMusic.play().catch(() => console.log("Autoplay dicegah browser."));
+        musicIcon.className = 'ri-volume-up-line';
+    } else {
+        bgMusic.pause();
+        musicIcon.className = 'ri-volume-mute-line';
+    }
+};
+
+if (musicToggleBtn && bgMusic) {
     bgMusic.volume = 0.3;
-
-    const toggleMusic = () => {
-        if (bgMusic.paused) {
-            bgMusic.play().catch(() => console.log("Autoplay dicegah browser."));
-            musicIcon.className = 'ri-volume-up-line';
-        } else {
-            bgMusic.pause();
-            musicIcon.className = 'ri-volume-mute-line';
-        }
-    };
-
     musicToggleBtn.addEventListener('click', toggleMusic);
 }
 
