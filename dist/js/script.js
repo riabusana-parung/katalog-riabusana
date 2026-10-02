@@ -373,7 +373,7 @@ const launchPreloaderConfetti = () => {
 
 // --- HERO TITLE ANIMATION ---
 function initHeroTitleAnimation() {
-    const heroTitle = document.querySelector('.hero-box h1');
+    const heroTitle = document.querySelector('.hero .hero-box h1');
     if (!heroTitle) return;
 
     // Split text by <br> tag to handle lines separately

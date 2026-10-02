@@ -617,6 +617,11 @@ body.ramadhan-mode .hero-box h1 {
     line-height: 1.16;
 }
 
+.member-section .member-title span {
+    display: block;
+    color: #b45309;
+}
+
 .member-section .member-intro {
     max-width: 540px;
     margin: 0 0 24px;
