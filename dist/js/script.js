@@ -309,24 +309,36 @@ themeToggleBtn.addEventListener('click', () => {
 // --- BACKGROUND MUSIC CONTROL ---
 const musicToggleBtn = document.getElementById('music-toggle');
 const bgMusic = document.getElementById('bg-music');
-const musicIcon = musicToggleBtn.querySelector('i');
+if (musicToggleBtn && bgMusic) {
+    const musicIcon = musicToggleBtn.querySelector('i');
+    bgMusic.volume = 0.3;
 
-// Set volume awal
-bgMusic.volume = 0.3;
+    const toggleMusic = () => {
+        if (bgMusic.paused) {
+            bgMusic.play().catch(() => console.log("Autoplay dicegah browser."));
+            musicIcon.className = 'ri-volume-up-line';
+        } else {
+            bgMusic.pause();
+            musicIcon.className = 'ri-volume-mute-line';
+        }
+    };
 
-// Fungsi untuk play/pause musik
-const toggleMusic = () => {
-    if (bgMusic.paused) {
-        bgMusic.play().catch(e => console.log("Autoplay dicegah browser."));
-        musicIcon.className = 'ri-volume-up-line';
-    } else {
-        bgMusic.pause();
-        musicIcon.className = 'ri-volume-mute-line';
-    }
-};
+    musicToggleBtn.addEventListener('click', toggleMusic);
+}
 
-// Event listener untuk tombol mute/unmute
-musicToggleBtn.addEventListener('click', toggleMusic);
+const memberVoiceoverAudio = document.getElementById('member-voiceover-audio');
+if (memberVoiceoverAudio) {
+    const startMemberVoiceover = () => {
+        memberVoiceoverAudio.play().then(() => {
+            document.removeEventListener('pointerdown', startMemberVoiceover);
+            document.removeEventListener('keydown', startMemberVoiceover);
+        }).catch(() => {});
+    };
+
+    document.addEventListener('pointerdown', startMemberVoiceover);
+    document.addEventListener('keydown', startMemberVoiceover);
+    startMemberVoiceover();
+}
 
 // --- PRELOADER SLIDER ANIMATION ---
 const initPreloaderSlider = () => {
@@ -480,16 +492,18 @@ function renderProducts() {
 }
 
 // Event Listener: Tutup Lightbox
-closeBtn.onclick = () => {
-    lightbox.classList.remove('active');
-};
-
-// Tutup jika klik di area gelap (luar gambar)
-lightbox.onclick = (e) => {
-    if (e.target === lightbox) {
+if (closeBtn && lightbox) {
+    closeBtn.onclick = () => {
         lightbox.classList.remove('active');
-    }
-};
+    };
+
+    // Tutup jika klik di area gelap (luar gambar)
+    lightbox.onclick = (e) => {
+        if (e.target === lightbox) {
+            lightbox.classList.remove('active');
+        }
+    };
+}
 
 // --- LOGIKA FILTER & LOAD MORE ---
 const btnfilter = document.querySelectorAll('.produk-box ul li');

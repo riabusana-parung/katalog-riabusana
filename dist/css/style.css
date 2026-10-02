@@ -574,6 +574,38 @@ body.ramadhan-mode .hero-box h1 {
     animation: scale-in 1s ease-out 0.3s both;
 }
 
+.member-collage {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    align-items: start;
+    gap: 12px;
+    padding: 8px;
+}
+
+.member-collage img {
+    display: block;
+    width: 100%;
+    height: auto;
+    border: 1px solid rgba(20, 55, 96, 0.12);
+    border-radius: 10px;
+    object-fit: contain;
+    box-shadow: 0 8px 18px rgba(19, 45, 78, 0.14);
+    animation: none;
+}
+
+.member-collage img:nth-child(2),
+.member-collage img:nth-child(5) {
+    transform: translateY(18px);
+}
+
+.member-section .btn-kirim {
+    background-color: #173c6c;
+}
+
+.member-section .btn-kirim:hover {
+    background-color: #102f56;
+}
+
 @keyframes scale-in {
     from { transform: scale(0.9); opacity: 0; }
     to { transform: scale(1); opacity: 1; }
