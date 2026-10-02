@@ -598,12 +598,157 @@ body.ramadhan-mode .hero-box h1 {
     transform: translateY(18px);
 }
 
+.member-section .member-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin: 0 0 14px;
+    color: #b45309;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 1.2px;
+}
+
+.member-section .member-title {
+    max-width: 560px;
+    margin: 0 0 16px;
+    color: #173c6c;
+    font-size: 44px;
+    line-height: 1.16;
+}
+
+.member-section .member-intro {
+    max-width: 540px;
+    margin: 0 0 24px;
+    color: #526174;
+    font-size: 16px;
+    line-height: 1.75;
+}
+
+.member-benefits {
+    display: grid;
+    gap: 16px;
+    margin: 0 0 28px;
+    padding: 0;
+    list-style: none;
+}
+
+.member-benefits li {
+    display: grid;
+    grid-template-columns: 42px minmax(0, 1fr);
+    align-items: start;
+    gap: 12px;
+}
+
+.member-benefits li > i {
+    display: grid;
+    place-items: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    background: #eaf1f8;
+    color: #173c6c;
+    font-size: 21px;
+}
+
+.member-benefits span {
+    display: grid;
+    gap: 3px;
+    padding-top: 1px;
+}
+
+.member-benefits strong {
+    color: #1f2937;
+    font-size: 15px;
+    font-weight: 700;
+}
+
+.member-benefits small {
+    color: #64748b;
+    font-size: 13px;
+    line-height: 1.55;
+}
+
 .member-section .btn-kirim {
     background-color: #173c6c;
 }
 
 .member-section .btn-kirim:hover {
     background-color: #102f56;
+}
+
+.member-section .member-cta {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    width: auto;
+    padding: 14px 24px;
+    border-radius: 8px;
+    box-shadow: 0 10px 20px rgba(23, 60, 108, 0.22);
+    font-size: 15px;
+}
+
+.member-section .member-cta i {
+    font-size: 19px;
+    transition: transform 0.2s ease;
+}
+
+.member-section .member-cta:hover i {
+    transform: translateX(3px);
+}
+
+.member-section .member-note {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    max-width: 420px;
+    margin: 12px 0 0;
+    color: #64748b;
+    font-size: 12px;
+    line-height: 1.5;
+}
+
+.member-section .member-note i {
+    flex: 0 0 auto;
+    color: #173c6c;
+    font-size: 16px;
+}
+
+@media (max-width: 768px) {
+    .member-section .member-title {
+        max-width: none;
+        font-size: 36px;
+    }
+
+    .member-section .member-intro {
+        margin-inline: auto;
+    }
+
+    .member-benefits {
+        max-width: 480px;
+        margin-inline: auto;
+        text-align: left;
+    }
+
+    .member-section .member-note {
+        justify-content: center;
+        margin-inline: auto;
+    }
+}
+
+@media (max-width: 480px) {
+    .member-section .member-title {
+        font-size: 30px;
+    }
+
+    .member-section .member-intro {
+        font-size: 14px;
+    }
+
+    .member-benefits {
+        gap: 13px;
+    }
 }
 
 @keyframes scale-in {
