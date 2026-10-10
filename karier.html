@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Informasi rekrutmen Ria Busana Parung. Lihat informasi lowongan dan kirim lamaran melalui Google Form resmi.">
+    <link rel="shortcut icon" href="./assets/icons/favicon.png" type="image/x-icon">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./dist/css/style.css">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+    <title>Karier - Ria Busana Parung</title>
+    <style>
+        [hidden] { display: none !important; }
+        .careers-opening { display: grid; min-height: 62vh; place-items: center; padding: 48px 20px; }
+        .careers-opening-card { width: min(100%, 620px); padding: clamp(28px, 6vw, 52px); border: 1px solid #e0e5e8; border-radius: 12px; background: #fff; text-align: center; box-shadow: 0 20px 44px rgba(17, 43, 69, 0.08); }
+        .careers-opening-icon { display: grid; width: 56px; height: 56px; margin: 0 auto 20px; place-items: center; border-radius: 50%; background: #e7edf4; color: #173c6c; font-size: 26px; }
+        .careers-opening-card h1 { margin: 0 0 12px; color: #18324b; font-family: 'Playfair Display', Georgia, serif; font-size: clamp(28px, 5vw, 40px); }
+        .careers-opening-card > p { margin: 0; color: #64748b; font-size: 14px; line-height: 1.7; }
+        .careers-countdown { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px; margin: 28px 0 20px; }
+        .careers-countdown-unit { padding: 14px 8px; border-radius: 8px; background: #f3f5f4; }
+        .careers-countdown-unit strong, .careers-countdown-unit span { display: block; }
+        .careers-countdown-unit strong { color: #a2452d; font-size: clamp(24px, 5vw, 34px); line-height: 1.2; }
+        .careers-countdown-unit span { margin-top: 4px; color: #536171; font-size: 11px; font-weight: 600; }
+        @media (max-width: 420px) { .careers-countdown { gap: 6px; } .careers-countdown-unit { padding-inline: 4px; } }
+    </style>
+</head>
+<body class="careers-page">
+    <header class="navbar">
+        <div class="container">
+            <div class="navbar-box">
+                <a class="logo careers-logo" href="index.html#beranda" aria-label="Ria Busana Parung, Beranda">
+                    <img src="./assets/icons/favicon.png" alt="">
+                    <span>Parung.</span>
+                </a>
+                <button class="hamburger" type="button" aria-label="Buka menu" aria-expanded="false">
+                    <span></span><span></span><span></span>
+                </button>
+                <nav aria-label="Navigasi utama">
+                    <ul class="menu">
+                        <li><a href="index.html#beranda">Beranda</a></li>
+                        <li><a href="index.html#produk">Produk</a></li>
+                        <li><a href="qna.html">QnA</a></li>
+                        <li><a href="member.html">Member</a></li>
+                        <li><a class="active vacancy-link" href="karier.html" aria-current="page">Karier <span class="vacancy-badge" hidden>LOWONGAN</span></a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <section class="careers-opening" id="careers-opening" aria-labelledby="careers-opening-title">
+        <div class="careers-opening-card">
+            <span class="careers-opening-icon" aria-hidden="true"><i class="ri-time-line"></i></span>
+            <p class="careers-eyebrow" style="justify-content:center">INFORMASI LOWONGAN KERJA</p>
+            <h1 id="careers-opening-title">Segera dibuka</h1>
+            <p>Informasi lowongan kerja Ria Busana Parung akan tersedia pada <strong>1 November 2026 pukul 00.00 WIB</strong>.</p>
+            <div class="careers-countdown" aria-label="Hitung mundur pembukaan lowongan">
+                <div class="careers-countdown-unit"><strong data-countdown="days">--</strong><span>Hari</span></div>
+                <div class="careers-countdown-unit"><strong data-countdown="hours">--</strong><span>Jam</span></div>
+                <div class="careers-countdown-unit"><strong data-countdown="minutes">--</strong><span>Menit</span></div>
+                <div class="careers-countdown-unit"><strong data-countdown="seconds">--</strong><span>Detik</span></div>
+            </div>
+            <p id="careers-opening-status" aria-live="polite">Halaman lowongan akan terbuka otomatis saat waktu pembukaan tiba.</p>
+        </div>
+    </section>
+
+    <div class="career-announcement-shell" id="career-announcement" hidden>
+        <a class="career-announcement" href="karier.html" aria-label="Ada lowongan kerja di Ria Busana Parung. Klik untuk melihat informasi dan melamar.">
+            <span class="career-announcement-track" aria-hidden="true">
+                <span><i class="ri-megaphone-line"></i> <span class="career-announcement-copy" data-before="INFORMASI LOWONGAN KERJA RIA BUSANA PARUNG DIBUKA 1 NOVEMBER 2026 · KUNJUNGI HALAMAN KARIER" data-after="KAMI SEDANG MEMBUKA LOWONGAN KERJA RIA BUSANA PARUNG · LIHAT INFO & LAMAR SEKARANG">KAMI SEDANG MEMBUKA LOWONGAN KERJA RIA BUSANA PARUNG · LIHAT INFO & LAMAR SEKARANG</span></span>
+                <span><i class="ri-megaphone-line"></i> <span class="career-announcement-copy" data-before="INFORMASI LOWONGAN KERJA RIA BUSANA PARUNG DIBUKA 1 NOVEMBER 2026 · KUNJUNGI HALAMAN KARIER" data-after="KAMI SEDANG MEMBUKA LOWONGAN KERJA RIA BUSANA PARUNG · LIHAT INFO & LAMAR SEKARANG">KAMI SEDANG MEMBUKA LOWONGAN KERJA RIA BUSANA PARUNG · LIHAT INFO & LAMAR SEKARANG</span></span>
+            </span>
+        </a>
+    </div>
+
+    <main>
+        <div id="career-content" hidden>
+        <section class="careers-hero">
+            <div class="container careers-hero-inner">
+                <div class="careers-copy">
+                    <p class="careers-eyebrow"><i class="ri-map-pin-line"></i> KESEMPATAN KERJA · PARUNG</p>
+                    <h1>Bertumbuh bersama <span>Ria Busana Parung.</span></h1>
+                    <p class="careers-lead">Suka dunia fashion dan senang melayani pelanggan? Kenali kesempatan bergabung dengan tim toko kami di Parung.</p>
+                    <a class="careers-apply" href="https://lynk.id/rekrutmenparung" target="_blank" rel="noopener noreferrer">
+                        Lihat Formulir & Lamar <i class="ri-arrow-right-up-line"></i>
+                    </a>
+                    <p class="careers-form-note"><i class="ri-information-line"></i> Formulir dibuka di Google Forms. Jika diminta, masuk ke akun Google untuk melanjutkan.</p>
+                </div>
+                <div class="careers-visual" aria-label="Informasi proses pendaftaran kerja">
+                    <div class="careers-visual-top"><i class="ri-store-2-line"></i><span>RIA BUSANA</span></div>
+                    <p class="careers-visual-label">TOKO PARUNG</p>
+                    <p class="careers-visual-title">Kesempatan baru dimulai dari sini.</p>
+                    <div class="careers-visual-rule"></div>
+                    <p class="careers-visual-caption">Satu tim. Satu tujuan. Melayani dengan sepenuh hati.</p>
+                    <span class="careers-mark" aria-hidden="true">RB</span>
+                </div>
+            </div>
+        </section>
+
+        <section class="careers-details">
+            <div class="container">
+                <div class="careers-section-heading">
+                    <p class="careers-eyebrow">LANGKAH BERGABUNG</p>
+                    <h2>Mulai dengan mudah</h2>
+                </div>
+                <ol class="careers-steps">
+                    <li><span class="careers-step-number">01</span><div><h3>Buka formulir</h3><p>Tekan tombol lamaran untuk melihat formulir rekrutmen resmi.</p></div></li>
+                    <li><span class="careers-step-number">02</span><div><h3>Isi data dengan lengkap</h3><p>Lengkapi informasi dan dokumen yang diminta langsung di Google Forms.</p></div></li>
+                    <li><span class="careers-step-number">03</span><div><h3>Tunggu informasi berikutnya</h3><p>Tim rekrutmen akan meninjau lamaran dan menghubungi kandidat yang sesuai.</p></div></li>
+                </ol>
+                <div class="careers-location"><i class="ri-map-pin-2-line"></i><div><strong>Penempatan: Toko Ria Busana Parung</strong><span>Halaman ini khusus untuk kesempatan kerja di cabang Parung.</span></div></div>
+            </div>
+        </section>
+        </div>
+    </main>
+
+    <footer class="careers-footer">
+        <div class="container">
+            <p>&copy; 2026 Katalog RiaBusana Parung by Qonde.</p>
+            <a href="index.html#beranda">Kembali ke katalog <i class="ri-arrow-right-line"></i></a>
+        </div>
+    </footer>
+
+    <script>
+        const menuButton = document.querySelector('.careers-page .hamburger');
+        const menu = document.querySelector('.careers-page .menu');
+        menuButton.addEventListener('click', () => {
+            const isOpen = menu.classList.toggle('menu-active');
+            menuButton.classList.toggle('active', isOpen);
+            menuButton.setAttribute('aria-expanded', String(isOpen));
+            menuButton.setAttribute('aria-label', isOpen ? 'Tutup menu' : 'Buka menu');
+        });
+
+        const openingTime = new Date('2026-11-01T00:00:00+07:00').getTime();
+        const openingScreen = document.querySelector('#careers-opening');
+        const careerContent = document.querySelector('#career-content');
+        const announcement = document.querySelector('#career-announcement');
+        const announcementLink = announcement.querySelector('.career-announcement');
+        const announcementCopies = announcement.querySelectorAll('.career-announcement-copy');
+        const vacancyBadge = document.querySelector('.vacancy-badge');
+        const openingStatus = document.querySelector('#careers-opening-status');
+        const countdownUnits = {
+            days: document.querySelector('[data-countdown="days"]'),
+            hours: document.querySelector('[data-countdown="hours"]'),
+            minutes: document.querySelector('[data-countdown="minutes"]'),
+            seconds: document.querySelector('[data-countdown="seconds"]')
+        };
+
+        function updateCareerOpening() {
+            const remaining = openingTime - Date.now();
+            const isOpen = remaining <= 0;
+
+            announcementCopies.forEach((copy) => {
+                copy.textContent = isOpen ? copy.dataset.after : copy.dataset.before;
+            });
+            announcementLink.setAttribute(
+                'aria-label',
+                isOpen
+                    ? 'Ada lowongan kerja di Ria Busana Parung. Klik untuk melihat informasi dan melamar.'
+                    : 'Informasi lowongan kerja Ria Busana Parung dibuka pada 1 November 2026.'
+            );
+            vacancyBadge.hidden = !isOpen;
+
+            if (isOpen) {
+                openingScreen.hidden = true;
+                careerContent.hidden = false;
+                announcement.hidden = false;
+                return;
+            }
+
+            const seconds = Math.floor(remaining / 1000);
+            countdownUnits.days.textContent = String(Math.floor(seconds / 86400)).padStart(2, '0');
+            countdownUnits.hours.textContent = String(Math.floor((seconds % 86400) / 3600)).padStart(2, '0');
+            countdownUnits.minutes.textContent = String(Math.floor((seconds % 3600) / 60)).padStart(2, '0');
+            countdownUnits.seconds.textContent = String(seconds % 60).padStart(2, '0');
+            openingStatus.textContent = 'Halaman lowongan akan terbuka otomatis saat waktu pembukaan tiba.';
+        }
+
+        updateCareerOpening();
+        window.setInterval(updateCareerOpening, 1000);
+    </script>
+</body>
+</html>

@@ -230,20 +230,10 @@ const applyTheme = (themeName) => {
         clockInterval = null;
     }
 
-    // === LOGIKA BARU: Ganti Logo di Mobile Menu ===
-    // Dijalankan di semua halaman yang memuat script ini
     const mobileMenuLogo = document.querySelector('.mobile-menu-header img');
     if (mobileMenuLogo) {
-        if (themeName === 'bubu') {
-            mobileMenuLogo.src = './assets/images/bubu-riri.png';
-            mobileMenuLogo.alt = 'Bubu & Riri';
-        } else if (themeName === 'ramadhan') {
-            mobileMenuLogo.src = './assets/images/kubah.png';
-            mobileMenuLogo.alt = 'Kubah Masjid';
-        } else { // Default untuk light, dark, purple
-            mobileMenuLogo.src = './assets/images/gebyar.png';
-            mobileMenuLogo.alt = 'Gebyar Logo';
-        }
+        mobileMenuLogo.src = './assets/icons/favicon.png';
+        mobileMenuLogo.alt = 'Logo Ria Busana';
     }
 
     if (themeName === 'dark') {
