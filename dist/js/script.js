@@ -1,9 +1,29 @@
 const humberger = document.querySelector('.hamburger');
 const menu = document.querySelector('.menu');
 
+const setMenuOpen = (isOpen) => {
+    menu.classList.toggle('menu-active', isOpen);
+    humberger.classList.toggle('active', isOpen);
+    humberger.setAttribute('aria-expanded', String(isOpen));
+    humberger.setAttribute('aria-label', isOpen ? 'Tutup menu' : 'Buka menu');
+};
+
 humberger.addEventListener('click', () => {
-    menu.classList.toggle('menu-active');
-    humberger.classList.toggle('active'); // Animasi X
+    setMenuOpen(humberger.getAttribute('aria-expanded') !== 'true');
+});
+
+menu.addEventListener('click', (event) => {
+    if (event.target.closest('a')) setMenuOpen(false);
+});
+
+document.addEventListener('click', (event) => {
+    if (!event.target.closest('.navbar-box')) setMenuOpen(false);
+});
+
+document.addEventListener('keydown', (event) => {
+    if (event.key !== 'Escape' || !menu.classList.contains('menu-active')) return;
+    setMenuOpen(false);
+    humberger.focus();
 });
 
 // Scroll to Top Logic
@@ -16,8 +36,7 @@ window.addEventListener('scroll', () => {
     // Select semua tombol melayang
     const floatingBtns = document.querySelectorAll('.music-toggle, .theme-toggle, .chat-widget, .scroll-top');
 
-    menu.classList.remove('menu-active');
-    humberger.classList.remove('active'); // Reset animasi X saat scroll
+    setMenuOpen(false);
 
     // 1. Logic Munculkan Tombol Scroll Top jika sudah scroll 300px
     if (scrollTop > 300) {
@@ -331,41 +350,11 @@ if (memberVoiceoverAudio) {
     startMemberVoiceover();
 }
 
-// --- PRELOADER SLIDER ANIMATION ---
-const initPreloaderSlider = () => {
-    const slides = document.querySelectorAll('.image-slider img');
-    if (slides.length === 0) return;
-    
-    let index = 0;
-    setInterval(() => {
-        slides[index].classList.remove('active');
-        index = (index + 1) % slides.length;
-        slides[index].classList.add('active');
-    }, 1500); // Ganti gambar setiap 1.5 detik agar lebih jelas
-};
-initPreloaderSlider();
-
-const launchPreloaderConfetti = () => {
-    if (typeof window.confetti !== 'function') return;
-
-    const burst = () => {
-        window.confetti({
-            particleCount: 140,
-            spread: 90,
-            startVelocity: 40,
-            colors: ['#dc2626', '#ffffff', '#f59e0b', '#1f2937'],
-            origin: { y: 0.45 }
-        });
-    };
-
-    burst();
-    setTimeout(burst, 220);
-};
-
 // --- HERO TITLE ANIMATION ---
 function initHeroTitleAnimation() {
     const heroTitle = document.querySelector('.hero .hero-box h1');
     if (!heroTitle) return;
+    if (heroTitle.querySelector('em, span, strong')) return;
 
     // Split text by <br> tag to handle lines separately
     const lines = heroTitle.innerHTML.split('<br>').map(line => line.trim());
@@ -402,7 +391,6 @@ window.addEventListener('load', () => {
     // Sembunyikan preloader setelah 2 detik
     setTimeout(() => {
         if (preloader) {
-            launchPreloaderConfetti();
             preloader.classList.add('hide');
             if (typeof AOS !== 'undefined') AOS.refresh(); // Refresh animasi AOS
         }
@@ -721,15 +709,18 @@ window.addEventListener('load', () => {
         if (!popup) return;
 
         const closeBtn = popup.querySelector('.close-promo');
+        const setPopupOpen = (isOpen) => {
+            popup.classList.toggle('show', isOpen);
+            popup.setAttribute('aria-hidden', String(!isOpen));
+        };
 
-        // Munculkan popup
-        setTimeout(() => popup.classList.add('show'), showDelay);
+        setTimeout(() => setPopupOpen(true), showDelay);
+        setTimeout(() => setPopupOpen(false), hideDelay);
 
-        // Sembunyikan otomatis
-        setTimeout(() => popup.classList.remove('show'), hideDelay);
-
-        // Tombol Close Manual
-        if (closeBtn) closeBtn.onclick = () => popup.classList.remove('show');
+        if (closeBtn) closeBtn.addEventListener('click', () => setPopupOpen(false));
+        popup.addEventListener('click', (event) => {
+            if (event.target === popup) setPopupOpen(false);
+        });
     };
 
     // Popup 1 (Slider Portrait): Muncul detik ke-4, Hilang detik ke-14
@@ -737,6 +728,14 @@ window.addEventListener('load', () => {
 
     // Popup 2 (Landscape): Muncul detik ke-15, Hilang detik ke-25
     handlePopup('promo-popup-2', 15000, 25000);
+
+    document.addEventListener('keydown', (event) => {
+        if (event.key !== 'Escape') return;
+        document.querySelectorAll('.promo-popup.show').forEach((popup) => {
+            popup.classList.remove('show');
+            popup.setAttribute('aria-hidden', 'true');
+        });
+    });
 
     // --- THEME NOTIFICATION LOGIC ---
     const themeNotif = document.getElementById('theme-notification');

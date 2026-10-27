@@ -23,33 +23,33 @@
 
     <title>Daftar Member - Ria Busana Parung</title>
 </head>
-<body>
+<body class="public-page">
     <!-- Navbar -->
     <div class="navbar">
         <div class="container">
             <div class="navbar-box">
-                <div class="logo">
+                <a class="logo" href="index.html#beranda" aria-label="Ria Busana Parung, Beranda">
                     <img src="./assets/icons/favicon.png" alt="RB Logo" />
                     <h1>Parung.</h1>
-                </div>
-                <ul class="menu">
-                    <li class="mobile-menu-header">
-                        <img src="./assets/icons/favicon.png" alt="Logo Ria Busana">
-                    </li>
-                    <li><a href="index.html#beranda">Beranda</a></li>
-                    <li><a href="index.html#layanan">Layanan</a></li>
-                    <li><a href="index.html#tv-media">TV Media</a></li>
-                    <li><a href="index.html#produk">Produk Kami</a></li>
-                    <li><a href="qna.html">QnA</a></li>
-                    <li><a href="#" style="color: #173c6c; font-weight: 600; border-bottom: 3px solid #173c6c;">Member</a></li>
-                    <li><a class="vacancy-link" href="karier.html">Karier <span class="vacancy-badge">LOWONGAN</span></a></li>
-                    <li><a href="#kontak">Kontak</a></li>
-                </ul>
-                <div class="hamburger">
+                </a>
+                <nav class="primary-navigation" aria-label="Navigasi utama">
+                    <ul class="menu" id="primary-menu">
+                        <li class="mobile-menu-header"><img src="./assets/icons/favicon.png" alt=""><span>Jelajahi Ria Busana</span></li>
+                        <li><a href="index.html#beranda">Beranda</a></li>
+                        <li><a href="index.html#produk">Koleksi</a></li>
+                        <li><a href="index.html#tv-media">TV Media</a></li>
+                        <li><a href="qna.html">Bantuan</a></li>
+                        <li><a href="#" class="active" aria-current="page">Member</a></li>
+                        <li><a class="vacancy-link" href="karier.html">Karier <span class="vacancy-badge">LOWONGAN</span></a></li>
+                        <li><a href="index.html#kontak">Kontak</a></li>
+                        <li class="menu-action"><a href="https://shopee.co.id/riabusana" target="_blank" rel="noopener noreferrer"><i class="ri-shopping-bag-3-line"></i> Belanja online <i class="ri-arrow-up-right-line"></i></a></li>
+                    </ul>
+                </nav>
+                <button class="hamburger" type="button" aria-label="Buka menu" aria-expanded="false" aria-controls="primary-menu">
                     <span></span>
                     <span></span>
                     <span></span>
-                </div>
+                </button>
             </div>
         </div>
     </div>
@@ -63,44 +63,23 @@
         </a>
     </div>
 
-    <!-- Member Section -->
-    <div class="member-section" style="padding-top: 80px; padding-bottom: 100px; min-height: 70vh; display: flex; align-items: center;">
-        <div class="container">
-            <div class="hero-box" style="align-items: center;">
-                <!-- Kolom Teks -->
-                <div class="box" data-aos="fade-right" data-aos-duration="1000">
-                    <p class="member-eyebrow"><i class="ri-sparkling-2-line"></i> RIA BUSANA CLUB</p>
-                    <h1 class="member-title">Belanja makin seru bersama <span>Ria Busana Club</span></h1>
-                    <p class="member-intro">
-                        Gabung jadi member dan nikmati pengalaman belanja yang lebih menguntungkan, dengan beragam benefit langsung melalui aplikasi.
-                    </p>
-                    
-                    <ul class="member-benefits">
-                        <li>
-                            <i class="ri-price-tag-3-line"></i>
-                            <span><strong>Penawaran khusus member</strong><small>Nikmati diskon dan penawaran spesial yang tersedia untuk member.</small></span>
-                        </li>
-                        <li>
-                            <i class="ri-copper-coin-line"></i>
-                            <span><strong>Kumpulkan poin belanja</strong><small>Setiap transaksi membantu menambah poin di akun member Anda.</small></span>
-                        </li>
-                        <li>
-                            <i class="ri-notification-3-line"></i>
-                            <span><strong>Info promo lebih awal</strong><small>Jangan lewatkan kabar promo dan penawaran terbaru dari Ria Busana.</small></span>
-                        </li>
-                    </ul>
-
+    <main class="member-page">
+        <section class="member-section member-hero">
+            <div class="container member-hero-grid">
+                <div class="member-hero-copy" data-aos="fade-up">
+                    <p class="member-eyebrow"><i class="ri-sparkling-2-line"></i> KENALAN DENGAN RIA BUSANA CLUB</p>
+                    <h1 class="member-title">Lebih dari belanja. <span>Ini worth it.</span></h1>
+                    <p class="member-intro">Satu akun untuk menikmati penawaran pilihan, mengumpulkan poin, dan mendapat kabar promo lebih awal.</p>
                     <a href="https://play.google.com/store/apps/details?id=com.riabusana.member" target="_blank" rel="noopener noreferrer" class="btn-kirim member-cta">
-                        <span>Gabung Sekarang</span><i class="ri-arrow-right-line"></i>
+                        <span>Download aplikasi member</span><i class="ri-arrow-right-up-line"></i>
                     </a>
+                    <p class="member-note"><i class="ri-google-play-line"></i> Pendaftaran dilakukan melalui aplikasi resmi di Google Play.</p>
                     <audio id="member-voiceover-audio" autoplay preload="auto" aria-hidden="true" tabindex="-1" hidden>
                         <source src="./assets/images/member/VO-RBC.MP3" type="audio/mpeg">
                     </audio>
-                    <p class="member-note"><i class="ri-google-play-line"></i> Pendaftaran dilakukan melalui aplikasi resmi di Google Play.</p>
                 </div>
-
-                <!-- Kolase Member -->
-                <div class="box" data-aos="fade-up" data-aos-duration="1000">
+                <div class="member-hero-art" data-aos="fade-left">
+                    <div class="member-art-note"><i class="ri-heart-3-fill"></i><span>Belanja favorit,<br><strong>makin banyak benefit.</strong></span></div>
                     <div class="member-collage">
                         <img src="./assets/images/member/member.jpeg" alt="Tampilan sambutan aplikasi Ria Busana Club">
                         <img src="./assets/images/member/member2.jpeg" alt="Formulir pendaftaran member Ria Busana Club">
@@ -109,10 +88,40 @@
                         <img src="./assets/images/member/member5.jpeg" alt="Informasi dan promo di aplikasi Ria Busana Club">
                         <img src="./assets/images/member/member6.jpeg" alt="Koleksi produk terbaru di aplikasi Ria Busana Club">
                     </div>
+                    <span class="member-art-caption">YOUR EVERYDAY SHOPPING, UPGRADED</span>
                 </div>
             </div>
-        </div>
-    </div>
+        </section>
+
+        <section class="member-perks" aria-labelledby="member-perks-title">
+            <div class="container">
+                <div class="member-perks-heading">
+                    <p class="member-eyebrow">MEMBER DAPAT APA?</p>
+                    <h2 id="member-perks-title">Belanja jadi <em>lebih seru.</em></h2>
+                </div>
+                <div class="member-perks-grid">
+                    <article class="member-perk-card">
+                        <span class="member-perk-icon"><i class="ri-price-tag-3-line"></i></span>
+                        <span class="member-perk-index">01 / SPECIAL</span>
+                        <h3>Penawaran khusus</h3>
+                        <p>Nikmati diskon dan penawaran spesial yang tersedia untuk member.</p>
+                    </article>
+                    <article class="member-perk-card">
+                        <span class="member-perk-icon"><i class="ri-copper-coin-line"></i></span>
+                        <span class="member-perk-index">02 / REWARDS</span>
+                        <h3>Poin setiap belanja</h3>
+                        <p>Setiap transaksi membantu menambah poin di akun member Anda.</p>
+                    </article>
+                    <article class="member-perk-card">
+                        <span class="member-perk-icon"><i class="ri-notification-3-line"></i></span>
+                        <span class="member-perk-index">03 / FIRST LOOK</span>
+                        <h3>Info promo lebih awal</h3>
+                        <p>Dapatkan kabar promo dan penawaran terbaru dari Ria Busana.</p>
+                    </article>
+                </div>
+            </div>
+        </section>
+    </main>
 
     <!-- Footer -->
     <div class="footer" id="kontak">

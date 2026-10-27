@@ -26,7 +26,7 @@
         @media (max-width: 420px) { .careers-countdown { gap: 6px; } .careers-countdown-unit { padding-inline: 4px; } }
     </style>
 </head>
-<body class="careers-page">
+<body class="careers-page public-page">
     <header class="navbar">
         <div class="container">
             <div class="navbar-box">
@@ -34,16 +34,20 @@
                     <img src="./assets/icons/favicon.png" alt="">
                     <span>Parung.</span>
                 </a>
-                <button class="hamburger" type="button" aria-label="Buka menu" aria-expanded="false">
+                <button class="hamburger" type="button" aria-label="Buka menu" aria-expanded="false" aria-controls="primary-menu">
                     <span></span><span></span><span></span>
                 </button>
-                <nav aria-label="Navigasi utama">
-                    <ul class="menu">
+                <nav class="primary-navigation" aria-label="Navigasi utama">
+                    <ul class="menu" id="primary-menu">
+                        <li class="mobile-menu-header"><img src="./assets/icons/favicon.png" alt=""><span>Jelajahi Ria Busana</span></li>
                         <li><a href="index.html#beranda">Beranda</a></li>
-                        <li><a href="index.html#produk">Produk</a></li>
-                        <li><a href="qna.html">QnA</a></li>
+                        <li><a href="index.html#produk">Koleksi</a></li>
+                        <li><a href="index.html#tv-media">TV Media</a></li>
+                        <li><a href="qna.html">Bantuan</a></li>
                         <li><a href="member.html">Member</a></li>
                         <li><a class="active vacancy-link" href="karier.html" aria-current="page">Karier <span class="vacancy-badge" hidden>LOWONGAN</span></a></li>
+                        <li><a href="index.html#kontak">Kontak</a></li>
+                        <li class="menu-action"><a href="https://shopee.co.id/riabusana" target="_blank" rel="noopener noreferrer"><i class="ri-shopping-bag-3-line"></i> Belanja online <i class="ri-arrow-up-right-line"></i></a></li>
                     </ul>
                 </nav>
             </div>
@@ -51,18 +55,26 @@
     </header>
 
     <section class="careers-opening" id="careers-opening" aria-labelledby="careers-opening-title">
-        <div class="careers-opening-card">
-            <span class="careers-opening-icon" aria-hidden="true"><i class="ri-time-line"></i></span>
-            <p class="careers-eyebrow" style="justify-content:center">INFORMASI LOWONGAN KERJA</p>
-            <h1 id="careers-opening-title">Segera dibuka</h1>
-            <p>Informasi lowongan kerja Ria Busana Parung akan tersedia pada <strong>1 November 2026 pukul 00.00 WIB</strong>.</p>
-            <div class="careers-countdown" aria-label="Hitung mundur pembukaan lowongan">
-                <div class="careers-countdown-unit"><strong data-countdown="days">--</strong><span>Hari</span></div>
-                <div class="careers-countdown-unit"><strong data-countdown="hours">--</strong><span>Jam</span></div>
-                <div class="careers-countdown-unit"><strong data-countdown="minutes">--</strong><span>Menit</span></div>
-                <div class="careers-countdown-unit"><strong data-countdown="seconds">--</strong><span>Detik</span></div>
+        <div class="container careers-opening-inner">
+            <div class="careers-opening-copy">
+                <p class="careers-eyebrow"><i class="ri-map-pin-line"></i> RIA BUSANA PARUNG · CAREER</p>
+                <h1 id="careers-opening-title">Kesempatan baru, <em>segera dimulai.</em></h1>
+                <p>Lowongan kerja untuk cabang Ria Busana Parung akan segera dibuka. Tandai waktunya dan kunjungi kembali halaman ini.</p>
+                <a href="index.html#beranda">Kenali Ria Busana <i class="ri-arrow-right-line"></i></a>
             </div>
-            <p id="careers-opening-status" aria-live="polite">Halaman lowongan akan terbuka otomatis saat waktu pembukaan tiba.</p>
+            <div class="careers-opening-card">
+                <div class="careers-opening-card-head">
+                    <span class="careers-opening-icon" aria-hidden="true"><i class="ri-calendar-event-line"></i></span>
+                    <div><span>JADWAL PEMBUKAAN</span><strong>01 NOVEMBER 2026 · 00.00 WIB</strong></div>
+                </div>
+                <div class="careers-countdown" aria-label="Hitung mundur pembukaan lowongan">
+                    <div class="careers-countdown-unit"><strong data-countdown="days">--</strong><span>Hari</span></div>
+                    <div class="careers-countdown-unit"><strong data-countdown="hours">--</strong><span>Jam</span></div>
+                    <div class="careers-countdown-unit"><strong data-countdown="minutes">--</strong><span>Menit</span></div>
+                    <div class="careers-countdown-unit"><strong data-countdown="seconds">--</strong><span>Detik</span></div>
+                </div>
+                <p id="careers-opening-status" aria-live="polite"><i class="ri-notification-3-line"></i> Halaman lowongan akan terbuka otomatis saat waktu pembukaan tiba.</p>
+            </div>
         </div>
     </section>
 
@@ -83,7 +95,7 @@
                     <p class="careers-eyebrow"><i class="ri-map-pin-line"></i> KESEMPATAN KERJA · PARUNG</p>
                     <h1>Bertumbuh bersama <span>Ria Busana Parung.</span></h1>
                     <p class="careers-lead">Suka dunia fashion dan senang melayani pelanggan? Kenali kesempatan bergabung dengan tim toko kami di Parung.</p>
-                    <a class="careers-apply" href="https://lynk.id/rekrutmenparung" target="_blank" rel="noopener noreferrer">
+                    <a class="careers-apply" href="https://bit.ly/Rekruitment-RiabusanaParung" target="_blank" rel="noopener noreferrer">
                         Lihat Formulir & Lamar <i class="ri-arrow-right-up-line"></i>
                     </a>
                     <p class="careers-form-note"><i class="ri-information-line"></i> Formulir dibuka di Google Forms. Jika diminta, masuk ke akun Google untuk melanjutkan.</p>
@@ -131,6 +143,28 @@
             menuButton.classList.toggle('active', isOpen);
             menuButton.setAttribute('aria-expanded', String(isOpen));
             menuButton.setAttribute('aria-label', isOpen ? 'Tutup menu' : 'Buka menu');
+        });
+        menu.addEventListener('click', (event) => {
+            if (!event.target.closest('a')) return;
+            menu.classList.remove('menu-active');
+            menuButton.classList.remove('active');
+            menuButton.setAttribute('aria-expanded', 'false');
+            menuButton.setAttribute('aria-label', 'Buka menu');
+        });
+        document.addEventListener('click', (event) => {
+            if (event.target.closest('.navbar-box')) return;
+            menu.classList.remove('menu-active');
+            menuButton.classList.remove('active');
+            menuButton.setAttribute('aria-expanded', 'false');
+            menuButton.setAttribute('aria-label', 'Buka menu');
+        });
+        document.addEventListener('keydown', (event) => {
+            if (event.key !== 'Escape' || !menu.classList.contains('menu-active')) return;
+            menu.classList.remove('menu-active');
+            menuButton.classList.remove('active');
+            menuButton.setAttribute('aria-expanded', 'false');
+            menuButton.setAttribute('aria-label', 'Buka menu');
+            menuButton.focus();
         });
 
         const openingTime = new Date('2026-11-01T00:00:00+07:00').getTime();

@@ -23,7 +23,7 @@
 
     <title>QnA - Ria Busana Parung</title>
 </head>
-<body>
+<body class="public-page">
     <!-- Background Music -->
     <audio id="bg-music" src="./assets/audio/rb-asyik.mpeg" loop></audio>
 
@@ -31,28 +31,28 @@
     <div class="navbar">
         <div class="container">
             <div class="navbar-box">
-                <div class="logo">
+                <a class="logo" href="index.html#beranda" aria-label="Ria Busana Parung, Beranda">
                     <img src="./assets/icons/favicon.png" alt="RB Logo" />
                     <h1>Parung.</h1>
-                </div>
-                <ul class="menu">
-                    <li class="mobile-menu-header">
-                        <img src="./assets/icons/favicon.png" alt="Logo Ria Busana">
-                    </li>
-                    <li><a href="index.html#beranda">Beranda</a></li>
-                    <li><a href="index.html#layanan">Layanan</a></li>
-                    <li><a href="index.html#tv-media">TV Media</a></li>
-                    <li><a href="index.html#produk">Produk Kami</a></li>
-                    <li><a href="#" class="active" aria-current="page">QnA</a></li>
-                    <li><a href="member.html">Member</a></li>
-                    <li><a class="vacancy-link" href="karier.html">Karier <span class="vacancy-badge">LOWONGAN</span></a></li>
-                    <li><a href="#kontak">Kontak</a></li>
-                </ul>
-                <div class="hamburger">
+                </a>
+                <nav class="primary-navigation" aria-label="Navigasi utama">
+                    <ul class="menu" id="primary-menu">
+                        <li class="mobile-menu-header"><img src="./assets/icons/favicon.png" alt=""><span>Jelajahi Ria Busana</span></li>
+                        <li><a href="index.html#beranda">Beranda</a></li>
+                        <li><a href="index.html#produk">Koleksi</a></li>
+                        <li><a href="index.html#tv-media">TV Media</a></li>
+                        <li><a href="#" class="active" aria-current="page">Bantuan</a></li>
+                        <li><a href="member.html">Member</a></li>
+                        <li><a class="vacancy-link" href="karier.html">Karier <span class="vacancy-badge">LOWONGAN</span></a></li>
+                        <li><a href="index.html#kontak">Kontak</a></li>
+                        <li class="menu-action"><a href="https://shopee.co.id/riabusana" target="_blank" rel="noopener noreferrer"><i class="ri-shopping-bag-3-line"></i> Belanja online <i class="ri-arrow-up-right-line"></i></a></li>
+                    </ul>
+                </nav>
+                <button class="hamburger" type="button" aria-label="Buka menu" aria-expanded="false" aria-controls="primary-menu">
                     <span></span>
                     <span></span>
                     <span></span>
-                </div>
+                </button>
             </div>
         </div>
     </div>
@@ -66,53 +66,55 @@
         </a>
     </div>
 
-    <!-- QnA Section -->
-    <div class="qna" id="qna">
-        <div class="container">
-            <div class="qna-box">
-                <p class="qna-eyebrow">BANTUAN & INFORMASI</p>
-                <h1 data-aos="fade-up" data-aos-duration="1000">Ada yang ingin Anda tanyakan?</h1>
-                <p class="qna-intro">Temukan jawaban seputar belanja di Ria Busana. Belum menemukan yang dicari? Tim kami siap membantu.</p>
-                
-                <!-- Live Search Input -->
-                <div class="qna-search" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="100">
-                    <i class="ri-search-line"></i>
-                    <input type="search" id="qna-search-input" placeholder="Cari promo, pemesanan, pembayaran..." aria-label="Cari pertanyaan umum" />
-                </div>
-                <p class="qna-search-empty" id="qna-search-empty" role="status" hidden>Pertanyaan belum ditemukan. Coba kata kunci lain atau kirim pertanyaan Anda di bawah.</p>
-
-                <div class="accordion-container">
-                    <details class="accordion-item" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="200">
-                        <summary>Apakah produk Ria Busana sering memiliki promo?</summary>
-                        <p>Ria Busana menghadirkan berbagai promo pada periode tertentu. Kunjungi toko atau kanal resmi kami untuk melihat penawaran yang sedang berlangsung.</p>
-                    </details>
-                    
-                    <details class="accordion-item" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="300">
-                        <summary>Bagaimana cara melakukan pemesanan?</summary>
-                        <p>Anda bisa datang langsung ke store kami atau menghubungi kontak WhatsApp yang tersedia di bagian bawah halaman ini.</p>
-                    </details>
-                    
-                    <details class="accordion-item" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="400">
-                        <summary>Bagaimana ketentuan penukaran barang?</summary>
-                        <p>Penukaran dapat diajukan maksimal 2 hari setelah barang diterima apabila terdapat cacat produk. Label harus masih terpasang dan struk pembayaran disertakan.</p>
-                    </details>
-
-                    <details class="accordion-item" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="500">
-                        <summary>Apa saja metode pembayaran yang diterima?</summary>
-                        <p>Kami menerima pembayaran tunai, kartu debit, kartu kredit, dan QRIS.</p>
-                    </details>
+    <main class="help-page">
+        <section class="qna" id="qna">
+            <div class="container">
+                <div class="qna-box">
+                    <header class="help-page-heading">
+                        <p class="qna-eyebrow">PUSAT BANTUAN · RIA BUSANA PARUNG</p>
+                        <h1 data-aos="fade-up" data-aos-duration="1000">Jawaban cepat, belanja makin nyaman.</h1>
+                        <p class="qna-intro">Cari informasi seputar promo, pesanan, pembayaran, dan kunjungan ke toko.</p>
+                    </header>
+                    <div class="qna-layout">
+                        <div class="qna-main">
+                            <div class="qna-search" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="100">
+                                <i class="ri-search-line"></i>
+                                <input type="search" id="qna-search-input" placeholder="Ketik pertanyaan atau kata kunci..." aria-label="Cari pertanyaan umum" />
+                            </div>
+                            <p class="qna-search-empty" id="qna-search-empty" role="status" hidden>Pertanyaan belum ditemukan. Coba kata kunci lain atau kirim pertanyaan Anda di bawah.</p>
+                            <div class="accordion-container">
+                                <details class="accordion-item" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="200">
+                                    <summary>Apakah produk Ria Busana sering memiliki promo?</summary>
+                                    <p>Ria Busana menghadirkan berbagai promo pada periode tertentu. Kunjungi toko atau kanal resmi kami untuk melihat penawaran yang sedang berlangsung.</p>
+                                </details>
+                                <details class="accordion-item" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="300">
+                                    <summary>Bagaimana cara melakukan pemesanan?</summary>
+                                    <p>Anda bisa datang langsung ke store kami atau menghubungi kontak WhatsApp yang tersedia di bagian bawah halaman ini.</p>
+                                </details>
+                                <details class="accordion-item" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="400">
+                                    <summary>Bagaimana ketentuan penukaran barang?</summary>
+                                    <p>Penukaran dapat diajukan maksimal 2 hari setelah barang diterima apabila terdapat cacat produk. Label harus masih terpasang dan struk pembayaran disertakan.</p>
+                                </details>
+                                <details class="accordion-item" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="500">
+                                    <summary>Apa saja metode pembayaran yang diterima?</summary>
+                                    <p>Kami menerima pembayaran tunai, kartu debit, kartu kredit, dan QRIS.</p>
+                                </details>
+                            </div>
+                        </div>
+                        <aside class="help-contact-card">
+                            <span class="help-contact-icon"><i class="ri-customer-service-2-line"></i></span>
+                            <p class="help-contact-label">BUTUH BANTUAN PERSONAL?</p>
+                            <h2>Tim kami siap membantu.</h2>
+                            <p>Belum menemukan jawaban? Hubungi admin Ria Busana Parung melalui WhatsApp.</p>
+                            <a href="https://wa.me/6285710995295" target="_blank" rel="noopener noreferrer">Chat admin <i class="ri-arrow-right-up-line"></i></a>
+                            <span class="help-contact-footnote"><i class="ri-time-line"></i> Senin–Minggu · Jam operasional toko</span>
+                        </aside>
+                    </div>
                 </div>
             </div>
-        </div>
-    </div>
+        </section>
 
-    <!-- Garis Pemisah dengan Ikon -->
-    <div class="section-separator-icon" data-aos="zoom-in" data-aos-duration="1000">
-        <i class="ri-message-2-line"></i>
-    </div>
-
-    <!-- Ulasan Section (Dipindahkan dari Index) -->
-    <div class="ulasan" id="ulasan" style="padding-top: 50px;">
+    <section class="ulasan" id="ulasan">
         <div class="container">
             <div class="ulasan-box">
                 <p class="review-eyebrow">CERITA DARI PELANGGAN</p>
@@ -155,7 +157,8 @@
                     <button id="load-more-ulasan" class="btn-load-more" style="display: none;">Lihat Ulasan Lainnya</button>
                 </div>
             </div>
-        </div>
+        </section>
+        </main>
     </div>
 
     <!-- Footer -->
