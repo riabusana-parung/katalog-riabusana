@@ -738,35 +738,6 @@ window.addEventListener('load', () => {
     // Popup 2 (Landscape): Muncul detik ke-15, Hilang detik ke-25
     handlePopup('promo-popup-2', 15000, 25000);
 
-    const winnerImage = document.querySelector('.winner-image-trigger');
-    const lightbox = document.getElementById('lightbox');
-    const lightboxImg = document.getElementById('lightbox-img');
-    const closeLightbox = document.querySelector('.close-lightbox');
-
-    if (winnerImage && lightbox && lightboxImg) {
-        winnerImage.addEventListener('click', () => {
-            lightboxImg.src = winnerImage.src;
-            lightbox.classList.add('active');
-            document.body.style.overflow = 'hidden';
-        });
-    }
-
-    if (closeLightbox && lightbox) {
-        closeLightbox.addEventListener('click', () => {
-            lightbox.classList.remove('active');
-            document.body.style.overflow = '';
-        });
-    }
-
-    if (lightbox) {
-        lightbox.addEventListener('click', (e) => {
-            if (e.target === lightbox) {
-                lightbox.classList.remove('active');
-                document.body.style.overflow = '';
-            }
-        });
-    }
-
     // --- THEME NOTIFICATION LOGIC ---
     const themeNotif = document.getElementById('theme-notification');
     const closeThemeNotif = document.querySelector('.close-theme-notif');
