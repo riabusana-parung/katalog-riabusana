@@ -51,6 +51,11 @@
         if (event.target === dialog) dialog.close();
     });
 
+    const deadlineTimer = window.setTimeout(() => {
+        if (dialog.open) dialog.close();
+    }, Math.max(0, deadlineTime - Date.now()));
+    dialog.addEventListener('close', () => window.clearTimeout(deadlineTimer), { once: true });
+
     function showPopup() {
         if (!dialog.isConnected || dialog.open) return;
         dialog.showModal();
