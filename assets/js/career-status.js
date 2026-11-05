@@ -37,7 +37,7 @@
             copy.textContent = isLastDay
                 ? copy.dataset.lastday
                 : isOpen
-                    ? copy.dataset.after
+                    ? copy.dataset.open
                     : copy.dataset.before;
         });
         document.querySelectorAll('.career-announcement').forEach((announcement) => {
@@ -46,7 +46,7 @@
                 isLastDay
                     ? `Peringatan: pendaftaran lowongan kerja berakhir besok, ${deadlineLabel}. Klik untuk melamar.`
                     : isOpen
-                        ? 'Ada lowongan kerja di Ria Busana Parung. Klik untuk melihat informasi dan melamar.'
+                        ? `Pendaftaran lowongan kerja Ria Busana Parung ditutup pada ${deadlineLabel} WIB. Klik untuk melamar.`
                         : 'Informasi lowongan kerja Ria Busana Parung akan segera dibuka.'
             );
         });

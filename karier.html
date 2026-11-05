@@ -96,8 +96,8 @@
     <div class="career-announcement-shell" id="career-announcement" hidden>
         <a class="career-announcement" href="karier.html" aria-label="Ada lowongan kerja di Ria Busana Parung. Klik untuk melihat informasi dan melamar.">
             <span class="career-announcement-track" aria-hidden="true">
-                <span><i class="ri-megaphone-line"></i> <span class="career-announcement-copy" data-before="INFORMASI LOWONGAN KERJA RIA BUSANA PARUNG DIBUKA 1 NOVEMBER 2026 · KUNJUNGI HALAMAN KARIER" data-lastday="PERINGATAN: PENDAFTARAN LOWONGAN BERAKHIR BESOK, 6 NOVEMBER 2026 · DAFTAR SEKARANG" data-after="KAMI SEDANG MEMBUKA LOWONGAN KERJA RIA BUSANA PARUNG · LIHAT INFO & LAMAR SEKARANG">KAMI SEDANG MEMBUKA LOWONGAN KERJA RIA BUSANA PARUNG · LIHAT INFO & LAMAR SEKARANG</span></span>
-                <span><i class="ri-megaphone-line"></i> <span class="career-announcement-copy" data-before="INFORMASI LOWONGAN KERJA RIA BUSANA PARUNG DIBUKA 1 NOVEMBER 2026 · KUNJUNGI HALAMAN KARIER" data-lastday="PERINGATAN: PENDAFTARAN LOWONGAN BERAKHIR BESOK, 6 NOVEMBER 2026 · DAFTAR SEKARANG" data-after="KAMI SEDANG MEMBUKA LOWONGAN KERJA RIA BUSANA PARUNG · LIHAT INFO & LAMAR SEKARANG">KAMI SEDANG MEMBUKA LOWONGAN KERJA RIA BUSANA PARUNG · LIHAT INFO & LAMAR SEKARANG</span></span>
+                <span><i class="ri-megaphone-line"></i> <span class="career-announcement-copy" data-before="INFORMASI LOWONGAN KERJA RIA BUSANA PARUNG DIBUKA 1 NOVEMBER 2026 · KUNJUNGI HALAMAN KARIER" data-open="PENDAFTARAN LOWONGAN RIA BUSANA PARUNG DITUTUP 6 NOVEMBER 2026 PUKUL 23.59 WIB · DAFTAR SEKARANG" data-lastday="PERINGATAN: PENDAFTARAN LOWONGAN BERAKHIR BESOK, 6 NOVEMBER 2026 · DAFTAR SEKARANG">KAMI SEDANG MEMBUKA LOWONGAN KERJA RIA BUSANA PARUNG · LIHAT INFO & LAMAR SEKARANG</span></span>
+                <span><i class="ri-megaphone-line"></i> <span class="career-announcement-copy" data-before="INFORMASI LOWONGAN KERJA RIA BUSANA PARUNG DIBUKA 1 NOVEMBER 2026 · KUNJUNGI HALAMAN KARIER" data-open="PENDAFTARAN LOWONGAN RIA BUSANA PARUNG DITUTUP 6 NOVEMBER 2026 PUKUL 23.59 WIB · DAFTAR SEKARANG" data-lastday="PERINGATAN: PENDAFTARAN LOWONGAN BERAKHIR BESOK, 6 NOVEMBER 2026 · DAFTAR SEKARANG">KAMI SEDANG MEMBUKA LOWONGAN KERJA RIA BUSANA PARUNG · LIHAT INFO & LAMAR SEKARANG</span></span>
             </span>
         </a>
     </div>
@@ -105,7 +105,7 @@
     <main>
         <div id="career-content" hidden>
         <div class="container">
-            <p class="careers-deadline-notice" id="careers-deadline-notice" role="status" hidden></p>
+            <p class="careers-deadline-notice" id="careers-deadline-notice" role="status"></p>
         </div>
         <section class="careers-hero">
             <div class="container careers-hero-inner">
@@ -154,6 +154,7 @@
     </footer>
 
     <script src="./assets/js/career-status.js"></script>
+    <script src="./assets/js/career-popup.js"></script>
     <script>
         const menuButton = document.querySelector('.careers-page .hamburger');
         const menu = document.querySelector('.careers-page .menu');
@@ -227,10 +228,10 @@
             }
 
             closedScreen.hidden = true;
-            deadlineNotice.hidden = !isLastDay;
-            if (isLastDay) {
-                deadlineNotice.textContent = `Peringatan: pendaftaran lowongan kerja Ria Busana Parung berakhir besok, ${deadlineLabel} WIB. Segera kirim lamaran Anda.`;
-            }
+            deadlineNotice.hidden = false;
+            deadlineNotice.textContent = isLastDay
+                ? `Peringatan: pendaftaran lowongan kerja Ria Busana Parung berakhir besok, ${deadlineLabel} WIB. Segera kirim lamaran Anda.`
+                : `Informasi: pendaftaran lowongan kerja Ria Busana Parung ditutup pada ${deadlineLabel} WIB. Segera kirim lamaran Anda.`;
 
             if (isOpen) {
                 openingScreen.hidden = true;

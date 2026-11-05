@@ -133,6 +133,95 @@ body {
     display: none !important;
 }
 
+.career-popup {
+    position: fixed;
+    inset: 0;
+    width: min(460px, calc(100% - 32px));
+    margin: auto;
+    padding: 36px 32px 30px;
+    border: 0;
+    border-radius: 22px;
+    color: #18324b;
+    text-align: center;
+    box-shadow: 0 24px 80px rgba(17, 43, 69, 0.3);
+    animation: career-popup-enter 0.28s ease-out both;
+}
+
+.career-popup::backdrop {
+    background: rgba(15, 23, 42, 0.62);
+    backdrop-filter: blur(3px);
+}
+
+.career-popup::before {
+    display: grid;
+    width: 58px;
+    height: 58px;
+    margin: 0 auto 18px;
+    place-items: center;
+    border-radius: 50%;
+    background: #fff1ed;
+    color: #b91c1c;
+    content: "!";
+    font-size: 32px;
+    font-weight: 700;
+}
+
+.career-popup h2 {
+    margin: 0 0 10px;
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: clamp(24px, 5vw, 32px);
+}
+
+.career-popup p {
+    margin: 0;
+    color: #536171;
+    font-size: 15px;
+    line-height: 1.7;
+}
+
+.career-popup-actions {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 24px;
+}
+
+.career-popup-actions button,
+.career-popup-action {
+    display: inline-flex;
+    min-height: 42px;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 16px;
+    border: 0;
+    border-radius: 8px;
+    font: inherit;
+    font-size: 14px;
+    font-weight: 600;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.career-popup-close {
+    background: #eef2f6;
+    color: #334155;
+}
+
+.career-popup-action {
+    background: #b91c1c;
+    color: #fff;
+}
+
+@keyframes career-popup-enter {
+    from { opacity: 0; transform: translateY(10px) scale(0.98); }
+    to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .career-popup { animation: none; }
+}
+
 .career-announcement {
     display: flex;
     align-items: center;
