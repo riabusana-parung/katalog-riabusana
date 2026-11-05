@@ -23,6 +23,12 @@
         .careers-countdown-unit strong, .careers-countdown-unit span { display: block; }
         .careers-countdown-unit strong { color: #a2452d; font-size: clamp(24px, 5vw, 34px); line-height: 1.2; }
         .careers-countdown-unit span { margin-top: 4px; color: #536171; font-size: 11px; font-weight: 600; }
+        .careers-deadline-notice { margin: 0 0 28px; padding: 16px 20px; border: 1px solid #f0c36d; border-radius: 10px; background: #fff8e7; color: #744b08; font-size: 14px; line-height: 1.6; }
+        .careers-closed { display: grid; min-height: 62vh; place-items: center; padding: 48px 20px; }
+        .careers-closed-card { width: min(100%, 620px); padding: clamp(28px, 6vw, 52px); border: 1px solid #e0e5e8; border-radius: 12px; background: #fff; text-align: center; box-shadow: 0 20px 44px rgba(17, 43, 69, 0.08); }
+        .careers-closed-card h1 { margin: 0 0 12px; color: #18324b; font-family: 'Playfair Display', Georgia, serif; font-size: clamp(28px, 5vw, 40px); }
+        .careers-closed-card p { margin: 0 0 20px; color: #64748b; font-size: 14px; line-height: 1.7; }
+        .careers-closed-card a { color: #173c6c; font-weight: 600; }
         @media (max-width: 420px) { .careers-countdown { gap: 6px; } .careers-countdown-unit { padding-inline: 4px; } }
     </style>
 </head>
@@ -78,17 +84,29 @@
         </div>
     </section>
 
+    <section class="careers-closed" id="careers-closed" aria-labelledby="careers-closed-title" hidden>
+        <div class="careers-closed-card">
+            <span class="careers-opening-icon" aria-hidden="true"><i class="ri-time-line"></i></span>
+            <h1 id="careers-closed-title">Pendaftaran lowongan telah ditutup.</h1>
+            <p id="careers-closed-message">Pendaftaran lowongan kerja Ria Busana Parung telah berakhir.</p>
+            <a href="index.html#beranda">Kembali ke katalog <i class="ri-arrow-right-line"></i></a>
+        </div>
+    </section>
+
     <div class="career-announcement-shell" id="career-announcement" hidden>
         <a class="career-announcement" href="karier.html" aria-label="Ada lowongan kerja di Ria Busana Parung. Klik untuk melihat informasi dan melamar.">
             <span class="career-announcement-track" aria-hidden="true">
-                <span><i class="ri-megaphone-line"></i> <span class="career-announcement-copy" data-before="INFORMASI LOWONGAN KERJA RIA BUSANA PARUNG DIBUKA 1 NOVEMBER 2026 · KUNJUNGI HALAMAN KARIER" data-after="KAMI SEDANG MEMBUKA LOWONGAN KERJA RIA BUSANA PARUNG · LIHAT INFO & LAMAR SEKARANG">KAMI SEDANG MEMBUKA LOWONGAN KERJA RIA BUSANA PARUNG · LIHAT INFO & LAMAR SEKARANG</span></span>
-                <span><i class="ri-megaphone-line"></i> <span class="career-announcement-copy" data-before="INFORMASI LOWONGAN KERJA RIA BUSANA PARUNG DIBUKA 1 NOVEMBER 2026 · KUNJUNGI HALAMAN KARIER" data-after="KAMI SEDANG MEMBUKA LOWONGAN KERJA RIA BUSANA PARUNG · LIHAT INFO & LAMAR SEKARANG">KAMI SEDANG MEMBUKA LOWONGAN KERJA RIA BUSANA PARUNG · LIHAT INFO & LAMAR SEKARANG</span></span>
+                <span><i class="ri-megaphone-line"></i> <span class="career-announcement-copy" data-before="INFORMASI LOWONGAN KERJA RIA BUSANA PARUNG DIBUKA 1 NOVEMBER 2026 · KUNJUNGI HALAMAN KARIER" data-lastday="PERINGATAN: PENDAFTARAN LOWONGAN BERAKHIR BESOK, 6 NOVEMBER 2026 · DAFTAR SEKARANG" data-after="KAMI SEDANG MEMBUKA LOWONGAN KERJA RIA BUSANA PARUNG · LIHAT INFO & LAMAR SEKARANG">KAMI SEDANG MEMBUKA LOWONGAN KERJA RIA BUSANA PARUNG · LIHAT INFO & LAMAR SEKARANG</span></span>
+                <span><i class="ri-megaphone-line"></i> <span class="career-announcement-copy" data-before="INFORMASI LOWONGAN KERJA RIA BUSANA PARUNG DIBUKA 1 NOVEMBER 2026 · KUNJUNGI HALAMAN KARIER" data-lastday="PERINGATAN: PENDAFTARAN LOWONGAN BERAKHIR BESOK, 6 NOVEMBER 2026 · DAFTAR SEKARANG" data-after="KAMI SEDANG MEMBUKA LOWONGAN KERJA RIA BUSANA PARUNG · LIHAT INFO & LAMAR SEKARANG">KAMI SEDANG MEMBUKA LOWONGAN KERJA RIA BUSANA PARUNG · LIHAT INFO & LAMAR SEKARANG</span></span>
             </span>
         </a>
     </div>
 
     <main>
         <div id="career-content" hidden>
+        <div class="container">
+            <p class="careers-deadline-notice" id="careers-deadline-notice" role="status" hidden></p>
+        </div>
         <section class="careers-hero">
             <div class="container careers-hero-inner">
                 <div class="careers-copy">
@@ -135,6 +153,7 @@
         </div>
     </footer>
 
+    <script src="./assets/js/career-status.js"></script>
     <script>
         const menuButton = document.querySelector('.careers-page .hamburger');
         const menu = document.querySelector('.careers-page .menu');
@@ -169,12 +188,21 @@
 
         const openingTime = new Date('2026-11-01T00:00:00+07:00').getTime();
         const openingScreen = document.querySelector('#careers-opening');
+        const closedScreen = document.querySelector('#careers-closed');
         const careerContent = document.querySelector('#career-content');
         const announcement = document.querySelector('#career-announcement');
-        const announcementLink = announcement.querySelector('.career-announcement');
-        const announcementCopies = announcement.querySelectorAll('.career-announcement-copy');
-        const vacancyBadge = document.querySelector('.vacancy-badge');
         const openingStatus = document.querySelector('#careers-opening-status');
+        const deadlineNotice = document.querySelector('#careers-deadline-notice');
+        const closedMessage = document.querySelector('#careers-closed-message');
+        const deadlineTime = window.careerDeadlineTime;
+        const deadlineLabel = new Intl.DateTimeFormat('id-ID', {
+            day: 'numeric',
+            month: 'long',
+            year: 'numeric',
+            hour: '2-digit',
+            minute: '2-digit',
+            timeZone: 'Asia/Jakarta'
+        }).format(deadlineTime);
         const countdownUnits = {
             days: document.querySelector('[data-countdown="days"]'),
             hours: document.querySelector('[data-countdown="hours"]'),
@@ -185,17 +213,24 @@
         function updateCareerOpening() {
             const remaining = openingTime - Date.now();
             const isOpen = remaining <= 0;
+            const now = Date.now();
+            const isClosed = now >= deadlineTime;
+            const isLastDay = isOpen && !isClosed && now >= deadlineTime - 24 * 60 * 60 * 1000;
 
-            announcementCopies.forEach((copy) => {
-                copy.textContent = isOpen ? copy.dataset.after : copy.dataset.before;
-            });
-            announcementLink.setAttribute(
-                'aria-label',
-                isOpen
-                    ? 'Ada lowongan kerja di Ria Busana Parung. Klik untuk melihat informasi dan melamar.'
-                    : 'Informasi lowongan kerja Ria Busana Parung dibuka pada 1 November 2026.'
-            );
-            vacancyBadge.hidden = !isOpen;
+            if (isClosed) {
+                openingScreen.hidden = true;
+                careerContent.hidden = true;
+                closedScreen.hidden = false;
+                announcement.hidden = true;
+                closedMessage.textContent = `Pendaftaran lowongan kerja Ria Busana Parung telah berakhir pada ${deadlineLabel} WIB.`;
+                return;
+            }
+
+            closedScreen.hidden = true;
+            deadlineNotice.hidden = !isLastDay;
+            if (isLastDay) {
+                deadlineNotice.textContent = `Peringatan: pendaftaran lowongan kerja Ria Busana Parung berakhir besok, ${deadlineLabel} WIB. Segera kirim lamaran Anda.`;
+            }
 
             if (isOpen) {
                 openingScreen.hidden = true;

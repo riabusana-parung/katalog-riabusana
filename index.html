@@ -154,8 +154,8 @@
         <div class="career-announcement-shell">
             <a class="career-announcement" href="karier.html" aria-label="Informasi lowongan kerja Ria Busana Parung dibuka pada 1 November 2026.">
                 <span class="career-announcement-track" aria-hidden="true">
-                    <span><i class="ri-megaphone-line"></i> <span class="career-announcement-copy" data-before="INFORMASI LOWONGAN KERJA RIA BUSANA PARUNG DIBUKA 1 NOVEMBER 2026 · KUNJUNGI HALAMAN KARIER" data-after="KAMI SEDANG MEMBUKA LOWONGAN KERJA RIA BUSANA PARUNG · LIHAT INFO & LAMAR SEKARANG">INFORMASI LOWONGAN KERJA RIA BUSANA PARUNG DIBUKA 1 NOVEMBER 2026 · KUNJUNGI HALAMAN KARIER</span></span>
-                    <span><i class="ri-megaphone-line"></i> <span class="career-announcement-copy" data-before="INFORMASI LOWONGAN KERJA RIA BUSANA PARUNG DIBUKA 1 NOVEMBER 2026 · KUNJUNGI HALAMAN KARIER" data-after="KAMI SEDANG MEMBUKA LOWONGAN KERJA RIA BUSANA PARUNG · LIHAT INFO & LAMAR SEKARANG">INFORMASI LOWONGAN KERJA RIA BUSANA PARUNG DIBUKA 1 NOVEMBER 2026 · KUNJUNGI HALAMAN KARIER</span></span>
+                    <span><i class="ri-megaphone-line"></i> <span class="career-announcement-copy" data-before="INFORMASI LOWONGAN KERJA RIA BUSANA PARUNG DIBUKA 1 NOVEMBER 2026 · KUNJUNGI HALAMAN KARIER" data-lastday="PERINGATAN: PENDAFTARAN LOWONGAN BERAKHIR BESOK, 6 NOVEMBER 2026 · DAFTAR SEKARANG" data-after="KAMI SEDANG MEMBUKA LOWONGAN KERJA RIA BUSANA PARUNG · LIHAT INFO & LAMAR SEKARANG">INFORMASI LOWONGAN KERJA RIA BUSANA PARUNG DIBUKA 1 NOVEMBER 2026 · KUNJUNGI HALAMAN KARIER</span></span>
+                    <span><i class="ri-megaphone-line"></i> <span class="career-announcement-copy" data-before="INFORMASI LOWONGAN KERJA RIA BUSANA PARUNG DIBUKA 1 NOVEMBER 2026 · KUNJUNGI HALAMAN KARIER" data-lastday="PERINGATAN: PENDAFTARAN LOWONGAN BERAKHIR BESOK, 6 NOVEMBER 2026 · DAFTAR SEKARANG" data-after="KAMI SEDANG MEMBUKA LOWONGAN KERJA RIA BUSANA PARUNG · LIHAT INFO & LAMAR SEKARANG">INFORMASI LOWONGAN KERJA RIA BUSANA PARUNG DIBUKA 1 NOVEMBER 2026 · KUNJUNGI HALAMAN KARIER</span></span>
                 </span>
             </a>
         </div>
@@ -807,28 +807,6 @@
             }
             initVisitorCounter();
         </script>
-        <script>
-            const careerOpeningTime = new Date('2026-11-01T00:00:00+07:00').getTime();
-            const careerVacancyBadge = document.querySelector('.vacancy-badge');
-            const careerAnnouncementLink = document.querySelector('.career-announcement');
-            const careerAnnouncementCopies = document.querySelectorAll('.career-announcement-copy');
-
-            function updateCareerAnnouncement() {
-                const isOpen = Date.now() >= careerOpeningTime;
-                careerAnnouncementCopies.forEach((copy) => {
-                    copy.textContent = isOpen ? copy.dataset.after : copy.dataset.before;
-                });
-                careerAnnouncementLink.setAttribute(
-                    'aria-label',
-                    isOpen
-                        ? 'Ada lowongan kerja di Ria Busana Parung. Klik untuk melihat informasi dan melamar.'
-                        : 'Informasi lowongan kerja Ria Busana Parung dibuka pada 1 November 2026.'
-                );
-                careerVacancyBadge.hidden = !isOpen;
-            }
-
-            updateCareerAnnouncement();
-            window.setInterval(updateCareerAnnouncement, 1000);
-        </script>
+        <script src="./assets/js/career-status.js"></script>
 </body>
 </html>
